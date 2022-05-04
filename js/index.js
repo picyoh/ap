@@ -1,3 +1,3 @@
-import {getPos} from "./autoQuest.js"
+import {getPos} from "./generator.js"
 
 getPos();
