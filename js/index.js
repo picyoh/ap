@@ -1,3 +1,3 @@
-import {getPos} from "./generator.js"
+import {getPos} from "./questionGenerator.js"
 
 getPos();
