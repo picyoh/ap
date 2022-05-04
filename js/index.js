@@ -1,2 +1,3 @@
-const url = window.location;
-console.log(url)
+import {getPos} from "./autoQuest.js"
+
+getPos();
