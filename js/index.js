@@ -1,5 +1,6 @@
-import { handleLogin } from "./modale.js";
-import { questionForm } from "./questionGenerator.js"
+import { handleLogin } from "./auth/login.js";
+import { questionForm } from "./quizz/Quizz.js"
+import {handleQuizz} from "./quizz/quizzGenerator.js"
 
 const main = document.querySelector("#main");
 
