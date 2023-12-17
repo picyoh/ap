@@ -1,4 +1,4 @@
-import { newAnswer, newQuestion } from "./Quizz.js";
+import { newAnswer, newQuestion } from "./quizz.js";
 
 const handleAddAnswer = () => {
   const addAnswerBtns = document.querySelectorAll(
