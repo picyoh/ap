@@ -1,40 +1,43 @@
-import { handleQuizz } from "./quizzUtils.js";
-
-export const questionChoice = () => {
-  const questionChoice = `
-    <div class='generator__questionChoice'>
-      <input type="checkbox" id="questionChoice" name="questionChoice" value="questionChoice" />
-      <label for="questionChoice">Cette question depend de la precedente ?</label>
+//TODO: trouver systeme pour tag sur chaques questions
+export const questionCheckbox = (questionCount) => {
+  const questionCheckbox = `
+    <div class='generator__checkbox'>
+      <input type="checkbox" id='checkbox_${questionCount}' name="checkbox_multi" value="checkbox_${questionCount}" />
+      <label for="checkbox_${questionCount}">La prochaine question depend d'une des precedentes questions ?'</label>
     </div>
     `;
-  const questionDiv = document.querySelector(".generator");
-  //TODO : add code to insert
+  const questionDiv = document.querySelectorAll(".generator__container");
+  const lastQuestionDiv = questionDiv[questionDiv.length - 1];
+  lastQuestionDiv.insertAdjacentHTML("beforeend", questionCheckbox);
 };
 
-export const newQuestion = () => {
-  const questionDivs = `
-    <div class="generator__question">
-
-    </div>
-    <div class="generator__answers">
-  
-    <button class="generator__question__addAnswer">+</button>
-  </div>
-    `;
-  const form = document.querySelector(".generator");
-  form.insertAdjacentHTML("beforeend", question);
-  newAnswer(counter);
-  newAnswer(counter);
-  counter++;
-  handleQuizz();
-};
-
-export const newQuestionContent = () => {
+export const newSimpleContent = (questionCount) => {
   const content = `
-  <h3>Question ${counter + 1}</h3>
-  <label for="question">Question :</label>
-  <input type="text" id="question" name="question">
-  <button class="generator__question__addQuestion">+</button>
+  <div class="generator__question__${questionCount}__1">
+    <h3>Question ${questionCount}</h3>
+    <label for="question_${questionCount}">Question :</label>
+    <input type="text" id="question_${questionCount}" name="question_${questionCount}" />
+    <button class="generator__question__addQuestion">+</button>
+  </div>
   `;
-  //TODO: add code to insert
+  const questionDiv = document.querySelectorAll('.generator__container');
+  const lastQuestionDiv = questionDiv[questionDiv.length - 1];
+  lastQuestionDiv.insertAdjacentHTML("beforeend", content);
 };
+
+export const newMultiContent = (questionCount, multiCount) => {
+  const content = `
+  <div class="generator__question__${questionCount}__${multiCount}">
+    <h3>Question ${questionCount}.${multiCount}</h3>
+    <label for="question_${questionCount}.${multiCount}">Question :</label>
+    <input type="text" id="question_${questionCount}.${multiCount}" name="question_${questionCount}.${multiCount}" />
+    <label for="parent_${questionCount}.${multiCount}">Parent :</label>
+    <input type="text" id="parent_${questionCount}.${multiCount}" name="parent_${questionCount}.${multiCount}" />
+    <button class="generator__question__addMulti">/</button>
+    <button class="generator__question__addQuestion">+</button>
+  </div>
+  `;
+  const questionDiv = document.querySelectorAll('.generator__container');
+  const lastQuestionDiv = questionDiv[questionDiv.length - 1];
+  lastQuestionDiv.insertAdjacentHTML("beforeend", content);
+}
