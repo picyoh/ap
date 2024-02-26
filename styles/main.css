@@ -1,3 +1,106 @@
-.hidden {
-    display : none;
+.row {
+  display: flex;
+  width: fit-content;
+  justify-content: space-between;
+  border: 1px solid blue;
+  background-color: aliceblue;
+  gap: 3rem;
 }
+
+.row__content {
+  display: flex;
+  gap: 3rem;
+}
+
+.add_row {
+  display: none;
+}
+
+/*TODO: last of type fonctionne pas*/
+
+.add_row:last-of-type {
+  display: block;
+}
+
+.container {
+  display:flex;
+  flex-flow: column;
+}
+.add_container {
+  display: none;
+}
+
+.add_container:last-of-type {
+  display: block;
+}
+
+.question {
+  display: flex;
+  background-color: lavender;
+  border: 1px solid slateblue;
+  border-radius: .3rem;
+  padding: .3rem
+}
+
+.question__input{
+  display: flex;
+  align-items: center;
+  gap: .3rem;
+}
+
+.question__link{
+height: .5rem;
+width: .5rem;
+background-color: white;
+border: 1px solid black;
+}
+
+.answers {
+  display: flex;
+  width: fit-content;
+  background-color: peachpuff;
+  border: 1px solid darkorange;
+  gap: .5rem;
+  padding: .3rem 3rem .3rem .3rem;
+}
+
+.answer {
+  display: flex;
+
+  background-color: papayawhip;
+  border: 1px solid orange;
+  border-radius: .3rem;
+  padding: .3rem;
+}
+
+.answer__input {
+  display: flex;
+  flex-flow: column;
+}
+
+#answer_value {
+  max-width: 6ch;
+}
+
+.add_answer {
+  display: none;
+}
+
+.add_answer:last-of-type {
+  display: block;
+}
+
+#trash {
+  margin: 0.5rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 3rem;
+  width: 100%;
+  border: 2px solid red;
+  border-radius: .3rem;
+  color: red;
+  background: repeating-linear-gradient(45deg, #FFC0CB, #FFC0CB 10px, #FFFFFF 10px, #FFFFFF 20px);
+}
+
+/*TODO: aligner les reponses pour le cote visuel

@@ -1,61 +1,98 @@
-import { form, newContainer } from "../components/form.js";
-import { questionCheckbox, newSimpleContent, newMultiContent } from "../components/questions.js";
-import { newAnswer, answerContent } from "../components/answers.js";
-import { handleCheckbox, handleSimple, handleMultiple } from "./handlers.js";
-
-
-let questionCount = 0;
-let answerCount = 1;
-let multiCount = 1;
+import { addForm } from "../components/form.js";
+import { addTrash } from "./dragdrop.js";
 
 export const init = () => {
-form();
-newQuestion();
+  addForm();
+  addTrash();
 };
 
-export const newQuestion = () => {
-  console.log("newQuestion", questionCount, answerCount);
-  questionCount++;
-  answerCount = 1;
-  multiCount = 1;
-  if (questionCount === 1) {
-    newContainer(questionCount);
-    newSimple(questionCount);
-    /*
-        document
-        .querySelector(".generator__question__addAnswer")
-        .classList.remove("hidden");
-        */
-  } else {
-    newContainer(questionCount);
-    questionCheckbox(questionCount);
-    handleCheckbox();
-  }
+export const formToJson = (form) => {
+  // Variables
+  const data = new FormData(form);
+  const encaps = { questions: [] };
+  let multiple = false;
+  let question = {};
+  let choices = [];
+  let currentQuestion = 0;
+
+  // Loop
+  data.forEach((value, key) => {
+    //TODO: gerer parent des reponses
+    //TODO: gerer parent qMulti
+
+    // get entrie number
+    let number = key.split("_")[1];
+    // parse entrie number
+    let numRow = parseInt(number);
+    // exclude first row
+    if (numRow === 0) {
+      //Set default first row value
+      if (value === "") {
+        value = "Go !";
+      }
+    } else {
+      console.log('ok')
+      // check for qMulti
+      const currentContent =
+        document.querySelectorAll(".row__content")[numRow];
+      // set multiple
+      multiple = currentContent.children.length > 1;
+    }
+
+    console.log(number, numRow, multiple);
+
+    // New rows
+    if (currentQuestion !== numRow) {
+      // append datas to encaps
+      encaps.questions.push(question);
+      // change row number
+      currentQuestion = numRow;
+      // reinit obj and arrays
+      question = {};
+      choices = [];
+    }
+    // create question
+    if (key.includes("question_")) {
+      // append question
+      if (multiple) {
+        let object = {};
+        if (!question.qMulti) {
+          question.qMulti = [];
+        }
+        object.question = value;
+        object.parent = "";
+        question.qMulti.push(object);
+      } else {
+        question.question = value;
+      }
+    }
+    // create choices
+    if (key.includes("answer_")) {
+      let choice = {};
+      choice.number = number;
+      choice.title = value.charAt(0).toUpperCase() + value.slice(1);
+      choice.value = 0;
+      choice.name = value;
+      choices.push(choice);
+      question.choices = choices;
+    }
+    // set values on choices
+    if (key.includes("value_")) {
+      const numAns = number.split(".")[2];
+      if (value !== "") {
+        console.log(numAns, question.choices[numAns]);
+        question.choices[numAns].value = value;
+        //encaps.questions[numQues].choices[numAns].value = value;
+      }
+    }
+  });
+  // append last datas to encaps
+  encaps.questions.push(question);
+  // stringify
+  const json = JSON.stringify(encaps);
+  console.log(json);
 };
 
-export const newSimple = () => {
-  console.log("newSimple", questionCount)
-  newSimpleContent(questionCount);
-  newAnswer(questionCount, multiCount, answerCount);
-  handleSimple();
-};
-
-export const newMultiple = () => {
-  console.log(questionCount)
-  newMultiContent(questionCount, multiCount);
-  newAnswer(questionCount, multiCount, answerCount);
-  handleMultiple();
-};
-
-export const addAnswer = (targetQuestion, targetMulti, nextAnswer) => {
-  answerCount++;
-  answerContent(targetQuestion, targetMulti, nextAnswer);
-};
-
-export const addQuestion = () => {
-  multiCount++;
-  console.log(questionCount);
-  newMultiContent(questionCount, multiCount);
-  newAnswer(questionCount, multiCount, answerCount);
-  handleMultiple();
+export const downloadJson = () => {
+  //TODO: creer blob et le faire down par le navigateur
 };

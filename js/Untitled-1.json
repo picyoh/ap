@@ -1,0 +1,70 @@
+{
+    "questions": [
+        {
+            "question": "Go !"
+        },
+        {
+            "qMulti": [
+                {
+                    "question": "q11",
+                    "parent": ""
+                },
+                {
+                    "question": "q12",
+                    "parent": ""
+                }
+            ],
+            "choices": [
+                {
+                    "number": "1.1.0",
+                    "title": "R111",
+                    "value": "100",
+                    "name": "r111"
+                },
+                {
+                    "number": "1.2.0",
+                    "title": "R121",
+                    "value": 0,
+                    "name": "r121"
+                }
+            ]
+        },
+        {
+            "question": "q21",
+            "choices": [
+                {
+                    "number": "2.1.0",
+                    "title": "R211",
+                    "value": "1000",
+                    "name": "r211"
+                }
+            ]
+        },
+        {
+            "qMulti": [
+                {
+                    "question": "q31",
+                    "parent": ""
+                },
+                {
+                    "question": "q32",
+                    "parent": ""
+                }
+            ],
+            "choices": [
+                {
+                    "number": "3.1.0",
+                    "title": "R311",
+                    "value": "10",
+                    "name": "r311"
+                },
+                {
+                    "number": "3.2.0",
+                    "title": "R321",
+                    "value": 0,
+                    "name": "r321"
+                }
+            ]
+        }
+    ]
+}
