@@ -8,6 +8,22 @@ export const addTrash = () => {
   main.insertAdjacentHTML("beforeend", trash);
 };
 
+const removeEmptyRow = () => {
+  //get rows
+  const rows = document.querySelectorAll(".row__content");
+  rows.forEach((row) => {
+    //get row length
+    const rowlength = row.querySelectorAll(".container").length;
+    if (rowlength === 0) {
+      //remove
+      row.parentNode.remove();
+      reNumbering();
+    }
+  });
+};
+
+const reNumbering = () => {};
+
 const dragStartHandler = (e) => {
   e.dataTransfer.setData("text/plain", e.target.id);
   //console.log(e.dataTransfer, e.target.id);
@@ -19,21 +35,33 @@ const dragOverHandler = (e) => {
   e.stopImmediatePropagation();
   e.dataTransfer.dropEffect = "move";
 };
-//TODO: gerer le append pour ajouter avant le bouton concerne
-//TODO: si container ou answers vide => remove
-//TODO: checker e.target pour voir si ajoutable a la drop zone
+
+//TODO: renaming question reponse
 const dropHandler = (e) => {
   e.preventDefault();
   e.stopImmediatePropagation();
   const data = e.dataTransfer.getData("text/plain");
-  console.log(e.target, e.dataTransfer);
+  const dataDom = document.getElementById(data);
+  const dataClass = dataDom.classList.value;
+  const targetClass = e.target.classList.value;
+  console.log(e.target, data, targetClass, dataClass);
 
-  if(e.target.id === 'trash'){
-      // trash case
+  if (e.target.id === "trash") {
+    // trash case
     document.getElementById(data).remove();
-  }else{
-    // containers and answers cases
-    e.target.appendChild(document.getElementById(data));
+  } else {
+    // containers case
+    if (targetClass === "row__content" && dataClass === "container") {
+      const containerBtn = e.target.querySelector(".add_container");
+      containerBtn.insertAdjacentElement("beforebegin", dataDom);
+      removeEmptyRow();
+    }
+    // answers cases
+    if (targetClass === "answers" && dataClass === "answer") {
+      const answerBtn = e.target.querySelector(".add_answer");
+      answerBtn.insertAdjacentElement("beforebegin", dataDom);
+      reNumbering();
+    }
   }
 };
 
@@ -58,3 +86,5 @@ export const dragDropHandler = () => {
     });
   });
 };
+
+//TODO: add linkables part

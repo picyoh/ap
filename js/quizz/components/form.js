@@ -69,13 +69,14 @@ export const addRow = (newRow) => {
 };
 
 export const addContainer = (parent) => {
-    // get values for draggables
-    const secondRow = parseInt(parent.id.split('_')[1]) >= 2;
-    const secondContainer = parent.children.length >= 2;
-    //container number
-    const contNumber = parent.querySelectorAll('.container').length;
+  // get values for draggables
+  const secondRow = parseInt(parent.id.split("_")[1]) >= 2;
+  //container number
+  const contNumber = parent.querySelectorAll(".container").length;
   const container = `
-    <div class='container' id='container_${contNumber}' ${(secondRow && secondContainer) ? `draggable='true'>` : `>`}
+    <div class='container' id='container_${contNumber}' ${
+    secondRow ? `draggable='true'>` : `>`
+  }
       <div class='answers' data-drop-target="true">
         <button type='button' class='add_answer'>+</button>
       </div>   
