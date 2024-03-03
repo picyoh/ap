@@ -22,7 +22,8 @@ const removeEmptyRow = () => {
   });
 };
 
-const reNumbering = () => {};
+//TODO: renaming question reponse
+const reNumbering = () => { };
 
 const dragStartHandler = (e) => {
   e.dataTransfer.setData("text/plain", e.target.id);
@@ -36,7 +37,6 @@ const dragOverHandler = (e) => {
   e.dataTransfer.dropEffect = "move";
 };
 
-//TODO: renaming question reponse
 const dropHandler = (e) => {
   e.preventDefault();
   e.stopImmediatePropagation();
@@ -49,6 +49,7 @@ const dropHandler = (e) => {
   if (e.target.id === "trash") {
     // trash case
     document.getElementById(data).remove();
+    reNumbering();
   } else {
     // containers case
     if (targetClass === "row__content" && dataClass === "container") {
@@ -69,15 +70,16 @@ export const dragDropHandler = () => {
   // get draggable elements
   const draggables = document.querySelectorAll("[draggable='true']");
   //console.log(draggables);
-  // loop on draggables and trigger event
   draggables.forEach((draggable) => {
+    // trigger event
     draggable.addEventListener("dragstart", (e) => {
       dragStartHandler(e);
     });
   });
-
+  // get targets
   const targets = document.querySelectorAll("[data-drop-target]");
   targets.forEach((target) => {
+    // trigger events
     target.addEventListener("dragover", (e) => {
       dragOverHandler(e);
     });

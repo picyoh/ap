@@ -54,9 +54,11 @@ const initSubmit = () => {
 //Structure
 
 export const addRow = (newRow) => {
+    // get values for draggables
   const row = `
     <div class='row'>
-        <div class='row__content' id='row_${newRow}' data-drop-target='true'></div>
+        <div class='row__content' id='row_${newRow}' data-drop-target='true'>
+        </div>
             <button type='button' class='add_row'>+</button>
         </div>
     </div>
@@ -69,23 +71,24 @@ export const addRow = (newRow) => {
 };
 
 export const addContainer = (parent) => {
-  // get values for draggables
   const secondRow = parseInt(parent.id.split("_")[1]) >= 2;
   //container number
   const contNumber = parent.querySelectorAll(".container").length;
   const container = `
-    <div class='container' id='container_${contNumber}' ${
-    secondRow ? `draggable='true'>` : `>`
-  }
+    <div class='container' id='container_${contNumber}' ${secondRow ? `draggable='true'>` : `>`}
+      <div class='questions'>
+        <button type='button' class='add_container' ${secondRow ? `>+</button>` : ` style='display: none;'>+</button>`}
+      </div>
       <div class='answers' data-drop-target="true">
         <button type='button' class='add_answer'>+</button>
       </div>   
     </div>
-    ${secondRow ? `<button type='button' class='add_container'>+</button>` : ``}
     `;
   parent.insertAdjacentHTML("beforeend", container);
+  const questions = parent.querySelectorAll(".questions");
+  const lastQuestion = questions[questions.length - 1];
+  addQuestion(parent, lastQuestion);
   const answers = parent.querySelectorAll(".answers");
   const lastAnswers = answers[answers.length - 1];
-  addQuestion(parent, lastAnswers);
   addAnswer(parent, lastAnswers);
 };

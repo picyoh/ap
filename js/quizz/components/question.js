@@ -1,8 +1,8 @@
-export const addQuestion = (parent, lastAnswers) => {
+export const addQuestion = (parent, lastQuestion) => {
     // numbering
     const rowNumber = parseInt(parent.id.split('_')[1]);
     const questionNumber = parent.querySelectorAll('.container').length;
-    const isQMulti= questionNumber >= 2;
+    const isQMulti = questionNumber >= 2;
     //console.log(rowNumber, questionNumber, isQMulti);
     const question = 
     `
@@ -14,12 +14,12 @@ export const addQuestion = (parent, lastAnswers) => {
         </div>
     </div>
     `;
-    lastAnswers.insertAdjacentHTML('beforebegin', question);
+    lastQuestion.insertAdjacentHTML('afterbegin', question);
 
     // display links
     if(isQMulti){
         const link = parent.querySelector('.question_link');
-        //console.log(lastAnswers, link);
+        //console.log(lastQuestion, link);
         link.removeAttribute('style');
     }
 };

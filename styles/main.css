@@ -35,6 +35,10 @@
   display: block;
 }
 
+.questions{
+  display: flex;
+}
+
 .question {
   display: flex;
   background-color: lavender;
