@@ -11,7 +11,7 @@ const getNumber = (target) => {
 const addParentValue = (start, target) => {
   // get Numbers in arrays
   const startNumber = getNumber(start.id)
-  const targetNumber = getNumber(target)
+  const targetNumber = getNumber(target.id)
   console.log(startNumber, targetNumber)
   // Compare
   // question cases
