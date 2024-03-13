@@ -1,9 +1,10 @@
 export const addTrash = () => {
-  const trash = `
-<div id='trash' data-drop-target='true'>
+  const trash =
+  `
+  <div id='trash' data-drop-target='true'>
     <i class="fa-solid fa-trash-can fa-2xl"></i>
-</div>
-`;
+  </div>
+  `;
   const main = document.querySelector("#main");
   main.insertAdjacentHTML("beforeend", trash);
 };
@@ -25,11 +26,15 @@ const removeEmptyRow = () => {
 //TODO: renaming question reponse
 const reNumbering = () => { };
 
+// drag start
 const dragStartHandler = (e) => {
+  e.stopImmediatePropagation();
   e.dataTransfer.setData("text/plain", e.target.id);
-  //console.log(e.dataTransfer, e.target.id);
   e.dataTransfer.effectAllowed = "move";
+  //console.log(e.dataTransfer, e.target.id);
 };
+
+// drag over
 
 const dragOverHandler = (e) => {
   e.preventDefault();
@@ -37,7 +42,12 @@ const dragOverHandler = (e) => {
   e.dataTransfer.dropEffect = "move";
 };
 
+// drop
+
 const dropHandler = (e) => {
+/*   if(e.target.classList.contains('link')){
+    return;
+  } */
   e.preventDefault();
   e.stopImmediatePropagation();
   const data = e.dataTransfer.getData("text/plain");
@@ -52,15 +62,16 @@ const dropHandler = (e) => {
     reNumbering();
   } else {
     // containers case
-    if (targetClass === "row__content" && dataClass === "container") {
-      const containerBtn = e.target.querySelector(".add_container");
-      containerBtn.insertAdjacentElement("beforebegin", dataDom);
+    if (targetClass === "row__content" && dataClass === "question__input") {
+      const container = dataDom.parentNode.parentNode.parentNode;
+      e.target.insertAdjacentElement("beforeend", container);
       removeEmptyRow();
     }
     // answers cases
-    if (targetClass === "answers" && dataClass === "answer") {
+    if (targetClass === "answers" && dataClass === "answer__input") {
+      const answerParent = dataDom.parentNode;
       const answerBtn = e.target.querySelector(".add_answer");
-      answerBtn.insertAdjacentElement("beforebegin", dataDom);
+      answerBtn.insertAdjacentElement("beforebegin", answerParent);
       reNumbering();
     }
   }
@@ -68,7 +79,7 @@ const dropHandler = (e) => {
 
 export const dragDropHandler = () => {
   // get draggable elements
-  const draggables = document.querySelectorAll("[draggable='true']");
+  const draggables = document.querySelectorAll("[draggable]");
   //console.log(draggables);
   draggables.forEach((draggable) => {
     // trigger event
@@ -88,5 +99,3 @@ export const dragDropHandler = () => {
     });
   });
 };
-
-//TODO: add linkables part

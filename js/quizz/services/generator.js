@@ -7,6 +7,7 @@ export const init = () => {
 };
 
 export const formToJson = (form) => {
+  //TODO:REFACTOR
   // Variables
   const data = new FormData(form);
   const encaps = { questions: [] };
@@ -19,6 +20,7 @@ export const formToJson = (form) => {
   data.forEach((value, key) => {
     //TODO: gerer parent des reponses
     //TODO: gerer parent qMulti
+    //TODO: gerer tag
 
     // get entrie number
     let number = key.split("_")[1];

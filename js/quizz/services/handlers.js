@@ -1,7 +1,8 @@
 import { addRow, addContainer } from "../components/form.js";
-import {addAnswer} from "../components/answer.js"
+import { addAnswer } from "../components/answer.js";
 import { formToJson } from "../services/generator.js";
 import { dragDropHandler } from "./dragdrop.js";
+import { linkablesHandler } from "./linksHandlers.js";
 
 const addRowHandler = () => {
   const addRowBtns = document.querySelectorAll(".add_row");
@@ -16,7 +17,7 @@ const addRowHandler = () => {
     );
   });
 };
-//TODO: gerer auestion + bouton
+
 export const addContainerHandler = () => {
   const addContainerBtns = document.querySelectorAll(".add_container");
   addContainerBtns.forEach((addContainerBtn) => {
@@ -24,7 +25,7 @@ export const addContainerHandler = () => {
       "click",
       (e) => {
         const parent = e.target.parentNode.parentNode.parentNode;
-        console.log(parent);
+        //console.log(parent);
         addContainer(parent);
       },
       { once: true }
@@ -57,6 +58,18 @@ export const submitHandler = () => {
   });
 };
 
+const preventDragOnRange = () => {
+  const ranges = document.querySelectorAll('input[type="range"]');
+  ranges.forEach((range) => {
+    range.addEventListener("mouseenter", (e) => {
+      e.target.parentNode.setAttribute("draggable", false);
+    });
+    range.addEventListener("mouseleave", (e) => {
+      e.target.parentNode.setAttribute("draggable", true);
+    });
+  });
+};
+
 const removeListeners = () => {
   const addRowBtns = document.querySelectorAll(".add_row");
   addRowBtns.forEach((addRowBtn) => {
@@ -70,12 +83,19 @@ const removeListeners = () => {
   addAnswerBtns.forEach((addAnswerBtn) => {
     addAnswerBtn.replaceWith(addAnswerBtn.cloneNode(true));
   });
+  //TODO: reset drag and drop ?
+  const linkables = document.querySelectorAll("[linkable]");
+  linkables.forEach((linkable)=>{
+    linkable.replaceWith(linkable.cloneNode(true));
+  });
 };
 
 export const handlers = () => {
   removeListeners();
-  dragDropHandler();
   addRowHandler();
   addContainerHandler();
   addAnswerHandler();
+  dragDropHandler();
+  linkablesHandler();
+  preventDragOnRange();
 };

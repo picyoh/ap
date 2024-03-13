@@ -1,11 +1,27 @@
 import { handlers, submitHandler } from "../services/handlers.js";
 import { addQuestion } from "../components/question.js";
 import { addAnswer } from "../components/answer.js";
+import { initCanvas } from "../services/links.js";
 
 //Init
 
 export const addForm = () => {
-  const form = `<form id='quizz'></form>`;
+  const form = `<form id='quizz'>
+    <datalist id="tickmarks">
+      <option value="0"></option>
+      <option value="1"></option>
+      <option value="2"></option>
+      <option value="3"></option>
+      <option value="4"></option>
+      <option value="5"></option>
+      <option value="6"></option>
+      <option value="7"></option>
+      <option value="8"></option>
+      <option value="9"></option>
+      <option value="10"></option>
+    </datalist>
+  </form>
+  `;
   const main = document.querySelector("#main");
   main.insertAdjacentHTML("beforeend", form);
   initRow();
@@ -32,14 +48,14 @@ const initContainer = (parent) => {
       <div class='container'>
         <div class='question'>
           <div class='question__input'>
-            <label for='question__input'>Debut : </label>
-            <input type='text' id='question__input' name='question_0.0' placeholder='Go!' />
+            <textarea type='text' id='question__input' name='question_0.0' placeholder='Go!'></textarea>
           </div>
         </div>
       </div>
       `;
   parent.insertAdjacentHTML("beforeend", container);
   handlers();
+  initCanvas();
 };
 
 const initSubmit = () => {
@@ -54,7 +70,7 @@ const initSubmit = () => {
 //Structure
 
 export const addRow = (newRow) => {
-    // get values for draggables
+  // get values for draggables
   const row = `
     <div class='row'>
         <div class='row__content' id='row_${newRow}' data-drop-target='true'>
@@ -71,13 +87,15 @@ export const addRow = (newRow) => {
 };
 
 export const addContainer = (parent) => {
-  const secondRow = parseInt(parent.id.split("_")[1]) >= 2;
   //container number
   const contNumber = parent.querySelectorAll(".container").length;
+  const secondRow = parseInt(parent.id.split("_")[1]) >= 2;
   const container = `
-    <div class='container' id='container_${contNumber}' ${secondRow ? `draggable='true'>` : `>`}
+    <div class='container' id='container_${contNumber}'>
       <div class='questions'>
-        <button type='button' class='add_container' ${secondRow ? `>+</button>` : ` style='display: none;'>+</button>`}
+        <button type='button' class='add_container' ${
+          secondRow ? `>+</button>` : ` style='display: none;'>+</button>`
+        }
       </div>
       <div class='answers' data-drop-target="true">
         <button type='button' class='add_answer'>+</button>
