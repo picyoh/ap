@@ -29,3 +29,42 @@ export const createLink = (first, second) => {
   //TODO: add circles
   //TODO: add animation/gravity
 };
+
+export const addParentValue = (dragged, target) => {
+  // get Numbers in arrays
+  const draggedNumber = getNumber(dragged.id);
+  const targetNumber = getNumber(target.id);
+  console.log(draggedNumber, targetNumber);
+  // Compare
+  // question cases
+  let elementChildNodes =
+    draggedNumber.length === 2
+      ? dragged
+      : targetNumber.length === 2
+      ? target
+      : "";
+  // answers cases
+  if (elementChildNodes === "") {
+    // get lower answer id
+    for (let i = 0; i < 3; i++) {
+      //console.log(draggedNumber[i], targetNumber[i]);
+      if (draggedNumber[i] !== targetNumber[i]) {
+        draggedNumber[i] > targetNumber[i]
+          ? (elementChildNodes = dragged)
+          : (elementChildNodes = target);
+        break;
+      }
+    }
+  }
+  const parent = target === elementChildNodes ? dragged : target;
+  console.log(elementChildNodes, elementChildNodes.parentNode);
+  elementChildNodes.parentNode.querySelector("input[type=hidden]").value =
+    parent.id;
+  //console.log("elementChildNodes : " + elementChildNodes.id + " parent : " + parent.id);
+};
+
+export const checkLinkable = (dragged, target) => {
+  //TODO: control links (answer -> question) + control parents (answer.parent !== question)
+  //console.log(dragged, target)
+  return true;
+};

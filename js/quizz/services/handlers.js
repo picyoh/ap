@@ -6,12 +6,12 @@ import { linkablesHandler } from "./linksHandlers.js";
 
 const addRowHandler = () => {
   const addRowBtns = document.querySelectorAll(".add_row");
-  addRowBtns.forEach((addRowBtn, index) => {
+  addRowBtns.forEach((addRowBtn) => {
     addRowBtn.addEventListener(
       "click",
       (e) => {
-        //console.log(e.target.className, index);
-        addRow(index + 1);
+        const rowNumber = parseInt(e.target.parentNode.parentNode.children.length)
+        addRow(rowNumber);
       },
       { once: true }
     );
@@ -39,10 +39,16 @@ const addAnswerHandler = () => {
     addAnswerBtn.addEventListener(
       "click",
       (e) => {
-        const parent = e.target.parentNode.parentNode.parentNode;
+        // get Id
+        const targetId = parseInt(e.target.id);
+        // empty ids are not at row level
+        const rowLevel = targetId > 0;
+        // get parent
+        const parent = rowLevel ? e.target.parentNode.parentNode : e.target.parentNode.parentNode.parentNode;
+        // get group
         const group = e.target.parentNode;
-        //console.log(parent, group)
-        addAnswer(parent, group);
+        //console.log(parent, group, targetId, rowLevel)
+        addAnswer(parent, group, targetId);
       },
       { once: true }
     );

@@ -1,9 +1,7 @@
 import { addForm } from "../components/form.js";
-import { addTrash } from "./dragdrop.js";
 
 export const init = () => {
   addForm();
-  addTrash();
 };
 
 export const formToJson = (form) => {
@@ -21,6 +19,7 @@ export const formToJson = (form) => {
     //TODO: gerer parent des reponses
     //TODO: gerer parent qMulti
     //TODO: gerer tag
+    //TODO: virer value
 
     // get entrie number
     let number = key.split("_")[1];

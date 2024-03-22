@@ -1,31 +1,11 @@
-export const addTrash = () => {
-  const trash =
-  `
-  <div id='trash' data-drop-target='true'>
-    <i class="fa-solid fa-trash-can fa-2xl"></i>
-  </div>
-  `;
-  const main = document.querySelector("#main");
-  main.insertAdjacentHTML("beforeend", trash);
-};
-
-const removeEmptyRow = () => {
-  //get rows
-  const rows = document.querySelectorAll(".row__content");
-  rows.forEach((row) => {
-    //get row length
-    const rowlength = row.querySelectorAll(".container").length;
-    if (rowlength === 0) {
-      //remove
-      row.parentNode.remove();
-      reNumbering();
-    }
-  });
-};
-
-//TODO: renaming question reponse
-const reNumbering = () => { };
-
+import {
+  checkPreviousRow,
+  removeEmptyRow,
+  getValues,
+  setValues,
+} from "./dragUtils.js";
+import { addContainer } from "../components/form.js";
+import { addAnswer } from "../components/answer.js";
 // drag start
 const dragStartHandler = (e) => {
   e.stopImmediatePropagation();
@@ -35,7 +15,6 @@ const dragStartHandler = (e) => {
 };
 
 // drag over
-
 const dragOverHandler = (e) => {
   e.preventDefault();
   e.stopImmediatePropagation();
@@ -43,40 +22,63 @@ const dragOverHandler = (e) => {
 };
 
 // drop
-
 const dropHandler = (e) => {
-/*   if(e.target.classList.contains('link')){
-    return;
-  } */
   e.preventDefault();
   e.stopImmediatePropagation();
   const data = e.dataTransfer.getData("text/plain");
   const dataDom = document.getElementById(data);
   const dataClass = dataDom.classList.value;
   const targetClass = e.target.classList.value;
-  console.log(e.target, data, targetClass, dataClass);
-
+  //console.log(e.target, dataDom, targetClass, dataClass);
+  //TODO: move check of target to enter/over ?
   if (e.target.id === "trash") {
     // trash case
-    document.getElementById(data).remove();
-    reNumbering();
+    checkPreviousRow(dataDom);
+    dataDom.remove();
   } else {
     // containers case
     if (targetClass === "row__content" && dataClass === "question__input") {
-      const container = dataDom.parentNode.parentNode.parentNode;
-      e.target.insertAdjacentElement("beforeend", container);
+      // get values
+      const values = getValues(dataDom, dataClass);
+      // add and remove container
+      addContainer(e.target);
+      dataDom.parentNode.parentNode.parentNode.remove();
       removeEmptyRow();
+      // get new container
+      const containers = e.target.querySelectorAll(".container");
+      const containersLength = parseInt(containers.length - 1);
+      const newContainer = containers[containersLength];
+      // set values
+      setValues(values, dataClass, newContainer);
+      // renumber previous row
+      checkPreviousRow(dataDom);
     }
     // answers cases
-    if (targetClass === "answers" && dataClass === "answer__input") {
-      const answerParent = dataDom.parentNode;
-      const answerBtn = e.target.querySelector(".add_answer");
-      answerBtn.insertAdjacentElement("beforebegin", answerParent);
-      reNumbering();
+    if (
+      (targetClass === "answers" && dataClass === "answer__input") ||
+      (targetClass === "row__answers" && dataClass === "answer__input")
+    ) {
+      // stack values
+      const values = getValues(dataDom, dataClass);
+      // get parent button for rowLevel
+      const targetId = parseInt(e.target.querySelector("button").id);
+      // add new answer
+      addAnswer(e.target.parentNode.parentNode, e.target, targetId);
+      // remove previous node
+      dataDom.parentNode.remove();
+      // retrieve new answer
+      const answers = e.target.querySelectorAll(".answer__input");
+      const answersLength = parseInt(answers.length - 1);
+      const newAnswer = answers[answersLength];
+      // set values
+      setValues(values, dataClass, newAnswer);
+      // renumber previous row
+      checkPreviousRow(dataDom);
     }
   }
 };
 
+// Trigger
 export const dragDropHandler = () => {
   // get draggable elements
   const draggables = document.querySelectorAll("[draggable]");
