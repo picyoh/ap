@@ -31,17 +31,25 @@ export const getValues = (dataDom, dataClass) => {
   let elementChildNodes;
   // answer case
   if (dataClass === "answer__input") {
-    elementChildNodes = dataDom.childNodes;
+    elementChildNodes = dataDom.children;
   }
   // question case
   if (dataClass === "question__input") {
-    // Method to concat DOM nodes
-    const questionNodes = Array.from(dataDom.childNodes);
-    const answerNodes = Array.from(
-      dataDom.parentNode.parentNode.parentNode.querySelector(".answer__input")
-        .childNodes
-    );
-    elementChildNodes = questionNodes.concat(answerNodes);
+    // get DOM nodes
+    const questionNodes = [...dataDom.children];
+    const parent = dataDom.parentNode.parentNode.parentNode;
+    const answers = [...parent.querySelectorAll('.answer__input')];
+    let answerNodes = [];
+    answers.forEach((answer)=>{
+      if(answerNodes.length === 0){
+        answerNodes = [...answer.children]
+      }else {
+        answerNodes = [...answerNodes, ...answer.children]
+      }
+      console.log(answerNodes)
+    })
+    // concat
+    elementChildNodes = [...questionNodes, ...answerNodes];
   }
   // stack the values
   elementChildNodes.forEach((element) => {
@@ -49,6 +57,7 @@ export const getValues = (dataDom, dataClass) => {
       values.push(element.value);
     }
   });
+  console.log(values)
   return values;
 };
 
@@ -59,15 +68,15 @@ export const setValues = (values, dataClass, newElement) => {
   let elementChildNodes;
   // answer case
   if (dataClass === "answer__input") {
-    elementChildNodes = newElement.childNodes;
+    elementChildNodes = newElement.children;
   }
   // question case
   if (dataClass === "question__input") {
     const questionNodes = Array.from(
-      newElement.querySelector(".question__input").childNodes
+      newElement.querySelector(".question__input").children
     );
     const answerNodes = Array.from(
-      newElement.querySelector(".answer__input").childNodes
+      newElement.querySelector(".answer__input").children
     );
     elementChildNodes = questionNodes.concat(answerNodes);
     console.log(elementChildNodes)
@@ -127,17 +136,17 @@ export const checkPreviousRow = (dragged) => {
     if (draggedType === "question") {
       const idNumber = parseInt(elements[i].id.split("_")[1].split(".")[1]);
       if (idNumber !== ref) {
-        const value = getValues(elements[i], elements[i].classList[0]);
+        const value = getValues(elements[i], elements[i].classNodes[0]);
         values.push(value);
         removeCount++;
         elements[i].parentNode.parentNode.parentNode.remove();
-        //console.log(idNumber, ref, removeCount, elements[i], elements[i].classList[0]);
+        //console.log(idNumber, ref, removeCount, elements[i], elements[i].classNodes[0]);
       }
     }
     if (draggedType === "answer") {
       const idNumber = parseInt(elements[i].id.split("_")[1].split(".")[2]);
       if (idNumber !== ref) {
-        const value = getValues(elements[i], elements[i].classList[0]);
+        const value = getValues(elements[i], elements[i].classNodes[0]);
         values.push(value);
         removeCount++;
         elements[i].parentNode.remove();

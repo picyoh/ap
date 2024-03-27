@@ -29,12 +29,13 @@ const dropHandler = (e) => {
   const dataDom = document.getElementById(data);
   const dataClass = dataDom.classList.value;
   const targetClass = e.target.classList.value;
+  const parent = dataDom.parentNode.parentNode.parentNode
   //console.log(e.target, dataDom, targetClass, dataClass);
   //TODO: move check of target to enter/over ?
-  if (e.target.id === "trash") {
+  if (e.target.classList.value === "trash") {
     // trash case
     checkPreviousRow(dataDom);
-    dataDom.remove();
+    parent.remove();
   } else {
     // containers case
     if (targetClass === "row__content" && dataClass === "question__input") {
@@ -42,7 +43,7 @@ const dropHandler = (e) => {
       const values = getValues(dataDom, dataClass);
       // add and remove container
       addContainer(e.target);
-      dataDom.parentNode.parentNode.parentNode.remove();
+      parent.remove();
       removeEmptyRow();
       // get new container
       const containers = e.target.querySelectorAll(".container");
