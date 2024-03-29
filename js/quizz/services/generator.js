@@ -4,8 +4,7 @@ export const init = () => {
   addForm();
 };
 
-export const formToJson = (form) => {
-  //TODO:REFACTOR
+export const quizzToJson = (form) => {
   // Variables
   const data = new FormData(form);
   const encaps = { questions: [] };
@@ -14,35 +13,28 @@ export const formToJson = (form) => {
   let choices = [];
   let currentQuestion = 0;
 
-  // Loop
-  data.forEach((value, key) => {
-    //TODO: gerer parent des reponses
-    //TODO: gerer parent qMulti
-    //TODO: gerer tag
-    //TODO: virer value
+  for (const element of data) {
+    // get Id
+    const id = element[0];
+    const splitId = id.split("_");
+    const splitLength = splitId.length - 1;
+    // get number
+    const number = splitId[splitLength];
+    // get row number
+    const numRow = parseInt(number);
+    const numAns = parseInt(number.split('.')[2]) - 1;
+    // get type
+    const type = element[0].replace(number, "").slice(0, -1);
+    // get currentContent
+    const currentContent = document.querySelectorAll(".row__content")[numRow];
+    multiple = currentContent.children.length > 1;
 
-    // get entrie number
-    let number = key.split("_")[1];
-    // parse entrie number
-    let numRow = parseInt(number);
-    // exclude first row
-    if (numRow === 0) {
-      //Set default first row value
-      if (value === "") {
-        value = "Go !";
-      }
-    } else {
-      console.log('ok')
-      // check for qMulti
-      const currentContent =
-        document.querySelectorAll(".row__content")[numRow];
-      // set multiple
-      multiple = currentContent.children.length > 1;
+    console.log(id, splitId, multiple, type);
+    // first row
+    if (numRow === 0 && element[1] === "") {
+      element[1] = "Go !";
     }
-
-    console.log(number, numRow, multiple);
-
-    // New rows
+    // New row
     if (currentQuestion !== numRow) {
       // append datas to encaps
       encaps.questions.push(question);
@@ -53,40 +45,44 @@ export const formToJson = (form) => {
       choices = [];
     }
     // create question
-    if (key.includes("question_")) {
-      // append question
-      if (multiple) {
-        let object = {};
-        if (!question.qMulti) {
-          question.qMulti = [];
+    switch (type) {
+      case "question":
+        // append question
+        if (multiple) {
+          let object = {};
+          if (!question.qMulti) {
+            question.qMulti = [];
+          }
+          object.question = element[1];
+          object.parent = "";
+          question.qMulti.push(object);
+        } else {
+          question.question = element[1];
         }
-        object.question = value;
-        object.parent = "";
-        question.qMulti.push(object);
-      } else {
-        question.question = value;
-      }
-    }
-    // create choices
-    if (key.includes("answer_")) {
-      let choice = {};
-      choice.number = number;
-      choice.title = value.charAt(0).toUpperCase() + value.slice(1);
-      choice.value = 0;
-      choice.name = value;
-      choices.push(choice);
-      question.choices = choices;
-    }
-    // set values on choices
-    if (key.includes("value_")) {
-      const numAns = number.split(".")[2];
-      if (value !== "") {
-        console.log(numAns, question.choices[numAns]);
-        question.choices[numAns].value = value;
-        //encaps.questions[numQues].choices[numAns].value = value;
-      }
-    }
-  });
+        break;
+      case "answer":
+        let choice = {};
+        choice.number = number;
+        choice.title = element[1].charAt(0).toUpperCase() + element[1].slice(1);
+        choice.name = element[1];
+        choice.tag ='';
+        choice.parent='';
+        choices.push(choice);
+        question.choices = choices;
+        break;
+      case "tag":
+        question.choices[numAns].tag = element[1];
+        break;
+      case "question_parent":
+        question.parent = element[1];
+        break;
+      case "answer_parent":
+        question.choices[numAns].parent = element[1];
+        break;
+      default:
+        console.log("err switch");
+    };
+  };
   // append last datas to encaps
   encaps.questions.push(question);
   // stringify

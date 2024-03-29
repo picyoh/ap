@@ -2,7 +2,7 @@ import { createLink } from "./links.js";
 import { addParentValue } from "./links.js";
 
 const linkStartHandler = (e) => {
-  e.stopImmediatePropagation();
+  e.stopPropagation();
   e.dataTransfer.clearData();
   e.dataTransfer.setData("text/plain", e.target.id);
   e.dataTransfer.effectAllowed = "link";
@@ -18,12 +18,12 @@ const linkEnterHandler = (e) => {
 
 const linkOverHandler = (e) => {
   e.preventDefault();
-  e.stopImmediatePropagation();
+  e.stopPropagation();
   e.dataTransfer.dropEffect = "link";
 };
 
 const linkDrop = (e) => {
-  e.stopImmediatePropagation();
+  e.stopPropagation();
   const dataDom = document.getElementById(e.dataTransfer.getData('text/plain'));
   addParentValue(dataDom, e.target);
   createLink(dataDom, e.target);

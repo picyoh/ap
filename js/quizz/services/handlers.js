@@ -1,6 +1,6 @@
 import { addRow, addContainer } from "../components/form.js";
 import { addAnswer } from "../components/answer.js";
-import { formToJson } from "../services/generator.js";
+import { quizzToJson } from "../services/generator.js";
 import { dragDropHandler } from "./dragdrop.js";
 import { linkablesHandler } from "./linksHandlers.js";
 
@@ -59,8 +59,9 @@ export const submitHandler = () => {
   const submit = document.querySelector("#submit");
   submit.addEventListener("click", (e) => {
     e.preventDefault();
-    e.stopImmediatePropagation();
-    formToJson(e.target.parentNode);
+    e.stopPropagation();
+    console.log(e.target.parentNode)
+    quizzToJson(e.target.parentNode);
   });
 };
 

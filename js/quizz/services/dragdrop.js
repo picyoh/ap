@@ -8,7 +8,7 @@ import { addContainer } from "../components/form.js";
 import { addAnswer } from "../components/answer.js";
 // drag start
 const dragStartHandler = (e) => {
-  e.stopImmediatePropagation();
+  e.stopPropagation();
   e.dataTransfer.setData("text/plain", e.target.id);
   e.dataTransfer.effectAllowed = "move";
   //console.log(e.dataTransfer, e.target.id);
@@ -17,14 +17,14 @@ const dragStartHandler = (e) => {
 // drag over
 const dragOverHandler = (e) => {
   e.preventDefault();
-  e.stopImmediatePropagation();
+  e.stopPropagation();
   e.dataTransfer.dropEffect = "move";
 };
 
 // drop
 const dropHandler = (e) => {
   e.preventDefault();
-  e.stopImmediatePropagation();
+  e.stopPropagation();
   const data = e.dataTransfer.getData("text/plain");
   const dataDom = document.getElementById(data);
   const dataClass = dataDom.classList.value;
@@ -41,8 +41,20 @@ const dropHandler = (e) => {
     if (targetClass === "row__content" && dataClass === "question__input") {
       // get values
       const values = getValues(dataDom, dataClass);
-      // add and remove container
+      // add container
       addContainer(e.target);
+      //add answer if necessary
+      if(values.length > 5){
+        const answerIndex = (values.length -5) / 3;
+        const answers = e.target.querySelectorAll('.answers');
+        const lastAnswers = answers[answers.length-1]
+        const buttonId = lastAnswers.querySelector('button').id
+        //console.log(answerIndex, e.target, lastAnswers, buttonId)
+        for(let i =0; i< answerIndex; i++){
+          addAnswer(e.target, lastAnswers, buttonId);
+        }
+      }
+      // remove previous 
       parent.remove();
       removeEmptyRow();
       // get new container

@@ -40,13 +40,14 @@ export const getValues = (dataDom, dataClass) => {
     const parent = dataDom.parentNode.parentNode.parentNode;
     const answers = [...parent.querySelectorAll('.answer__input')];
     let answerNodes = [];
+    // stack children
     answers.forEach((answer)=>{
       if(answerNodes.length === 0){
         answerNodes = [...answer.children]
       }else {
         answerNodes = [...answerNodes, ...answer.children]
       }
-      console.log(answerNodes)
+      //console.log(answerNodes)
     })
     // concat
     elementChildNodes = [...questionNodes, ...answerNodes];
@@ -64,7 +65,6 @@ export const getValues = (dataDom, dataClass) => {
 // set values
 
 export const setValues = (values, dataClass, newElement) => {
-  console.log(newElement)
   let elementChildNodes;
   // answer case
   if (dataClass === "answer__input") {
@@ -72,14 +72,20 @@ export const setValues = (values, dataClass, newElement) => {
   }
   // question case
   if (dataClass === "question__input") {
-    const questionNodes = Array.from(
-      newElement.querySelector(".question__input").children
-    );
-    const answerNodes = Array.from(
-      newElement.querySelector(".answer__input").children
-    );
-    elementChildNodes = questionNodes.concat(answerNodes);
-    console.log(elementChildNodes)
+    const questionNodes = [...newElement.querySelector(".question__input").children];
+    const answers = [...newElement.querySelectorAll(".answer__input")]
+    let answerNodes = [];
+     // stack children
+     answers.forEach((answer)=>{
+      if(answerNodes.length === 0){
+        answerNodes = [...answer.children]
+      }else {
+        answerNodes = [...answerNodes, ...answer.children]
+      }
+    });
+    // concat
+    elementChildNodes = [...questionNodes, ...answerNodes];
+    //console.log(elementChildNodes)
   }
 
   let index = 0;
