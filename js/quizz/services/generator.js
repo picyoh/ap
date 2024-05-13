@@ -20,8 +20,9 @@ export const quizzToJson = (form) => {
     const splitLength = splitId.length - 1;
     // get number
     const number = splitId[splitLength];
-    // get row number
+    // decompose number
     const numRow = parseInt(number);
+    const numQues = parseInt(number.split('.')[1]) - 1;
     const numAns = parseInt(number.split('.')[2]) - 1;
     // get type
     const type = element[0].replace(number, "").slice(0, -1);
@@ -29,7 +30,7 @@ export const quizzToJson = (form) => {
     const currentContent = document.querySelectorAll(".row__content")[numRow];
     multiple = currentContent.children.length > 1;
 
-    console.log(id, splitId, multiple, type);
+    console.log(id, multiple, type, element[1]);
     // first row
     if (numRow === 0 && element[1] === "") {
       element[1] = "Go !";
@@ -74,7 +75,10 @@ export const quizzToJson = (form) => {
         question.choices[numAns].tag = element[1];
         break;
       case "question_parent":
-        question.parent = element[1];
+        if(multiple){
+          console.log(element[1], question.qMulti)
+          question.qMulti[numQues].parent = element[1];
+        }
         break;
       case "answer_parent":
         question.choices[numAns].parent = element[1];

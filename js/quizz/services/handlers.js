@@ -3,6 +3,7 @@ import { addAnswer } from "../components/answer.js";
 import { quizzToJson } from "../services/generator.js";
 import { dragDropHandler } from "./dragdrop.js";
 import { linkablesHandler } from "./linksHandlers.js";
+import { pathHandler } from "./links.js";
 
 const addRowHandler = () => {
   const addRowBtns = document.querySelectorAll(".add_row");
@@ -104,5 +105,6 @@ export const handlers = () => {
   addAnswerHandler();
   dragDropHandler();
   linkablesHandler();
+  pathHandler()
   preventDragOnRange();
 };

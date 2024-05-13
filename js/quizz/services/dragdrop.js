@@ -34,6 +34,7 @@ const dropHandler = (e) => {
   //TODO: move check of target to enter/over ?
   if (e.target.classList.value === "trash") {
     // trash case
+    //TODO: check remove answer
     checkPreviousRow(dataDom);
     parent.remove();
   } else {

@@ -8,7 +8,7 @@ export const addQuestion = (parent, lastQuestion) => {
     //console.log(rowNumber, questionNumber, isQMulti);
     const question = `
     <div class='question'>
-        <div id='question_link_${number}' class='link' linkable='true' ${isQMulti ? `>` : `style='display: none;'>`}</div>
+        <div id='question_link_${number}' class='link' link-target='true' ${isQMulti ? `>` : `style='display: none;'>`}</div>
         <div class='question__input' id='question_${number}' ${secondRow ? `draggable='true'>` : `>`}
             <label for='question_input_${number}'>Question :&nbsp;</label>
             <textarea id='question_input_${number}' name='question_${number}'></textarea>

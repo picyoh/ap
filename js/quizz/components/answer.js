@@ -15,7 +15,7 @@ export const addAnswer = (parent, lastAnswers, targetId) => {
   //console.log(parent, rowNumber, questionNumber, answerNumber, lastAnswers);
   const answer = `
     <div class='answer'>
-        ${rowLevel ? `` : `<div class='link' id='answer_link_${number}' linkable='true' link-target='true'></div>`}    
+        ${rowLevel ? `` : `<div id='answer_link_${number}' class='link' linkable='true'></div>`}    
         <div class='answer__input' id='answer_${number}' draggable='true'>
             <label for='answer_input_${number}'>Réponse :&nbsp;</label>
             <textarea id='answer_input_${number}' name='answer_${number}'></textarea>

@@ -1,7 +1,7 @@
 import { addAnswer } from "../components/answer.js";
 import { addContainer } from "../components/form.js";
 
-const getNumber = (targetId) => {
+export const getNumber = (targetId) => {
   //console.log(targetId);
   const targetSplit = targetId.split("_");
   const targetSplitLast = targetSplit.length - 1;

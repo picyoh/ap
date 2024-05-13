@@ -1,7 +1,7 @@
 import { handlers, submitHandler } from "../services/handlers.js";
 import { addQuestion } from "../components/question.js";
 import { addAnswer } from "../components/answer.js";
-import { initCanvas } from "../services/links.js";
+import { initSvg } from "../services/links.js";
 
 //Init
 
@@ -67,7 +67,7 @@ const initContainer = (parent) => {
       `;
   parent.insertAdjacentHTML("beforeend", container);
   handlers();
-  initCanvas();
+  initSvg();
 };
 
 const initSubmit = () => {
