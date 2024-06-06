@@ -1,4 +1,5 @@
 import { getNumber } from "./dragUtils.js";
+import { pathClickHandler } from "./linksHandlers.js";
 
 let start = { x: 0, y: 0 };
 let center = { x: 0, y: 0 };
@@ -11,6 +12,11 @@ export const initSvg = () => {
   <svg width='${window.innerWidth}' height='${window.innerHeight}' xmlns="http://www.w3.org/2000/svg"></svg>`;
   const page = document.querySelector("html");
   page.insertAdjacentHTML("afterbegin", svg);
+  // add hide path button
+  const quizz = document.querySelector('#quizz')
+  const hideLinkBtn = `<button id='hide_links'>Hide Links</button>`;
+  quizz.insertAdjacentHTML('beforeend', hideLinkBtn);
+  hideLinkHandler();
 };
 
 const addTempPath = () => {
@@ -24,13 +30,32 @@ const addTempPath = () => {
   />`;
   const svg = document.querySelector("svg");
   svg.insertAdjacentHTML("beforeend", path);
+  addCircle('temp', start.x, start.y)
 };
 
-export const resetTemp = () => {
+const addCircle = (number, elementX, elementY) =>{
+  const element = 'circle_'+ number;
+  const elementDom = document.getElementById(element);
+  // avoiding to duplicate circles
+  if(elementDom === null){
+    const circle = `<circle id='circle_${number}' cx='${elementX}' cy='${elementY}' r='6'/>`;
+    const svg = document.querySelector("svg");
+    svg.insertAdjacentHTML("beforeend", circle);
+  }
+}
+
+export const removeCircle = (number) =>{
+  const id = 'circle_'+number;
+  document.getElementById(id).remove();
+}
+
+export const resetTemp = (firstNumber) => {
   cancelRequest();
-  //reset temp
+  // reset temp
   const tempPath = document.querySelector("#temp_path");
   if (tempPath) tempPath.remove();
+  // remove circle
+  removeCircle('temp');
 };
 
 export const getPositions = (element, type) => {
@@ -55,7 +80,7 @@ export const getPositions = (element, type) => {
 export const updateMousePosition = (mouseEvent) => {
   mouse.x = mouseEvent.clientX;
   mouse.y = mouseEvent.clientY;
-  //TODO:console.log(mouse);
+  //console.log(mouse);
   updateMouse();
 };
 
@@ -66,7 +91,11 @@ const cancelRequest = () => {
 const updateMouse = () => {
   // remove previous path
   const tempPath = document.querySelector("#temp_path");
-  if (tempPath) tempPath.remove();
+  if (tempPath){
+    tempPath.remove();
+    // remove circle
+    removeCircle('temp');
+  } 
   // get center point
   center.x = (mouse.x + start.x) / 2;
   center.y = (mouse.y + start.y) / 2 + 100;
@@ -92,25 +121,42 @@ export const createLink = (first, second) => {
   <path 
     id=${pathId}
     class='paths'
-    d="M${start.x},${start.y} Q${center.x},${center.y} ${mouse.x},${mouse.y}" 
+    d="M${start.x},${start.y} Q${center.x},${center.y} ${end.x},${end.y}" 
     fill="none" 
     stroke="black" 
-    stroke-width="3" 
+    stroke-width="5" 
   />`;
   const svg = document.querySelector("svg");
   svg.insertAdjacentHTML("beforeend", path);
   //console.log(start, center, end)
-  resetTemp()
+  resetTemp(firstNumber);
+  pathClickHandler();
+  addCircle(firstNumber, start.x, start.y);
+  addCircle(secondNumber, end.x, end.y);
 };
 
-export const pathHandler = () => {
+const hideLinkHandler = () =>{
+  const btn = document.querySelector('#hide_links');
+  btn.addEventListener('click', (e)=>{
+    e.preventDefault()
+    const svgDom = document.querySelector('svg');
+    if(svgDom.classList.contains('none')){
+      svgDom.classList.remove('none');
+    }else {
+      svgDom.classList.add('none');
+    }
+  });
+}
+
+/*//TODO: checker pour mise a jour reguliere des paths et cercles
+ export const pathHandler = () => {
   const paths = document.querySelectorAll(".paths");
   paths.forEach((path) => {
     updatePath(path.id);
   });
 };
 
-const updatePath = (pathId) => {
+export const updatePath = (pathId) => {
   // split canvas Id
   const split = pathId.split("_");
   const first = split[1];
@@ -128,7 +174,7 @@ const updatePath = (pathId) => {
       : second.length === 5
       ? "answer_link_" + second
       : "";
-  //console.log(firstId, secondId);
+  console.log(firstId, secondId);
   // get links elements
   const firstElement = document.getElementById(firstId);
   const secondElement = document.getElementById(secondId);
@@ -141,7 +187,7 @@ const updatePath = (pathId) => {
   // re generate link
   createLink(firstElement, secondElement);
 };
-
+ */
 export const addParentValue = (dragged, target) => {
   // get Numbers in arrays
   const draggedNumber = getNumber(dragged.id);

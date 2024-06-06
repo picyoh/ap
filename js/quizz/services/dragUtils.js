@@ -1,5 +1,6 @@
 import { addAnswer } from "../components/answer.js";
 import { addContainer } from "../components/form.js";
+import { createLink, getPositions } from "./links.js";
 
 export const getNumber = (targetId) => {
   //console.log(targetId);
@@ -22,8 +23,6 @@ export const removeEmptyRow = () => {
     }
   });
 };
-
-// get values
 
 export const getValues = (dataDom, dataClass) => {
   //console.log(dataDom, dataClass);
@@ -58,11 +57,14 @@ export const getValues = (dataDom, dataClass) => {
       values.push(element.value);
     }
   });
-  console.log(values)
+  //console.log(values)
+  const parentValueNumber = values[1].split('_')[1] ;
+  const dataDomNumber = dataDom.id.split('_')[1];
+  const pathId = 'path_' + parentValueNumber + '_' + dataDomNumber;
+  document.getElementById(pathId).remove();
+
   return values;
 };
-
-// set values
 
 export const setValues = (values, dataClass, newElement) => {
   let elementChildNodes;
@@ -86,6 +88,19 @@ export const setValues = (values, dataClass, newElement) => {
     // concat
     elementChildNodes = [...questionNodes, ...answerNodes];
     //console.log(elementChildNodes)
+    /* Update Links */
+    // get parent element
+    const parentElement = document.getElementById(values[1]);
+    // get parent link element
+    const parentLinkElement = parentElement.parentNode.firstElementChild;
+    // get current question element
+    const currentQuestion = questionNodes[0].parentNode;
+    // get current question link element
+    const currentQuestionLink = questionNodes[0].parentNode.parentNode.firstElementChild;
+    // create new path
+    getPositions(parentLinkElement, 'start');
+    getPositions(currentQuestionLink, 'end');
+    createLink(parentElement, currentQuestion);
   }
 
   let index = 0;

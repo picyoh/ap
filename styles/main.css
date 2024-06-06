@@ -82,14 +82,6 @@ textarea {
   cursor: crosshair;
 }
 
-.clicked::after {
-  content: "";
-  width: 70%;
-  height: 70%;
-  background-color: black;
-  border-radius: 0.8rem;
-}
-
 .answers {
   display: flex;
   justify-content: space-between;
@@ -177,7 +169,15 @@ svg {
   pointer-events: none;
 }
 
-.paths{
-  pointer-events: all;
-  opacity: .5;
+.paths {
+  pointer-events: stroke;
+  opacity: 0.5;
+}
+
+.highlightedPaths {
+  opacity: 1;
+}
+
+.none {
+  display: none;
 }

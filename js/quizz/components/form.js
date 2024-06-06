@@ -18,6 +18,7 @@ export const addForm = () => {
   initRow();
   initTickmarkers();
   initSubmit();
+  initSvg();
 };
 
 const initRow = () => {
@@ -67,7 +68,6 @@ const initContainer = (parent) => {
       `;
   parent.insertAdjacentHTML("beforeend", container);
   handlers();
-  initSvg();
 };
 
 const initSubmit = () => {

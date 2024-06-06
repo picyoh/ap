@@ -3,32 +3,33 @@ import {
   updateMousePosition,
   getPositions,
   resetTemp,
+  removeCircle
 } from "./links.js";
 import { addParentValue } from "./links.js";
 
 let onDrag = false;
 let dragged;
 
-const linkableTrigger = (dragged) => {
+const linkableTrigger = () => {
   const linkables = document.querySelectorAll("[linkable]");
   linkables.forEach((linkable) => {
     linkable.addEventListener(
       "click",
       (e) => {
-        endClickHandler(dragged, e);
+        endClickHandler(e);
       },
       { once: true }
     );
   });
 };
 
-const linkTargetTrigger = (dragged) => {
+const linkTargetTrigger = () => {
   const linkables = document.querySelectorAll("[link-target]");
   linkables.forEach((linkable) => {
     linkable.addEventListener(
       "click",
       (e) => {
-        endClickHandler(dragged, e);
+        endClickHandler(e);
       },
       { once: true }
     );
@@ -38,8 +39,6 @@ const linkTargetTrigger = (dragged) => {
 const beginClickHandler = (e) => {
   e.stopPropagation();
   onDrag = true;
-  // add clicked class
-  e.target.classList.add("clicked");
   // trigger cursor animation
   mouseMoveTrigger();
   // trigger linkable click
@@ -47,19 +46,17 @@ const beginClickHandler = (e) => {
   dragged = e.target;
   getPositions(e.target, "start");
   resetLinkTrigger();
-  cancelClickTrigger(dragged);
+  cancelClickTrigger();
   if (linkable) {
-    linkTargetTrigger(dragged);
+    linkTargetTrigger();
   } else {
-    linkableTrigger(dragged);
+    linkableTrigger();
   }
 };
 
-const endClickHandler = (dragged, e) => {
+const endClickHandler = (e) => {
   e.stopPropagation();
   onDrag = false;
-  // add clicked class
-  e.target.classList.add("clicked");
   // end cursor animation
   mouseMoveTrigger();
   // get end position
@@ -89,29 +86,17 @@ const initTrigger = () => {
 };
 
 const cancelClick = (e) => {
+  console.log(e.target);
   e.stopPropagation();
   if (!e.target.classList.contains("link")) {
     onDrag = false;
+    resetTemp();
     mouseMoveTrigger();
     linkablesHandler();
-    removeClickedClass(dragged.id);
   }
 };
 
-const removeClickedClass = (elementId) => {
-  const element = document.getElementById(elementId);
-  //console.log(elementId.split('_')[0])
-  const isAnswer = elementId.split('_')[0] === 'answer' ? true : false;
-  // get parent value
-  const parentValue =
-    element.parentNode.querySelector("input[type=hidden]").value;
-  //console.log(parentValue);
-  if (!parentValue && !isAnswer) {
-    element.classList.remove("clicked");
-  }
-};
-
-const cancelClickTrigger = (dragged) => {
+const cancelClickTrigger = () => {
   const body = document.querySelector("body");
   if (onDrag) {
     body.addEventListener("click", cancelClick, false);
@@ -143,5 +128,57 @@ const resetLinkTrigger = () => {
 
 export const linkablesHandler = () => {
   resetLinkTrigger();
+  cancelClickTrigger();
   initTrigger();
+  hightlightHandler();
 };
+
+export const pathClickHandler = () => {
+  const paths = document.querySelectorAll(".paths");
+  paths.forEach((path) => {
+    path.addEventListener("click", (e) => {
+      const split =  path.id.split("_");
+      const answerId = "answer_link_" + split[1];
+      document.getElementById(answerId).click();
+      path.remove();
+      removeCircle(split[1]);
+      removeCircle(split[2]);
+    });
+  });
+};
+
+const hightlightHandler = () =>{
+  const paths = document.querySelectorAll(".paths");
+  paths.forEach((path) => {
+    path.addEventListener("mouseover", (e)=>{
+      e.target.classList.add('highlightedPaths');
+      highlightParentPath(e.target.id, true);
+    });
+    path.addEventListener("mouseleave", (e)=>{
+      e.target.classList.remove('highlightedPaths');
+      highlightParentPath(e.target.id, false);
+    });
+  });
+};
+
+const highlightParentPath = (targetId, isOver) =>{
+  //console.log(targetId)
+  const split = targetId.split('_');
+      // get answer
+      const answerNumber = split[1];
+      // get parent question value
+      const questionNumber = answerNumber.slice(0, 3);
+      const questionParent = 'question_parent_' + questionNumber;
+      const parentValue = document.getElementById(questionParent).value
+      if(parentValue){
+        const splitNumber = parentValue.split('_')[1];
+        const pathId = 'path_'+ splitNumber + '_' + questionNumber;
+        //console.log(pathId);
+        if(isOver){
+          document.getElementById(pathId).classList.add('highlightedPaths');
+        }else{
+          document.getElementById(pathId).classList.remove('highlightedPaths');
+        }
+        highlightParentPath(pathId, isOver);
+      }
+}

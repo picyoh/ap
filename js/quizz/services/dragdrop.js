@@ -6,6 +6,8 @@ import {
 } from "./dragUtils.js";
 import { addContainer } from "../components/form.js";
 import { addAnswer } from "../components/answer.js";
+/* import { pathHandler, updatePath } from "./links.js"; */
+
 // drag start
 const dragStartHandler = (e) => {
   e.stopPropagation();
@@ -45,13 +47,13 @@ const dropHandler = (e) => {
       // add container
       addContainer(e.target);
       //add answer if necessary
-      if(values.length > 5){
-        const answerIndex = (values.length -5) / 3;
+      if (values.length > 5) {
+        const answerIndex = (values.length - 5) / 3;
         const answers = e.target.querySelectorAll('.answers');
-        const lastAnswers = answers[answers.length-1]
+        const lastAnswers = answers[answers.length - 1]
         const buttonId = lastAnswers.querySelector('button').id
         //console.log(answerIndex, e.target, lastAnswers, buttonId)
-        for(let i =0; i< answerIndex; i++){
+        for (let i = 0; i < answerIndex; i++) {
           addAnswer(e.target, lastAnswers, buttonId);
         }
       }
@@ -66,6 +68,12 @@ const dropHandler = (e) => {
       setValues(values, dataClass, newContainer);
       // renumber previous row
       checkPreviousRow(dataDom);
+      // check input parent value
+      const parentValue = dataDom.querySelector('input[type=hidden]').value
+/*       if (parentValue) {
+        // update paths
+        pathHandler();
+      } */
     }
     // answers cases
     if (

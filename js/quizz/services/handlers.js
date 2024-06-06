@@ -3,7 +3,7 @@ import { addAnswer } from "../components/answer.js";
 import { quizzToJson } from "../services/generator.js";
 import { dragDropHandler } from "./dragdrop.js";
 import { linkablesHandler } from "./linksHandlers.js";
-import { pathHandler } from "./links.js";
+/* import { pathHandler } from "./links.js"; */
 
 const addRowHandler = () => {
   const addRowBtns = document.querySelectorAll(".add_row");
@@ -96,6 +96,10 @@ const removeListeners = () => {
   linkables.forEach((linkable)=>{
     linkable.replaceWith(linkable.cloneNode(true));
   });
+  const paths = document.querySelectorAll(".paths");
+  paths.forEach((path) => {
+    path.replaceWith(path.cloneNode(true));
+  });
 };
 
 export const handlers = () => {
@@ -105,6 +109,6 @@ export const handlers = () => {
   addAnswerHandler();
   dragDropHandler();
   linkablesHandler();
-  pathHandler()
+  //pathHandler()
   preventDragOnRange();
 };

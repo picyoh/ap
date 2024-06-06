@@ -12,7 +12,7 @@ export const addQuestion = (parent, lastQuestion) => {
         <div class='question__input' id='question_${number}' ${secondRow ? `draggable='true'>` : `>`}
             <label for='question_input_${number}'>Question :&nbsp;</label>
             <textarea id='question_input_${number}' name='question_${number}'></textarea>
-            <input type='hidden' name='question_parent_${number}'/>
+            <input type='hidden' name='question_parent_${number}' id='question_parent_${number}'/>
         </div>
     </div>
     `;
