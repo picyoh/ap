@@ -1,7 +1,10 @@
-import { addForm } from "../components/form.js";
+import { initResultForm } from "../../results/components/resultForm.js";
+import { addForm } from "../components/quizzForm.js";
+import { downloadJson } from "./download.js";
 
 export const init = () => {
   addForm();
+  initResultForm()
 };
 
 export const quizzToJson = (form) => {
@@ -30,7 +33,8 @@ export const quizzToJson = (form) => {
     const currentContent = document.querySelectorAll(".row__content")[numRow];
     multiple = currentContent.children.length > 1;
 
-    console.log(id, multiple, type, element[1]);
+    //console.log(id, multiple, type, element[1]);
+    
     // first row
     if (numRow === 0 && element[1] === "") {
       element[1] = "Go !";
@@ -84,16 +88,14 @@ export const quizzToJson = (form) => {
         question.choices[numAns].parent = element[1];
         break;
       default:
-        console.log("err switch");
+        console.log("err switch quizz gen");
     };
   };
   // append last datas to encaps
   encaps.questions.push(question);
   // stringify
   const json = JSON.stringify(encaps);
-  console.log(json);
-};
-
-export const downloadJson = () => {
-  //TODO: creer blob et le faire down par le navigateur
+  const date = new Date().toISOString();
+  const filename = 'quizz' + date;
+  downloadJson(filename, json);
 };

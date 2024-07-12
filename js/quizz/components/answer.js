@@ -20,7 +20,7 @@ export const addAnswer = (parent, lastAnswers, targetId) => {
             <label for='answer_input_${number}'>Réponse :&nbsp;</label>
             <textarea id='answer_input_${number}' name='answer_${number}'></textarea>
             <label for='answer_tag_${number}'>Tag :&nbsp;</label>
-            <input type='text' id='answer_tag_${number}' name='tag_${number}'/>
+            <input type='text' id='answer_tag_${number}' name='tag_${number}' class='answer_tag' />
             ${rowLevel ? `` : `
             <input type='hidden' name='answer_parent_${number}' />
             `}

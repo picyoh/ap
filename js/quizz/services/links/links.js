@@ -1,4 +1,4 @@
-import { getNumber } from "./dragUtils.js";
+import { getNumber } from "../dragNdrop/dragUtils.js";
 import { pathClickHandler } from "./linksHandlers.js";
 
 let start = { x: 0, y: 0 };
@@ -188,6 +188,7 @@ export const updatePath = (pathId) => {
   createLink(firstElement, secondElement);
 };
  */
+
 export const addParentValue = (dragged, target) => {
   // get Numbers in arrays
   const draggedNumber = getNumber(dragged.id);

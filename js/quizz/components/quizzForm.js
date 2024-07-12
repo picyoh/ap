@@ -1,7 +1,7 @@
 import { handlers, submitHandler } from "../services/handlers.js";
-import { addQuestion } from "../components/question.js";
-import { addAnswer } from "../components/answer.js";
-import { initSvg } from "../services/links.js";
+import { addQuestion } from "./question.js";
+import { addAnswer } from "./answer.js";
+import { initSvg } from "../services/links/links.js";
 
 //Init
 
@@ -16,7 +16,6 @@ export const addForm = () => {
   const main = document.querySelector("#main");
   main.insertAdjacentHTML("beforeend", form);
   initRow();
-  initTickmarkers();
   initSubmit();
   initSvg();
 };
@@ -35,26 +34,6 @@ const initRow = () => {
   const container = form.querySelector(".row__content");
   initContainer(container);
 };
-//TODO: move to results
-const initTickmarkers = () => {
-  const tickMarkers = `    
-  <datalist id="tickmarks">
-    <option value="0"></option>
-    <option value="1"></option>
-    <option value="2"></option>
-    <option value="3"></option>
-    <option value="4"></option>
-    <option value="5"></option>
-    <option value="6"></option>
-    <option value="7"></option>
-    <option value="8"></option>
-    <option value="9"></option>
-    <option value="10"></option>
-  </datalist>
-  `
-  const form = document.querySelector("#quizz");
-  form.insertAdjacentHTML("beforeend", tickMarkers);
-}
 
 const initContainer = (parent) => {
   const container = `

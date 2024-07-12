@@ -4,8 +4,9 @@ import {
   getValues,
   setValues,
 } from "./dragUtils.js";
-import { addContainer } from "../components/form.js";
-import { addAnswer } from "../components/answer.js";
+import { addContainer } from "../../components/quizzForm.js";
+import { addAnswer } from "../../components/answer.js";
+import { addTag } from "../../../results/components/tags.js";
 /* import { pathHandler, updatePath } from "./links.js"; */
 
 // drag start
@@ -28,6 +29,7 @@ const dropHandler = (e) => {
   e.preventDefault();
   e.stopPropagation();
   const data = e.dataTransfer.getData("text/plain");
+  console.log(data)
   const dataDom = document.getElementById(data);
   const dataClass = dataDom.classList.value;
   const targetClass = e.target.classList.value;
@@ -35,10 +37,15 @@ const dropHandler = (e) => {
   //console.log(e.target, dataDom, targetClass, dataClass);
   //TODO: move check of target to enter/over ?
   if (e.target.classList.value === "trash") {
-    // trash case
+    if(dataClass === 'result__tag'){
+      //tags cases
+      dataDom.remove()
+    }else{
+    // others cases
     //TODO: check remove answer
     checkPreviousRow(dataDom);
     parent.remove();
+    }
   } else {
     // containers case
     if (targetClass === "row__content" && dataClass === "question__input") {
@@ -96,6 +103,10 @@ const dropHandler = (e) => {
       setValues(values, dataClass, newAnswer);
       // renumber previous row
       checkPreviousRow(dataDom);
+    }
+    //tag cases
+    if(targetClass === 'tags__area' && dataClass === 'tag'){
+      addTag('.tags__area', data);
     }
   }
 };

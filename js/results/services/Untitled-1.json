@@ -1,0 +1,14 @@
+{
+    "results": [
+        {
+            "name": "test",
+            "imgSrc": "https://m.media-amazon.com/images/I/618zZ7u3sUL._AC_SL1500_.jpg",
+            "affLink": "https://www.google.com/search?client=firefox-b-d&sca_esv=c07cf4001d5d2ec8&q=souris&tbm=isch&source=lnms&prmd=ivnbz&sa=X&ved=2ahUKEwiU45uDiI6FAxVdTqQEHcP7Dp8Q0pQJegQIChAB&biw=958&bih=918#imgrc=A6sQySAeE74hwM",
+            "value": "5",
+            "tags": [
+                "test",
+                "test2"
+            ]
+        }
+    ]
+}

@@ -1,3 +1,3 @@
-import { init } from "./quizz/services/generator.js"
+import { init } from "./quizz/services/quizzGenerator.js"
 
 init();
