@@ -47,7 +47,6 @@ export const resultToJson = (form) => {
   encaps.results.push(resultValue);
   // stringify
   const json = JSON.stringify(encaps);
-  const date = new Date().toISOString();
-  const filename = "result" + date;
+  const filename = "results.json";
   downloadJson(filename, json);
 };

@@ -95,7 +95,6 @@ export const quizzToJson = (form) => {
   encaps.questions.push(question);
   // stringify
   const json = JSON.stringify(encaps);
-  const date = new Date().toISOString();
-  const filename = 'quizz' + date;
+  const filename = 'questions.json';
   downloadJson(filename, json);
 };
