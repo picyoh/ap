@@ -33,19 +33,19 @@ const addTempPath = () => {
   addCircle('temp', start.x, start.y)
 };
 
-const addCircle = (number, elementX, elementY) =>{
-  const element = 'circle_'+ number;
+const addCircle = (number, elementX, elementY) => {
+  const element = 'circle_' + number;
   const elementDom = document.getElementById(element);
   // avoiding to duplicate circles
-  if(elementDom === null){
+  if (elementDom === null) {
     const circle = `<circle id='circle_${number}' cx='${elementX}' cy='${elementY}' r='6'/>`;
     const svg = document.querySelector("svg");
     svg.insertAdjacentHTML("beforeend", circle);
   }
 }
 
-export const removeCircle = (number) =>{
-  const id = 'circle_'+number;
+export const removeCircle = (number) => {
+  const id = 'circle_' + number;
   document.getElementById(id).remove();
 }
 
@@ -91,11 +91,11 @@ const cancelRequest = () => {
 const updateMouse = () => {
   // remove previous path
   const tempPath = document.querySelector("#temp_path");
-  if (tempPath){
+  if (tempPath) {
     tempPath.remove();
     // remove circle
     removeCircle('temp');
-  } 
+  }
   // get center point
   center.x = (mouse.x + start.x) / 2;
   center.y = (mouse.y + start.y) / 2 + 100;
@@ -135,14 +135,14 @@ export const createLink = (first, second) => {
   addCircle(secondNumber, end.x, end.y);
 };
 
-const hideLinkHandler = () =>{
+const hideLinkHandler = () => {
   const btn = document.querySelector('#hide_links');
-  btn.addEventListener('click', (e)=>{
+  btn.addEventListener('click', (e) => {
     e.preventDefault()
     const svgDom = document.querySelector('svg');
-    if(svgDom.classList.contains('none')){
+    if (svgDom.classList.contains('none')) {
       svgDom.classList.remove('none');
-    }else {
+    } else {
       svgDom.classList.add('none');
     }
   });
@@ -200,8 +200,8 @@ export const addParentValue = (dragged, target) => {
     draggedNumber.length === 3
       ? dragged
       : targetNumber.length === 3
-      ? target
-      : "";
+        ? target
+        : "";
   //console.log(draggedNumber.length, targetNumber.length);
   // sort if answers
   if (childElement === "") {
@@ -218,11 +218,15 @@ export const addParentValue = (dragged, target) => {
   }
   // get parentElement
   const parentElement = target === childElement ? dragged : target;
-  const parentSplit = parentElement.id.split("_");
-  const parentId = parentSplit[0] + "_" + parentSplit[2];
-  //console.log('child : ' + childElement , 'parentId : '+ parentId);
+  const targetTag= parentElement.id.replace('link', 'tag');
+  const tagValue = document.getElementById(targetTag).value;
   // set parent on input hidden
-  document
-    .getElementById(childElement.id)
-    .parentElement.querySelector("input[type=hidden]").value = parentId;
+  const parentContainer = document.getElementById(childElement.id).parentElement;
+  parentContainer.querySelector("input[type=hidden]").value = tagValue;
+  //set tag on children answers parent value
+  const answers = parentContainer.parentNode.parentNode.querySelectorAll(".answer");
+  //console.log(tagValue, answers);
+  answers.forEach((answer)=>{
+    answer.querySelector("input[type=hidden]").value = tagValue;
+  });
 };

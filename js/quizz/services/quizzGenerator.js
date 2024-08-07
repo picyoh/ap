@@ -15,7 +15,7 @@ export const quizzToJson = (form) => {
   let question = {};
   let choices = [];
   let currentQuestion = 0;
-
+console.log(data)
   for (const element of data) {
     // get Id
     const id = element[0];
@@ -59,33 +59,30 @@ export const quizzToJson = (form) => {
             question.qMulti = [];
           }
           object.question = element[1];
-          object.parent = "";
+          object.number = number;
           question.qMulti.push(object);
         } else {
           question.question = element[1];
+          question.number = number;
         }
         break;
       case "answer":
         let choice = {};
         choice.number = number;
         choice.title = element[1].charAt(0).toUpperCase() + element[1].slice(1);
-        choice.name = element[1];
-        choice.tag ='';
-        choice.parent='';
         choices.push(choice);
         question.choices = choices;
         break;
       case "tag":
-        question.choices[numAns].tag = element[1];
+        question.choices[question.choices.length -1].tag = element[1];
         break;
       case "question_parent":
         if(multiple){
-          console.log(element[1], question.qMulti)
-          question.qMulti[numQues].parent = element[1];
+          question.qMulti[question.qMulti.length -1].parent = element[1];
         }
         break;
       case "answer_parent":
-        question.choices[numAns].parent = element[1];
+        question.choices[question.choices.length -1].parent = element[1];
         break;
       default:
         console.log("err switch quizz gen");
