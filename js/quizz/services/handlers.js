@@ -135,4 +135,23 @@ export const handlers = () => {
   linkablesHandler();
   addTagsToResults();
   preventDragOnRange();
+  autoFillTag();
 };
+
+const autoFillTag = () => {
+  const answers = document.querySelectorAll('.answer_inputs');
+  answers.forEach((answer)=>{
+    answer.addEventListener('change', (e)=>{
+      // get id
+      const answerId = e.target.id;
+      const tagId = answerId.replace('input', 'tag');
+      // get value
+      const answerValue = e.target.value;
+      const tagValue = answerValue.toLowerCase().slice(0,20).replaceAll(' ', '_');
+      
+      const tagDom = document.getElementById(tagId);
+      tagDom.value = tagValue;
+      
+    });
+  })
+}

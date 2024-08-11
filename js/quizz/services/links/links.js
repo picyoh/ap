@@ -222,11 +222,24 @@ export const addParentValue = (dragged, target) => {
   const tagValue = document.getElementById(targetTag).value;
   // set parent on input hidden
   const parentContainer = document.getElementById(childElement.id).parentElement;
-  parentContainer.querySelector("input[type=hidden]").value = tagValue;
+  //TODO: transformer en array pour check avec contains
+  let values = parentContainer.querySelector("input[type=hidden]").value.split(',');
+  if(values[0] === ''){
+    values = tagValue
+  }else{
+    values.push(tagValue);
+  }
+  parentContainer.querySelector("input[type=hidden]").value = values;
   //set tag on children answers parent value
   const answers = parentContainer.parentNode.parentNode.querySelectorAll(".answer");
   //console.log(tagValue, answers);
   answers.forEach((answer)=>{
-    answer.querySelector("input[type=hidden]").value = tagValue;
+    let values = answer.querySelector("input[type=hidden]").value.split(',');
+    if(values[0] === ''){
+      values = tagValue
+    }else{
+      values.push(tagValue);
+    }
+    answer.querySelector("input[type=hidden]").value = values;
   });
 };
