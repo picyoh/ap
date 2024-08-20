@@ -1,11 +1,4 @@
-import { initResultForm } from "../../results/components/resultForm.js";
-import { addForm } from "../components/quizzForm.js";
-import { downloadJson } from "./download.js";
-
-export const init = () => {
-  addForm();
-  initResultForm()
-};
+import { downloadJson } from "../../submit/download.js";
 
 export const quizzToJson = (form) => {
   // Variables

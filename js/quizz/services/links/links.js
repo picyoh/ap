@@ -1,23 +1,12 @@
 import { getNumber } from "../dragNdrop/dragUtils.js";
 import { pathClickHandler } from "./linksHandlers.js";
+import { addCircle, removeCircle } from "./components/circles.js";
 
 let start = { x: 0, y: 0 };
 let center = { x: 0, y: 0 };
 let end = { x: 0, y: 0 };
 let mouse = { x: 0, y: 0 };
 let request;
-
-export const initSvg = () => {
-  const svg = `
-  <svg width='${window.innerWidth}' height='${window.innerHeight}' xmlns="http://www.w3.org/2000/svg"></svg>`;
-  const page = document.querySelector("html");
-  page.insertAdjacentHTML("afterbegin", svg);
-  // add hide path button
-  const quizz = document.querySelector('#quizz')
-  const hideLinkBtn = `<button id='hide_links'>Hide Links</button>`;
-  quizz.insertAdjacentHTML('beforeend', hideLinkBtn);
-  hideLinkHandler();
-};
 
 const addTempPath = () => {
   const path = `
@@ -32,22 +21,6 @@ const addTempPath = () => {
   svg.insertAdjacentHTML("beforeend", path);
   addCircle('temp', start.x, start.y)
 };
-
-const addCircle = (number, elementX, elementY) => {
-  const element = 'circle_' + number;
-  const elementDom = document.getElementById(element);
-  // avoiding to duplicate circles
-  if (elementDom === null) {
-    const circle = `<circle id='circle_${number}' cx='${elementX}' cy='${elementY}' r='6'/>`;
-    const svg = document.querySelector("svg");
-    svg.insertAdjacentHTML("beforeend", circle);
-  }
-}
-
-export const removeCircle = (number) => {
-  const id = 'circle_' + number;
-  document.getElementById(id).remove();
-}
 
 export const resetTemp = (firstNumber) => {
   cancelRequest();
@@ -104,142 +77,4 @@ const updateMouse = () => {
   //console.log(start.x, center.x, mouse.x, end.x, request);
   cancelRequest();
   request = window.requestAnimationFrame(updateMouse);
-};
-
-export const createLink = (first, second) => {
-
-  // get numbers and concatenate
-  const firstNumber = getNumber(first.id);
-  const secondNumber = getNumber(second.id);
-  const pathId = "path_" + firstNumber + "_" + secondNumber;
-  // get center point
-  center.x = (end.x + start.x) / 2;
-  center.y = (end.y + start.y) / 2 + 100;
-
-  // draw path
-  const path = `
-  <path 
-    id=${pathId}
-    class='paths'
-    d="M${start.x},${start.y} Q${center.x},${center.y} ${end.x},${end.y}" 
-    fill="none" 
-    stroke="black" 
-    stroke-width="5" 
-  />`;
-  const svg = document.querySelector("svg");
-  svg.insertAdjacentHTML("beforeend", path);
-  //console.log(start, center, end)
-  resetTemp(firstNumber);
-  pathClickHandler();
-  addCircle(firstNumber, start.x, start.y);
-  addCircle(secondNumber, end.x, end.y);
-};
-
-const hideLinkHandler = () => {
-  const btn = document.querySelector('#hide_links');
-  btn.addEventListener('click', (e) => {
-    e.preventDefault()
-    const svgDom = document.querySelector('svg');
-    if (svgDom.classList.contains('none')) {
-      svgDom.classList.remove('none');
-    } else {
-      svgDom.classList.add('none');
-    }
-  });
-}
-
-/*//TODO: checker pour mise a jour reguliere des paths et cercles
- export const pathHandler = () => {
-  const paths = document.querySelectorAll(".paths");
-  paths.forEach((path) => {
-    updatePath(path.id);
-  });
-};
-
-export const updatePath = (pathId) => {
-  // split canvas Id
-  const split = pathId.split("_");
-  const first = split[1];
-  const second = split[2];
-  // get links ids
-  const firstId =
-    first.length === 3
-      ? "question_link_" + first
-      : first.length === 5
-      ? "answer_link_" + first
-      : "";
-  const secondId =
-    second.length === 3
-      ? "question_link_" + second
-      : second.length === 5
-      ? "answer_link_" + second
-      : "";
-  console.log(firstId, secondId);
-  // get links elements
-  const firstElement = document.getElementById(firstId);
-  const secondElement = document.getElementById(secondId);
-  // get positions
-  getPositions(firstElement, "start");
-  getPositions(secondElement, "end");
-  // delete previous links
-  document.getElementById(pathId).remove();
-  //console.log(pathId);
-  // re generate link
-  createLink(firstElement, secondElement);
-};
- */
-
-export const addParentValue = (dragged, target) => {
-  // get Numbers in arrays
-  const draggedNumber = getNumber(dragged.id);
-  const targetNumber = getNumber(target.id);
-  //console.log(draggedNumber, targetNumber);
-  // Compare => answer = parentElement, question = childElement
-  // get question id
-  let childElement =
-    draggedNumber.length === 3
-      ? dragged
-      : targetNumber.length === 3
-        ? target
-        : "";
-  //console.log(draggedNumber.length, targetNumber.length);
-  // sort if answers
-  if (childElement === "") {
-    // get lower answer id
-    for (let i = 0; i < 3; i++) {
-      //console.log(draggedNumber[i], targetNumber[i]);
-      if (draggedNumber[i] !== targetNumber[i]) {
-        draggedNumber[i] > targetNumber[i]
-          ? (childElement = dragged)
-          : (childElement = target);
-        break;
-      }
-    }
-  }
-  // get parentElement
-  const parentElement = target === childElement ? dragged : target;
-  const targetTag= parentElement.id.replace('link', 'tag');
-  const tagValue = document.getElementById(targetTag).value;
-  // set parent on input hidden
-  const parentContainer = document.getElementById(childElement.id).parentElement;
-  //TODO: transformer en array pour check avec contains
-  let values = parentContainer.querySelector("input[type=hidden]").value.split(',');
-  if(values[0] === ''){
-    values = tagValue
-  }else{
-    values.push(tagValue);
-  }
-  parentContainer.querySelector("input[type=hidden]").value = values;
-  //set tag on children answers parent value
-  const answers = parentContainer.parentNode.parentNode.querySelectorAll(".answer");
-  //console.log(tagValue, answers);
-  answers.forEach((answer)=>{
-    let values = answer.querySelector("input[type=hidden]").value.split(',');
-    if(values[0] === ''){
-      values = tagValue
-    }else{
-      values.push(tagValue);
-    }
-    answer.querySelector("input[type=hidden]").value = values;
-  });
 };

@@ -4,9 +4,9 @@ import {
   getValues,
   setValues,
 } from "./dragUtils.js";
-import { addContainer } from "../../components/quizzForm.js";
-import { addAnswer } from "../../components/answer.js";
-import { addTag } from "../../../results/components/tags.js";
+import { addContainer } from "../../components/container/container.js";
+import { addAnswer } from "../../components/answer/answer.js";
+import { addTag } from "../../../results/components/tags/tags.js";
 /* import { pathHandler, updatePath } from "./links.js"; */
 
 // drag start
@@ -29,22 +29,26 @@ const dropHandler = (e) => {
   e.preventDefault();
   e.stopPropagation();
   const data = e.dataTransfer.getData("text/plain");
-  console.log(data)
   const dataDom = document.getElementById(data);
+  if(dataDom === null) return
   const dataClass = dataDom.classList.value;
   const targetClass = e.target.classList.value;
   const parent = dataDom.parentNode.parentNode.parentNode
-  //console.log(e.target, dataDom, targetClass, dataClass);
-  //TODO: move check of target to enter/over ?
-  if (e.target.classList.value === "trash") {
+  console.log(e.target, dataDom, targetClass, dataClass);
+  //TODO: refactor this part
+  if (targetClass === "trash") {
     if(dataClass === 'result__tag'){
       //tags cases
       dataDom.remove()
     }else{
-    // others cases
-    //TODO: check remove answer
-    checkPreviousRow(dataDom);
-    parent.remove();
+      // others cases
+      if(dataClass === 'answer__input'){
+        dataDom.parentNode.remove()
+      }
+      if(dataClass === ''){
+        checkPreviousRow(dataDom);
+        parent.remove();
+      } 
     }
   } else {
     // containers case

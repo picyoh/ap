@@ -1,6 +1,7 @@
-import { addAnswer } from "../../components/answer.js";
-import { addContainer } from "../../components/quizzForm.js";
-import { createLink, getPositions } from "../links/links.js";
+import { addAnswer } from "../../components/answer/answer.js";
+import { addContainer } from "../../components/container/container.js";
+import { getPositions } from "../links/links.js";
+import { createPath} from "../links/components/path.js";
 
 export const getNumber = (targetId) => {
   //console.log(targetId);

@@ -1,16 +1,12 @@
-//TODO: creer structure json reponses (ne pas oublier lien affil + lien image)
-//TODO: gerer generation  du deuxieme formulaire
-//TODO creer handlers
-//TODO: gerer tags a chaque ajout de answer
-
-import {initCloud} from './tags.js'
-import { addResultRow } from './results.js';
-import { submitHandlerResult } from '../../quizz/services/handlers.js';
+import { addResultRow } from "./components/row/row.js";
+import { submitHandlerResult } from "../submit/submitHandlers.js";
 
 export const initResultForm = () => {
   const struct = `
     <div class='bottom'>
-        <form id='results'></form>
+        <form id='results'>
+          <h2>Resultats</h2>
+        </form>
         <button type='button' class='add_result'>+</button>
         <div id='tags'></div>
     </div>
@@ -43,9 +39,32 @@ const initTickmarkers = () => {
   form.insertAdjacentHTML("beforeend", tickMarkers);
 };
 
+export const initPreview = (rowNumber) => {
+  const preview = `
+      <div class='preview' id='preview_${rowNumber}'>
+          <div class="img__container">
+          <i class="fa-regular fa-image fa-2xl img_preview"></i>
+          </div>
+          <p class='link_preview'>No link</p>
+      </div>
+      `;
+  const results = document.querySelector("#result_row_" + rowNumber);
+  results.insertAdjacentHTML("beforeend", preview);
+};
+
+export const initCloud = () => {
+  const cloud = `
+      <div class='tags__container'>
+          <p class='result__tag' id='empty_tag'>empty</p>
+      </div>
+      `;
+  const tags = document.querySelector("#tags");
+  tags.insertAdjacentHTML("beforeend", cloud);
+};
+
 const initSubmitR = () => {
   const buttonR = `<button id='submitResult'>Submit</button>`;
   const formR = document.querySelector("#results");
   formR.insertAdjacentHTML("beforeend", buttonR);
-  submitHandlerResult()
+  submitHandlerResult();
 };

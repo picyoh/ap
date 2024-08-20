@@ -1,4 +1,4 @@
-import { downloadJson } from "../../quizz/services/download.js";
+import { downloadJson } from "../../submit/download.js";
 
 export const resultToJson = (form) => {
   const data = new FormData(form);

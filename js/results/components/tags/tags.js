@@ -1,15 +1,5 @@
-import { handlers } from "../../quizz/services/handlers.js";
-
-export const initCloud = () => {
-  const cloud = `
-      <div class='tags__container'>
-          <p class='result__tag' id='empty_tag'>empty</p>
-      </div>
-      `;
-  const tags = document.querySelector("#tags");
-  tags.insertAdjacentHTML("beforeend", cloud);
-};
-
+import { handlers } from "../../../quizz/services/handlers.js";
+//TODO: refactor checkTag
 export const addTagsToResults = () => {
   const tags = document.querySelectorAll(".answer_tag");
   tags.forEach((tag) => {
@@ -86,3 +76,24 @@ const removeTags = () => {
     }
   });
 };
+
+export const autoFillTag = () => {
+  const answers = document.querySelectorAll('.answer_inputs');
+  answers.forEach((answer)=>{
+    answer.addEventListener('change', (e)=>{
+      // get id
+      const answerId = e.target.id;
+      const tagId = answerId.replace('input', 'tag');
+      // get value
+      const answerValue = e.target.value;
+      const tagValue = answerValue.toLowerCase().slice(0,20).replaceAll(' ', '_').normalize('NFD').replace(/[\u0300-\u036f]/g, "");
+      //get DOM
+      const tagDom = document.getElementById(tagId);
+      // set Value
+      if(tagDom.value === ''){
+        tagDom.value = tagValue;
+        checkTag(tagDom, tagDom.value)
+      } 
+    });
+  })
+}

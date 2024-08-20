@@ -1,16 +1,3 @@
-export const initPreview = (rowNumber) => {
-  const preview = `
-      <div class='preview' id='preview_${rowNumber}'>
-          <div class="img__container">
-          <i class="fa-regular fa-image fa-2xl img_preview"></i>
-          </div>
-          <p class='link_preview'>No link</p>
-      </div>
-      `;
-  const results = document.querySelector("#result_row_" + rowNumber);
-  results.insertAdjacentHTML("beforeend", preview);
-};
-
 export const addImgPreview = (rowNumber, imgSrc) => {
   const preview = `
     <div class=img__container'>

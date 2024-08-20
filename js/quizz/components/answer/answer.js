@@ -1,4 +1,4 @@
-import { handlers } from "../services/handlers.js";
+import { handlers } from "../../services/handlers.js";
 
 export const addAnswer = (parent, lastAnswers, targetId) => {
   // empty targetId are not at row level

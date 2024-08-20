@@ -1,11 +1,11 @@
 import {
-  createLink,
   updateMousePosition,
   getPositions,
-  resetTemp,
-  removeCircle
+  resetTemp
 } from "./links.js";
-import { addParentValue } from "./links.js";
+import { createPath } from "./components/path.js";
+import { removeCircle } from "./components/circles.js";
+import { addParentValue } from "./parentHandler.js";
 
 let onDrag = false;
 let dragged;
@@ -137,7 +137,7 @@ export const pathClickHandler = () => {
   const paths = document.querySelectorAll(".paths");
   paths.forEach((path) => {
     path.addEventListener("click", (e) => {
-      const split =  path.id.split("_");
+      const split = path.id.split("_");
       const answerId = "answer_link_" + split[1];
       document.getElementById(answerId).click();
       path.remove();
@@ -147,38 +147,51 @@ export const pathClickHandler = () => {
   });
 };
 
-const hightlightHandler = () =>{
+const hightlightHandler = () => {
   const paths = document.querySelectorAll(".paths");
   paths.forEach((path) => {
-    path.addEventListener("mouseover", (e)=>{
-      e.target.classList.add('highlightedPaths');
+    path.addEventListener("mouseover", (e) => {
+      e.target.classList.add("highlightedPaths");
       highlightParentPath(e.target.id, true);
     });
-    path.addEventListener("mouseleave", (e)=>{
-      e.target.classList.remove('highlightedPaths');
+    path.addEventListener("mouseleave", (e) => {
+      e.target.classList.remove("highlightedPaths");
       highlightParentPath(e.target.id, false);
     });
   });
 };
 
-const highlightParentPath = (targetId, isOver) =>{
+const highlightParentPath = (targetId, isOver) => {
   //console.log(targetId)
-  const split = targetId.split('_');
-      // get answer
-      const answerNumber = split[1];
-      // get parent question value
-      const questionNumber = answerNumber.slice(0, 3);
-      const questionParent = 'question_parent_' + questionNumber;
-      const parentValue = document.getElementById(questionParent).value
-      if(parentValue){
-        const splitNumber = parentValue.split('_')[1];
-        const pathId = 'path_'+ splitNumber + '_' + questionNumber;
-        //console.log(pathId);
-        if(isOver){
-          document.getElementById(pathId).classList.add('highlightedPaths');
-        }else{
-          document.getElementById(pathId).classList.remove('highlightedPaths');
-        }
-        highlightParentPath(pathId, isOver);
-      }
+  const split = targetId.split("_");
+  // get answer
+  const answerNumber = split[1];
+  // get parent question value
+  const questionNumber = answerNumber.slice(0, 3);
+  const questionParent = "question_parent_" + questionNumber;
+  const parentValue = document.getElementById(questionParent).value;
+  if (parentValue) {
+    const splitNumber = parentValue.split("_")[1];
+    const pathId = "path_" + splitNumber + "_" + questionNumber;
+    //console.log(pathId);
+    if (isOver) {
+      document.getElementById(pathId).classList.add("highlightedPaths");
+    } else {
+      document.getElementById(pathId).classList.remove("highlightedPaths");
+    }
+    highlightParentPath(pathId, isOver);
+  }
+};
+
+export const hideLinkHandler = () => {
+  const btn = document.querySelector('#hide_links');
+  btn.addEventListener('click', (e) => {
+    e.preventDefault()
+    const svgDom = document.querySelector('svg');
+    if (svgDom.classList.contains('none')) {
+      svgDom.classList.remove('none');
+    } else {
+      svgDom.classList.add('none');
+    }
+  });
 }
