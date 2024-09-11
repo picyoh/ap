@@ -1,5 +1,6 @@
-import { getPositions } from "./links";
-import { createPath } from "./paths.js";
+import { removeCircle } from "./components/circles.js";
+import { createPath, getPositions } from "./path.js";
+import {resizeSvg} from "./components/svg.js"
 
 //TODO: checker pour mise a jour reguliere des paths et cercles
 export const pathHandler = () => {
@@ -27,16 +28,20 @@ export const pathHandler = () => {
         : second.length === 5
         ? "answer_link_" + second
         : "";
-    console.log(firstId, secondId);
+    //console.log(firstId, secondId);
     // get links elements
     const firstElement = document.getElementById(firstId);
     const secondElement = document.getElementById(secondId);
+        // delete previous links
+        document.getElementById(pathId).remove();
     // get positions
     getPositions(firstElement, "start");
     getPositions(secondElement, "end");
-    // delete previous links
-    document.getElementById(pathId).remove();
     //console.log(pathId);
-    // re generate link
+    //TODO: check why start coordinates are wrong
+    // re generate path
+    resizeSvg()
+    removeCircle(first);
+    removeCircle(second);
     createPath(firstElement, secondElement);
   };

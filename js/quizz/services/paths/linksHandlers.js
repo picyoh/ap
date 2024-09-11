@@ -1,9 +1,5 @@
-import {
-  updateMousePosition,
-  getPositions,
-  resetTemp
-} from "./links.js";
-import { createPath } from "./components/path.js";
+import { updateMousePosition, getPositions, resetTemp } from "./path.js";
+import { createPath } from "./path.js";
 import { removeCircle } from "./components/circles.js";
 import { addParentValue } from "./parentHandler.js";
 
@@ -62,7 +58,7 @@ const endClickHandler = (e) => {
   // get end position
   getPositions(e.target, "end");
   // create canvas link
-  createLink(dragged, e.target);
+  createPath(dragged, e.target);
   // add parent value
   addParentValue(dragged, e.target);
   //reinit triggers
@@ -184,14 +180,14 @@ const highlightParentPath = (targetId, isOver) => {
 };
 
 export const hideLinkHandler = () => {
-  const btn = document.querySelector('#hide_links');
-  btn.addEventListener('click', (e) => {
-    e.preventDefault()
-    const svgDom = document.querySelector('svg');
-    if (svgDom.classList.contains('none')) {
-      svgDom.classList.remove('none');
+  const btn = document.querySelector("#hide_links");
+  btn.addEventListener("click", (e) => {
+    e.preventDefault();
+    const svgDom = document.querySelector("svg");
+    if (svgDom.classList.contains("none")) {
+      svgDom.classList.remove("none");
     } else {
-      svgDom.classList.add('none');
+      svgDom.classList.add("none");
     }
   });
-}
+};

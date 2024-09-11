@@ -1,4 +1,4 @@
-export const preventDragOnRanges = () => {
+const preventDragOnRanges = () => {
   const ranges = document.querySelectorAll('input[type="range"]');
   ranges.forEach((range) => {
     range.addEventListener("mouseenter", (e) => {
@@ -9,8 +9,8 @@ export const preventDragOnRanges = () => {
     });
   });
 };
-
-export const preventDragOnInputs = () => {
+ 
+const preventDragOnInputs = () => {
   const inputs = document.querySelectorAll('input[type="text"]');
   inputs.forEach((input) => {
     input.addEventListener("mouseenter", (e) => {
@@ -22,7 +22,7 @@ export const preventDragOnInputs = () => {
   });
 };
 
-export const preventDragOnAreas = () => {
+const preventDragOnAreas = () => {
   const areas = document.querySelectorAll("textarea");
   areas.forEach((area) => {
     area.addEventListener("mouseenter", (e) => {
@@ -33,3 +33,9 @@ export const preventDragOnAreas = () => {
     });
   });
 };
+
+export const preventDrag = () => {
+  preventDragOnRanges()
+  preventDragOnInputs()
+  preventDragOnAreas()
+}

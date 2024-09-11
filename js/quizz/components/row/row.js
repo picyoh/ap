@@ -5,7 +5,6 @@ export const addRow = (newRow) => {
   const row = `
       <div class='row'>
           <div class='row__content' id='row_${newRow}' data-drop-target='true'></div>
-          <div class='row__answers' data-drop-target="true"></div>
           <button type='button' class='add_row' id='${newRow}'>+</button>
       </div>
       `;

@@ -1,4 +1,4 @@
-import { addResultRow } from "./components/row/row.js";
+import { addResultRow } from "./components/row/resultRow.js";
 import { submitHandlerResult } from "../submit/submitHandlers.js";
 
 export const initResultForm = () => {
@@ -53,11 +53,7 @@ export const initPreview = (rowNumber) => {
 };
 
 export const initCloud = () => {
-  const cloud = `
-      <div class='tags__container'>
-          <p class='result__tag' id='empty_tag'>empty</p>
-      </div>
-      `;
+  const cloud = `<div class='tags__container'></div>`;
   const tags = document.querySelector("#tags");
   tags.insertAdjacentHTML("beforeend", cloud);
 };

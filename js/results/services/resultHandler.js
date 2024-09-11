@@ -1,5 +1,5 @@
-import { addResultRow } from "../components/row/row.js";
-import { addImgPreview, addLinkPreview } from "../components/preview/preview.js";
+import { addResultRow } from "../components/row/resultRow.js";
+import { addImgPreview, addLinkPreview } from "../components/preview/previews.js";
 
 export const addResultHandler = () => {
   const addResultBtn = document.querySelector(".add_result");

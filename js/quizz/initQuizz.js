@@ -1,4 +1,4 @@
-import { initSvg } from "./services/links/components/svg.js";
+import { initSvg } from "./services/paths/components/svg.js";
 import { submitHandlerQuizz } from "../submit/submitHandlers.js";
 import { handlers } from "./services/handlers.js";
 

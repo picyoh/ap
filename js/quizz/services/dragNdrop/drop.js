@@ -1,54 +1,31 @@
-import {
-  checkPreviousRow,
-  removeEmptyRow,
-  getValues,
-  setValues,
-} from "./dragUtils.js";
-import { addContainer } from "../../components/container/container.js";
+import { getValues } from "./getValues.js";
+import { setValues } from "./setValues.js";
 import { addAnswer } from "../../components/answer/answer.js";
-import { addTag } from "../../../results/components/tags/tags.js";
-/* import { pathHandler, updatePath } from "./links.js"; */
 
-// drag start
-const dragStartHandler = (e) => {
-  e.stopPropagation();
-  e.dataTransfer.setData("text/plain", e.target.id);
-  e.dataTransfer.effectAllowed = "move";
-  //console.log(e.dataTransfer, e.target.id);
-};
-
-// drag over
-const dragOverHandler = (e) => {
-  e.preventDefault();
-  e.stopPropagation();
-  e.dataTransfer.dropEffect = "move";
-};
-
-// drop
-const dropHandler = (e) => {
+export const dropHandler = (e) => {
   e.preventDefault();
   e.stopPropagation();
   const data = e.dataTransfer.getData("text/plain");
   const dataDom = document.getElementById(data);
-  if(dataDom === null) return
+  if (dataDom === null) return;
   const dataClass = dataDom.classList.value;
   const targetClass = e.target.classList.value;
-  const parent = dataDom.parentNode.parentNode.parentNode
-  console.log(e.target, dataDom, targetClass, dataClass);
+  const parent = dataDom.parentNode.parentNode.parentNode;
+  //console.log(e.target, dataDom, targetClass, dataClass);
   //TODO: refactor this part
   if (targetClass === "trash") {
-    if(dataClass === 'result__tag'){
+    if (dataClass === "result__tag") {
       //tags cases
-      dataDom.remove()
-    }else{
+      dataDom.remove();
+    } else {
       // others cases
-      if(dataClass === 'answer__input'){
-        dataDom.parentNode.remove()
+      if (dataClass === "answer__input") {
+        dataDom.parentNode.remove();
       }
-      if(dataClass === ''){
+      if (dataClass === "") {
         checkPreviousRow(dataDom);
         parent.remove();
-      } 
+      }
     }
   } else {
     // containers case
@@ -60,15 +37,15 @@ const dropHandler = (e) => {
       //add answer if necessary
       if (values.length > 5) {
         const answerIndex = (values.length - 5) / 3;
-        const answers = e.target.querySelectorAll('.answers');
-        const lastAnswers = answers[answers.length - 1]
-        const buttonId = lastAnswers.querySelector('button').id
+        const answers = e.target.querySelectorAll(".answers");
+        const lastAnswers = answers[answers.length - 1];
+        const buttonId = lastAnswers.querySelector("button").id;
         //console.log(answerIndex, e.target, lastAnswers, buttonId)
         for (let i = 0; i < answerIndex; i++) {
           addAnswer(e.target, lastAnswers, buttonId);
         }
       }
-      // remove previous 
+      // remove previous
       parent.remove();
       removeEmptyRow();
       // get new container
@@ -80,17 +57,18 @@ const dropHandler = (e) => {
       // renumber previous row
       checkPreviousRow(dataDom);
       // check input parent value
-      const parentValue = dataDom.querySelector('input[type=hidden]').value
-/*       if (parentValue) {
-        // update paths
-        pathHandler();
-      } */
+      const parentValue = dataDom.querySelector("input[type=hidden]").value;
+      /*       if (parentValue) {
+          // update paths
+          pathHandler();
+        } */
     }
     // answers cases
     if (
       (targetClass === "answers" && dataClass === "answer__input") ||
       (targetClass === "row__answers" && dataClass === "answer__input")
     ) {
+      console.log(dataDom)
       // stack values
       const values = getValues(dataDom, dataClass);
       // get parent button for rowLevel
@@ -109,32 +87,8 @@ const dropHandler = (e) => {
       checkPreviousRow(dataDom);
     }
     //tag cases
-    if(targetClass === 'tags__area' && dataClass === 'tag'){
-      addTag('.tags__area', data);
+    if (targetClass === "tags__area" && dataClass === "tag") {
+      addTag(".tags__area", data);
     }
   }
-};
-
-// Trigger
-export const dragDropHandler = () => {
-  // get draggable elements
-  const draggables = document.querySelectorAll("[draggable]");
-  //console.log(draggables);
-  draggables.forEach((draggable) => {
-    // trigger event
-    draggable.addEventListener("dragstart", (e) => {
-      dragStartHandler(e);
-    });
-  });
-  // get targets
-  const targets = document.querySelectorAll("[data-drop-target]");
-  targets.forEach((target) => {
-    // trigger events
-    target.addEventListener("dragover", (e) => {
-      dragOverHandler(e);
-    });
-    target.addEventListener("drop", (e) => {
-      dropHandler(e);
-    });
-  });
 };

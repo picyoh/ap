@@ -3,7 +3,7 @@ export const addCircle = (number, elementX, elementY) => {
   const elementDom = document.getElementById(element);
   // avoiding to duplicate circles
   if (elementDom === null) {
-    const circle = `<circle id='circle_${number}' cx='${elementX}' cy='${elementY}' r='6'/>`;
+    const circle = `<circle id='circle_${number}' cx='${elementX}' cy='${elementY}' r='5'/>`;
     const svg = document.querySelector("svg");
     svg.insertAdjacentHTML("beforeend", circle);
   }

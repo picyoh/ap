@@ -1,3 +1,5 @@
+import { getNumber } from "../dragNdrop/getNumber.js";
+
 export const addParentValue = (dragged, target) => {
     // get Numbers in arrays
     const draggedNumber = getNumber(dragged.id);
@@ -29,9 +31,9 @@ export const addParentValue = (dragged, target) => {
     const parentElement = target === childElement ? dragged : target;
     const targetTag= parentElement.id.replace('link', 'tag');
     const tagValue = document.getElementById(targetTag).value;
-    // set parent on input hidden
+    // get parent dom
     const parentContainer = document.getElementById(childElement.id).parentElement;
-    //TODO: transformer en array pour check avec contains
+    // get values
     let values = parentContainer.querySelector("input[type=hidden]").value.split(',');
     if(values[0] === ''){
       values = tagValue
