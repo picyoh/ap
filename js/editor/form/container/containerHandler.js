@@ -7,7 +7,7 @@ export const addContainerHandler = () => {
         "click",
         (e) => {
           const parent = e.target.parentNode.parentNode.parentNode;
-          //console.log(parent);
+          console.log(parent);
           addContainer(parent);
         },
         { once: true }

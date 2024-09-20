@@ -1,14 +1,16 @@
 import { addQuestion } from "../question/question.js";
 import { addAnswer } from "../answer/answer.js";
+import { addEmptyContainers } from "./emptyContainers.js";
 
 export const addContainer = (parent) => {
   // get container number
-  const contNumber = parseInt(parent.querySelectorAll(".container").length) + 1;
+  const countNumber =
+    parseInt(parent.querySelectorAll(".container").length) + 1;
   // secondRow ?
   const secondRow = parseInt(parent.id.split("_")[1]) >= 2;
   // component
   const container = `
-  <div class='container' id='container_${contNumber}'>
+  <div class='container' id='container_${countNumber}'>
     <div class='questions'>
       <button type='button' class='add_container' ${
         secondRow ? `>+</button>` : ` style='display: none;'>+</button>`
@@ -28,4 +30,6 @@ export const addContainer = (parent) => {
   const answers = parent.querySelectorAll(".answers");
   const lastAnswers = answers[answers.length - 1];
   addAnswer(parent, lastAnswers);
+  // add empty containers
+  addEmptyContainers(parent, countNumber);
 };

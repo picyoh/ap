@@ -1,9 +1,7 @@
-import { initQuizzForm } from "./quizz/initQuizz.js";
-import { initResultForm } from "./results/initResult.js";
+import { initEditorForm } from "./editor/initEditor.js";
 
 const init = () => {
-  initQuizzForm();
-  initResultForm();
+  initEditorForm();
 };
 
 init();

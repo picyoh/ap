@@ -1,3 +1,5 @@
+import { addDragHandle } from "../../services/dots/dots.js";
+
 export const addQuestion = (parent, lastQuestion) => {
     // numbering
     const rowNumber = parseInt(parent.id.split("_")[1]);
@@ -8,6 +10,7 @@ export const addQuestion = (parent, lastQuestion) => {
     //console.log(rowNumber, questionNumber, isQMulti);
     const question = `
     <div class='question'>
+        <div class='drag_handle_container'></div>
         <div id='question_link_${number}' class='link' link-target='true' ${isQMulti ? `>` : `style='display: none;'>`}</div>
         <div class='question__input' id='question_${number}' ${secondRow ? `draggable='true'>` : `>`}
             <label for='question_input_${number}'>Question :&nbsp;</label>
@@ -23,4 +26,6 @@ export const addQuestion = (parent, lastQuestion) => {
         const link = parent.querySelector(".link");
         link.removeAttribute("style");
     }
+    // add drag handler
+    addDragHandle(lastQuestion)
 };

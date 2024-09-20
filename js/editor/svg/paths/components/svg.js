@@ -12,11 +12,6 @@ export const initSvg = () => {
     </svg>`;
   const page = document.querySelector("body");
   page.insertAdjacentHTML("afterbegin", svg);
-  // add hide path button
-  const quizz = document.querySelector("#quizz");
-  const hideLinkBtn = `<button id='hide_links'>Hide Links</button>`;
-  quizz.insertAdjacentHTML("beforeend", hideLinkBtn);
-  hideLinkHandler();
   svgWindowHandler();
 };
 

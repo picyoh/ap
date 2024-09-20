@@ -7,8 +7,9 @@ export const addRowHandler = () => {
       "click",
       (e) => {
         const rowNumber = parseInt(
-          e.target.parentNode.parentNode.children.length
+          e.target.parentNode.children.length
         );
+        //console.log('is this div.rows ? : ' + e.target.parentNode)
         addRow(rowNumber);
       },
       { once: true }

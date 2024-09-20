@@ -1,5 +1,5 @@
-import { quizzToJson } from "../quizz/services/quizzGenerator.js";
-import { resultToJson } from "../results/services/resultGenerator.js";
+import { quizzToJson } from "./quizzGenerator.js";
+import { resultToJson } from "./resultGenerator.js";
 
 export const submitHandlerQuizz = () => {
   const submit = document.querySelector("#submit");
