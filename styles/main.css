@@ -1,5 +1,5 @@
 #wrapper {
-  height: fit-content;
+
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-template-areas: 
@@ -12,6 +12,7 @@
 }
 
 .grid_wrapper {
+  height: fit-content;
   border: 1px solid darkgray;
   resize: both;
   overflow: auto;
