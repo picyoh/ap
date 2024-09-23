@@ -39,6 +39,7 @@ body {
 
 #editor {
   position: relative;
+  overflow: hidden;
 }
 
 
@@ -98,7 +99,6 @@ body {
 .labels {
   height: 2rem;
   width: 2rem;
-  
   border: 1px solid silver;
   border-radius: .3rem;
   display: flex;
