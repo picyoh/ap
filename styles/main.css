@@ -68,7 +68,7 @@ body {
   position: absolute;
   z-index: 3;
   height: 90%;
-  margin: 1%;
+  margin: 1.5rem;
   min-width: 3rem;
   max-width: fit-content;
   border: 1px solid grey;
