@@ -1,19 +1,61 @@
-import { zoomIconsHandler } from "./tools/zoom/zoomIcons.js"
+import { addRowHandler } from "./grid/row.js";
+import { addColumnHandler } from "./grid/column.js";
+import { zoomIconsHandler } from "./tools/zoom/zoomIcons.js";
+import { navigateHandler } from "./tools/navigate/navigateWrapper.js";
 
-export const resetHandlers = () => {
-    const buttons = ["zoom"];
+let loaded = false;
+const buttons = [
+  "add_row",
+  "add_column",
+  "zoom_minus",
+  "zoom_plus",
+  "zoom_reset",
+];
 
-    removeListeners(buttons);
-    
-    zoomIconsHandler();
+export const waitForElements = (selector) => {
+  return new Promise((resolve) => {
+    if (document.querySelector(selector)) {
+      return resolve(document.querySelector(selector));
+    }
+    const observer = new MutationObserver((mutations) => {
+      if (document.querySelector(selector)) {
+        observer.disconnect();
+        resolve(document.querySelector(selector));
+      }
+    });
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true,
+    });
+  });
+};
 
-}
-
-export const removeListeners = (buttons) =>{
-    buttons.forEach((button)=> {
-        const btns = document.querySelectorAll("." + button);
-  btns.forEach((btn) => {
-    btn.replaceWith(btn.cloneNode(true));
+export const initHandlers = () =>{
+  let count = 0;
+  buttons.forEach((button) => {
+    waitForElements("#" + button).then((e) => {
+      count++;
+      if(count === buttons.length){
+        loaded = true;
+        //console.log(count, buttons.length);
+      }
     });
   });
 }
+
+export const resetHandlers = () => {
+    removeListeners(buttons);
+    addRowHandler();
+    addColumnHandler();
+    zoomIconsHandler();
+    navigateHandler();
+};
+
+export const removeListeners = (buttons) => {
+  buttons.forEach((button) => {
+    const btns = document.querySelectorAll("#" + button);
+    btns.forEach((btn) => {
+      btn.replaceWith(btn.cloneNode(true));
+    });
+  });
+};

@@ -16,7 +16,7 @@ const addColumn = () => {
   const rowBtnStr = `rowBtn `;
   const newGridTemplate = `${newLineTemp.repeat(
     style.rowCount
-  )} "${rowBtnStr.repeat(style.colCount + 1)}."`;
+  )} "${rowBtnStr.repeat(style.colCount)}."`;
   //console.log(newGridTemplate);
   style.wrapper.setProperty("grid-template-areas", newGridTemplate);
   style.wrapper.setProperty(

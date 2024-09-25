@@ -23,7 +23,7 @@ export const zoomIconsHandler = () => {
     zoomBtn.addEventListener(
       "click",
       (e) => {
-        applyZoom(e.target.id);
+        zooming(e.target.id);
         console.log(zoom);
       },
       { once: true }
@@ -31,7 +31,7 @@ export const zoomIconsHandler = () => {
   });
 };
 
-const applyZoom = (target) => {
+const zooming = (target) => {
   const wrapper = document.querySelector("#wrapper");
   switch (target) {
     case "zoom_minus":

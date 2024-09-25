@@ -1,3 +1,5 @@
+import { resetHandlers } from "../../resetHandlers.js";
+
 export const createLabels = (labels) => {
 
   let labelHtml = "";
@@ -13,6 +15,7 @@ export const createLabels = (labels) => {
   });
   const tools = document.querySelector("#tools");
   tools.insertAdjacentHTML("afterbegin", labelHtml);
+  resetHandlers();
 };
 
 export const eraserLabelHandler = () => {

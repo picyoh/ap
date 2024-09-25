@@ -1,74 +1,76 @@
-/* /!\ wrapper must be the second css rule (document.styleSheets[0].cssRules[0] in gridUtils.js) /!\ */
-#wrapper {
-  display: grid;
-  grid-template-columns: repeat(9, 100px);
-  grid-template-rows: repeat(7, 100px);
-  grid-template-areas:
-    "compar compar compar compar compar compar compar compar compar contBtn"
-    "compar compar compar compar compar compar compar compar compar contBtn"
-    "compar compar compar compar compar compar compar compar compar contBtn"
-    "compar compar compar compar compar compar compar compar compar contBtn"
-    "compar compar compar compar compar compar compar compar compar contBtn"
-    "compar compar compar compar compar compar compar compar compar contBtn"
-    "compar compar compar compar compar compar compar compar compar contBtn"
-    "compar compar compar compar compar compar compar compar compar contBtn"
-    "rowBtn rowBtn rowBtn rowBtn rowBtn rowBtn rowBtn rowBtn rowBtn .";
-}
-
-:root{
+:root {
   --font-color: #b8b8b8;
-  --link-color:  	#86a9e7;
+  --link-color: #86a9e7;
   --visited: #c791d4;
   --lighter-darkground: #242424;
   --darkground: #1a1a1a;
   --darker-darkground: #121212;
 }
 
-html,
-body {
+html {
   margin: 0;
   padding: 0;
+  height: 100%;
 }
 
 body {
-  margin: 0 2%;
+  height: 100vh;
+  min-height: 100%;
+  display: flex;
+  flex-flow: column;
+  margin: 0 2vw;
   font-family: Verdana, sans-serif;
   background-color: var(--darkground);
   color: var(--font-color);
 }
 
-#editor {
-  position: relative;
-  overflow: hidden;
+header{
+  max-height: 15vh;
 }
 
+footer{
+max-height: 15vh;
+}
+
+#main{
+  flex: 1;
+  height: 70vh;
+}
+
+#wrapper {
+  display: flex;
+}
+
+#editor {
+  height:100%;
+  position: relative;
+  overflow: scroll;
+}
 
 .grid_wrapper {
-  height: fit-content;
   border: 1px solid darkgray;
-  resize: both;
-  overflow: scroll;
   background-color: var(--lighter-darkground);
 }
 
-#add_row {
-  grid-area: rowBtn;
+.rows {
+  display: flex;
+  flex-flow: column;
 }
 
-#add_column {
-  grid-area: contBtn;
+.row {
+  display: flex;
+  height: 100px;
 }
 
 .empty_container {
   width: 100px;
-  min-height: 100px;
   border: 1px dashed var(--font-color);
 }
 
 #tools {
-  position: absolute;
+  position: fixed;
   z-index: 3;
-  height: 90%;
+  height: 68%;
   margin: 1.5rem;
   min-width: 3rem;
   max-width: fit-content;
@@ -84,27 +86,29 @@ body {
 #zoomIcons {
   position: fixed;
   z-index: 3;
-  bottom: 12%;
-  right: 6%;
+  top: 90%;
+  right: 4%;
   background-color: var(--darker-darkground);
-  padding: .3rem;
-  border-radius: 2rem;;
+  border: 1px solid grey;
+  padding: 0.3rem;
+  border-radius: 2rem;
 }
 
-.zoom{
+.zoom {
   font-size: 2rem;
-  padding: .2rem;
+  padding: 0.2rem;
 }
 
 .labels {
   height: 2rem;
   width: 2rem;
   border: 1px solid silver;
-  border-radius: .3rem;
+  border-radius: 0.3rem;
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 }
 
 .labels p {
@@ -127,13 +131,8 @@ svg {
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 2;
+  z-index: 0;
 }
-
-
-
-
-
 
 /* OLD */
 /* 

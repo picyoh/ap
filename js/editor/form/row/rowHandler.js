@@ -6,6 +6,7 @@ export const addRowHandler = () => {
     addRowBtn.addEventListener(
       "click",
       (e) => {
+        console.log('row')
         const rowNumber = parseInt(
           e.target.parentNode.children.length
         );
