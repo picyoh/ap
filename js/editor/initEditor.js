@@ -17,7 +17,7 @@ import { initHandlers } from "./resetHandlers.js";
 //TODO: voir cb de px pour un bloc question
 //TODO: check navigation
 //TODO: fusionner les fichiers question et result + ajouter nuage de tag au milieu;
-//TODO: 
+//TODO: Enlever les scroll de #editor via css
 
 export const initEditorForm = () => {
   const form = `

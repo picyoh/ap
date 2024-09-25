@@ -34,8 +34,8 @@ const navigating = () => {
     const editor = document.querySelector('#editor');
     const endX = e.pageX - editor.offsetLeft;
     const endY = e.pageY - editor.offsetTop;
-    const walkX = (endX - startX) * scrollSpeed;
-    const walkY = (endY - startY) * scrollSpeed;
+    const walkX = (startX - endX) * scrollSpeed;
+    const walkY = (startY - endY) * scrollSpeed;
     console.log(startX, endX, walkX);
     editor.scrollLeft = walkX;
     editor.scrollTop = walkY;

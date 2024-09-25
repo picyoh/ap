@@ -42,9 +42,9 @@ max-height: 15vh;
 }
 
 #editor {
-  height:100%;
+  height: 100%;
   position: relative;
-  overflow: scroll;
+  overflow: hidden;
 }
 
 .grid_wrapper {
@@ -70,7 +70,7 @@ max-height: 15vh;
 #tools {
   position: fixed;
   z-index: 3;
-  height: 68%;
+  height: 74%;
   margin: 1.5rem;
   min-width: 3rem;
   max-width: fit-content;
@@ -86,7 +86,7 @@ max-height: 15vh;
 #zoomIcons {
   position: fixed;
   z-index: 3;
-  top: 90%;
+  top: 84%;
   right: 4%;
   background-color: var(--darker-darkground);
   border: 1px solid grey;
