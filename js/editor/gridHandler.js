@@ -1,5 +1,3 @@
-import { addRowHandler } from "./grid/row.js";
-import { addColumnHandler } from "./grid/column.js";
 import { zoomIconsHandler } from "./grid/zoom/zoomIcons.js";
 import { navigateHandler } from "./grid/navigate/navigateWrapper.js";
 

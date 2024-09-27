@@ -1,7 +1,6 @@
 import { initSvg } from "./svg/paths/components/svg.js";
 import { createLabels } from "./tools/labels/createLabels.js"
 import { addZoomIcons } from "./grid/zoom/zoomIcons.js";
-
 import { initHandlers } from "./gridHandler.js";
 
 //TODO: templates => composants
