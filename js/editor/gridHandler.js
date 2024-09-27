@@ -35,7 +35,6 @@ export const initHandlers = () =>{
       count++;
       if(count === buttons.length){
         loaded = true;
-        //console.log(count, buttons.length);
       }
     });
   });
@@ -43,8 +42,6 @@ export const initHandlers = () =>{
 
 export const resetHandlers = () => {
     removeListeners(buttons);
-/*     addRowHandler();
-    addColumnHandler(); */
     zoomIconsHandler();
     navigateHandler();
 };

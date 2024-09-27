@@ -15,6 +15,13 @@
   --font-color: var(--bright-color);
   --link-color: #86a9e7;
   --visited: #c791d4;
+
+  --grid-size: 66px;
+	--grid-strength: 1px;
+	--grid-dash: 5.5px;
+  --grid-gap: 11px;
+	--grid-color: var(--darker-mid);
+  --paper-color: var(--lighter-dark);
 }
 
 html {
@@ -56,38 +63,14 @@ max-height: 15vh;
 
 #wrapper {
   height: 100%;
-  background-size: 5000px 5000px;
-  background-position: center;
-  background-repeat: repeat;
-  background-image: 
-    linear-gradient(to right, var(--lighter-mid) 1px, transparent 1px),
-    linear-gradient(to bottom, var(--lighter-mid) 1px, transparent 1px);
-}
-
-.rows {
-  display: flex;
-  flex-flow: column;
-}
-
-.row {
-  display: flex;
-  height: 100px;
-}
-
-.empty_container {
-  width: 100px;
-  border: 1px dashed var(--darker-mid);
-}
-
-.select_container {
-  width: 100px;
-  border: 1px dashed var(--font-color);
-}
-
-.select_container:hover {
-  width: 100px;
-  border: 1px dashed var(--font-color);
-  background-color: var(--dim-color);
+  background-color: var(--lighter-dark);
+  background-size: var(--grid-gap) var(--grid-gap), var(--grid-size) var(--grid-size);
+  background-image:
+    linear-gradient(to bottom, transparent var(--grid-dash), var(--paper-color) var(--grid-dash)), 
+    linear-gradient(to right, var(--grid-color) var(--grid-strength), transparent var(--grid-strength)),
+    linear-gradient(to right, transparent var(--grid-dash), var(--paper-color) var(--grid-dash)),
+    linear-gradient(to bottom, var(--grid-color) var(--grid-strength), transparent var(--grid-strength));
+    background-position: -2px -2px;
 }
 
 #tools {

@@ -1,4 +1,4 @@
-import { resetHandlers } from "../../resetHandlers.js";
+import { resetHandlers } from "../../gridHandler.js";
 import { clickHandler } from "../clickHandler/clickHandler.js";
 
 export const createLabels = (labels) => {
