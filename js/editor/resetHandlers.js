@@ -10,6 +10,7 @@ const buttons = [
   "zoom_minus",
   "zoom_plus",
   "zoom_reset",
+  "editor"
 ];
 
 export const waitForElements = (selector) => {
@@ -48,6 +49,7 @@ export const resetHandlers = () => {
     addRowHandler();
     addColumnHandler();
     zoomIconsHandler();
+    //TODO: reset navigate here ?
     navigateHandler();
 };
 

@@ -1,43 +1,53 @@
+
 let grabbing = false;
 let startX;
 let startY;
-let scrollLeft;
-let scrollTop;
 let scrollSpeed = 1;
 
 export const navigateHandler = () => {
-  const editor = document.querySelector("#editor");
-  //console.log(editor, grabbing);
-  editor.addEventListener("mouseup", (e) => {
+  startX = 0;
+  startY = 0;
+  const wrapper = document.querySelector("#wrapper");
+  //console.log(wrapper, grabbing);
+  wrapper.addEventListener("mouseup", (e) => {
     grabbing = false;
-    editor.style.cursor = "grab";
+    wrapper.style.cursor = "grab";
+    //resetwrapper()
   });
 
-  editor.addEventListener("mouseleave", (e) => {
+  wrapper.addEventListener("mouseleave", (e) => {
     grabbing = false;
-    editor.style.cursor = "grab";
+    wrapper.style.cursor = "grab";
+    //resetwrapper()
   });
 
-  editor.addEventListener("mousedown", (e) => {
+  wrapper.addEventListener("mousedown", (e) => {
     grabbing = true;
-    startX = e.pageX - editor.offsetLeft;
-    startY = e.pageY - editor.offsetTop;
-    editor.style.cursor = "grabbing";
-    console.log(startX, startY)
+    startX = e.pageX - wrapper.offsetLeft;
+    startY = e.pageY - wrapper.offsetTop;
+    wrapper.style.cursor = "grabbing";
     navigating();
   });
 };
 
-const navigating = () => {
-  document.addEventListener("mousemove", (e) => {
+
+export const navigating = () => {
+  const editor = document.querySelector("#editor");
+  editor.addEventListener("mousemove", (e) => {
     if (!grabbing) return;
-    const editor = document.querySelector('#editor');
     const endX = e.pageX - editor.offsetLeft;
     const endY = e.pageY - editor.offsetTop;
     const walkX = (startX - endX) * scrollSpeed;
     const walkY = (startY - endY) * scrollSpeed;
-    console.log(startX, endX, walkX);
+    //console.log(startX, endX, walkX);
     editor.scrollLeft = walkX;
     editor.scrollTop = walkY;
+    editor.style.transformOrigin = `${startX} ${startY}`;
   });
 };
+
+// TODO: clean listeners
+const resetwrapper = () => {
+  const wrapper = document.querySelector("#wrapper");
+  wrapper.replaceWith(wrapper.cloneNode(true));
+}

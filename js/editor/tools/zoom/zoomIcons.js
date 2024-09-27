@@ -1,6 +1,6 @@
 import { resetHandlers } from "../../resetHandlers.js";
 
-const min = 1;
+const min = 0;
 const max = 2;
 let zoom = 1;
 
@@ -51,7 +51,8 @@ const zooming = (target) => {
       break;
   }
   //console.log(wrapper.style);
+  //TODO: fix origin or add translate or transform origin oin editor or ???
+  wrapper.style.transformOrigin = `100% 100%`;
   wrapper.style.transform = `scale(${zoom})`;
-  wrapper.style.transformOrigin = `50% 50%`;
   resetHandlers();
 };

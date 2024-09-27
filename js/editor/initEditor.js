@@ -21,7 +21,7 @@ import { initHandlers } from "./resetHandlers.js";
 
 export const initEditorForm = () => {
   const form = `
-  <form id='editor'>
+  <form id="editor">
   </form>
   `;
   const main = document.querySelector("#main");
@@ -33,42 +33,43 @@ export const initEditorForm = () => {
 
 const initWrapper = () => {
   const rows = `
-  <div id='wrapper' class='grid_wrapper' style='cursor: grab;'>
+  <div id="wrapper" style="cursor: grab;">
   </div>
   `;
   const form = document.querySelector("#editor");
   form.insertAdjacentHTML("beforeend", rows);
-  //initWrapperStyle();
-  addEmptyContainers(0, 20, 20);
-  addGridBtn()
+  //addEmptyContainers(0, 20, 20);
+  //addGridBtn()
   initTools();
 };
 
 const addGridBtn = () =>{
-  const rowBtn = `<button type='button' id='add_row'>+</button><div class="bottomRight"></div>`;
-  const wrapper = document.querySelector('#wrapper');
-  wrapper.insertAdjacentHTML('beforeend', rowBtn);
+  const rowBtn = `<button type="button" id="add_row">+</button><div class="bottomRight"></div>`;
+  const wrapper = document.querySelector("#wrapper");
+  wrapper.insertAdjacentHTML("beforeend", rowBtn);
 
-  const colBtn = `<button type='button' id='add_column'>+</button>`;
-  const rows = document.querySelector('.rows');
-  rows.insertAdjacentHTML('beforeend', colBtn)
+  const colBtn = `<button type="button" id="add_column">+</button>`;
+  const rows = document.querySelector(".rows");
+  rows.insertAdjacentHTML("beforeend", colBtn)
 }
 
 const initTools = () => {
   const tools = `
-  <div id='tools'></div>
+  <div id="tools"></div>
   `;
   const wrapper = document.querySelector("#editor");
   wrapper.insertAdjacentHTML("afterbegin", tools);
   const labels = [
-    {name:"question", text:"Question", icon:'bars'},
-    {name:"answer", text:"Réponse", icon:'grip-lines'},
-    {name:"result", text:"Résultat", icon:'link'},
-    {name:"row", text:"Thème", icon:'object-group'},
-    {name:"links", text:"Liens", icon:'diagram-project'},
-    {name:"upload", text:"Importer", icon:'file-import'},
-    {name:"submit", text:"Télécharger", icon:'file-export'},
-    {name:"eraser", text:"Gomme", icon:'eraser'}
+    {name:"question", text:"Question", icon:"bars"},
+    {name:"answer", text:"Réponse", icon:"grip-lines"},
+    {name:"result", text:"Résultat", icon:"link"},
+    {name:"eraser", text:"Gomme", icon:"eraser"},
+    {name: "hr"},
+    {name:"row", text:"Thème", icon:"object-group"},
+    {name:"links", text:"Liens", icon:"diagram-project"},
+    {name: "hr"},
+    {name:"upload", text:"Importer", icon:"file-import"},
+    {name:"submit", text:"Télécharger", icon:"file-export"}
   ];
   addZoomIcons();
   createLabels(labels);

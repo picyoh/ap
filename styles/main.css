@@ -1,10 +1,20 @@
 :root {
-  --font-color: #b8b8b8;
+  --lighter-bright: #f8f9fa;
+  --bright-color: #e9ecef;
+  --darker-bright: #dee2e6;
+  --lighter-mid: #ced4da;
+  --mid-color: #adb5bd;
+  --darker-mid: #6C757d;
+  --lighter-dim: #495057;
+  --dim-color: #343a40;
+  --darker-dim: #212529;
+  --lighter-dark: #242424;
+  --dark-color: #1a1a1a;
+  --darker-dark: #121212;
+
+  --font-color: var(--bright-color);
   --link-color: #86a9e7;
   --visited: #c791d4;
-  --lighter-darkground: #242424;
-  --darkground: #1a1a1a;
-  --darker-darkground: #121212;
 }
 
 html {
@@ -20,7 +30,7 @@ body {
   flex-flow: column;
   margin: 0 2vw;
   font-family: Verdana, sans-serif;
-  background-color: var(--darkground);
+  background-color: var(--dark-color);
   color: var(--font-color);
 }
 
@@ -37,9 +47,6 @@ max-height: 15vh;
   height: 70vh;
 }
 
-#wrapper {
-  display: flex;
-}
 
 #editor {
   height: 100%;
@@ -47,9 +54,13 @@ max-height: 15vh;
   overflow: hidden;
 }
 
-.grid_wrapper {
-  border: 1px solid darkgray;
-  background-color: var(--lighter-darkground);
+#wrapper {
+  height: 100%;
+  background-size: 5000px 5000px;
+  background-position: center;
+  background-image: 
+    linear-gradient(to right, var(--lighter-mid) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--lighter-mid) 1px, transparent 1px);
 }
 
 .rows {
@@ -64,7 +75,18 @@ max-height: 15vh;
 
 .empty_container {
   width: 100px;
+  border: 1px dashed var(--darker-mid);
+}
+
+.select_container {
+  width: 100px;
   border: 1px dashed var(--font-color);
+}
+
+.select_container:hover {
+  width: 100px;
+  border: 1px dashed var(--font-color);
+  background-color: var(--dim-color);
 }
 
 #tools {
@@ -80,7 +102,13 @@ max-height: 15vh;
   flex-flow: column;
   align-items: center;
   justify-content: space-evenly;
-  background-color: var(--darker-darkground);
+  background-color: var(--darker-dark);
+}
+
+.separator{
+  width: 60%;
+  border: 1px solid var(--dim-color);
+  border-radius: 2rem;
 }
 
 #zoomIcons {
@@ -88,7 +116,7 @@ max-height: 15vh;
   z-index: 3;
   top: 84%;
   right: 4%;
-  background-color: var(--darker-darkground);
+  background-color: var(--darker-dark);
   border: 1px solid grey;
   padding: 0.3rem;
   border-radius: 2rem;
@@ -132,6 +160,10 @@ svg {
   top: 0;
   left: 0;
   z-index: 0;
+}
+
+.media i{
+  color: var(--darker-mid);
 }
 
 /* OLD */
