@@ -5,12 +5,9 @@ import { navigateHandler } from "./tools/navigate/navigateWrapper.js";
 
 let loaded = false;
 const buttons = [
-  "add_row",
-  "add_column",
   "zoom_minus",
   "zoom_plus",
-  "zoom_reset",
-  "editor"
+  "zoom_reset"
 ];
 
 export const waitForElements = (selector) => {
@@ -46,10 +43,9 @@ export const initHandlers = () =>{
 
 export const resetHandlers = () => {
     removeListeners(buttons);
-    addRowHandler();
-    addColumnHandler();
+/*     addRowHandler();
+    addColumnHandler(); */
     zoomIconsHandler();
-    //TODO: reset navigate here ?
     navigateHandler();
 };
 

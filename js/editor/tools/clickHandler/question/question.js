@@ -1,7 +1,6 @@
 import {addAnswer} from "../answer/answer.js"
 
 export const addQuestion = (contNumber, target) => {
-  const
   const question = `
             <div class='question'>
                 <div class='question__input' id='question_${contNumber} draggable='true'>

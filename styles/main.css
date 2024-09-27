@@ -58,6 +58,7 @@ max-height: 15vh;
   height: 100%;
   background-size: 5000px 5000px;
   background-position: center;
+  background-repeat: repeat;
   background-image: 
     linear-gradient(to right, var(--lighter-mid) 1px, transparent 1px),
     linear-gradient(to bottom, var(--lighter-mid) 1px, transparent 1px);
