@@ -71,6 +71,7 @@ max-height: 15vh;
     linear-gradient(to right, transparent var(--grid-dash), var(--paper-color) var(--grid-dash)),
     linear-gradient(to bottom, var(--grid-color) var(--grid-strength), transparent var(--grid-strength));
     background-position: -2px -2px;
+    background-repeat: repeat;
 }
 
 #tools {

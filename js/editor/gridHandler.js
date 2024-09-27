@@ -1,7 +1,7 @@
 import { addRowHandler } from "./grid/row.js";
 import { addColumnHandler } from "./grid/column.js";
-import { zoomIconsHandler } from "./tools/zoom/zoomIcons.js";
-import { navigateHandler } from "./tools/navigate/navigateWrapper.js";
+import { zoomIconsHandler } from "./grid/zoom/zoomIcons.js";
+import { navigateHandler } from "./grid/navigate/navigateWrapper.js";
 
 let loaded = false;
 const buttons = [

@@ -1,6 +1,6 @@
 import { initSvg } from "./svg/paths/components/svg.js";
 import { createLabels } from "./tools/labels/createLabels.js"
-import { addZoomIcons } from "./tools/zoom/zoomIcons.js";
+import { addZoomIcons } from "./grid/zoom/zoomIcons.js";
 
 import { initHandlers } from "./gridHandler.js";
 
@@ -10,7 +10,9 @@ import { initHandlers } from "./gridHandler.js";
 //TODO: submit editor a mettre en place
 //TODO: rendre la fenetre editor navigable
 //TODO: check navigation
-//TODO: fusionner les fichiers question et result + ajouter nuage de tag au milieu;
+//TODO: fusionner les fichiers question et result + ajouter nuage de tag au milieu
+//TODO: etendre grille
+//TODO: reprendre au questions
 
 export const initEditorForm = () => {
   const form = `
