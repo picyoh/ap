@@ -1,17 +1,15 @@
 import { initSvg } from "./svg/paths/components/svg.js";
 import { createLabels } from "./tools/labels/createLabels.js"
 import { addZoomIcons } from "./grid/zoom/zoomIcons.js";
-import { initHandlers } from "./gridHandler.js";
+import { initHandlers } from "./grid/gridHandler.js";
 
 //TODO: templates => composants
 
-//TODO: deplacer tags
-//TODO: submit editor a mettre en place
+//TODO: reprendre au questions en placant au px
 //TODO: rendre la fenetre editor navigable
-//TODO: check navigation
-//TODO: fusionner les fichiers question et result + ajouter nuage de tag au milieu
-//TODO: etendre grille
-//TODO: reprendre au questions
+//TODO: faire apparaitre une box de tags au premier result ajouter
+//TODO: submit editor a mettre en place
+//TODO: fusionner les fichiers question et result + ajouter nuage de tag au milieu du json
 
 export const initEditorForm = () => {
   const form = `

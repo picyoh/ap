@@ -1,7 +1,6 @@
-import { zoomIconsHandler } from "./grid/zoom/zoomIcons.js";
-import { navigateHandler } from "./grid/navigate/navigateWrapper.js";
+import { zoomIconsHandler } from "./zoom/zoomIcons.js";
+import { navigateHandler } from "./navigate/navigateWrapper.js";
 
-let loaded = false;
 const buttons = [
   "zoom_minus",
   "zoom_plus",
@@ -32,7 +31,7 @@ export const initHandlers = () =>{
     waitForElements("#" + button).then((e) => {
       count++;
       if(count === buttons.length){
-        loaded = true;
+        resetHandlers()
       }
     });
   });

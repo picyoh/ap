@@ -1,30 +1,32 @@
-import { addQuestion } from "./question/question.js"
+import { addQuestion } from "./question/question.js";
+import { randomColor } from "../colorPicker/colorPicker.js";
 
 export const clickHandler = (label) => {
-  const emptys = document.querySelectorAll(".empty_container");
-  emptys.forEach((container) => {
-    container.addEventListener("click", (e) => {
-      const split = e.target.id.split("container_");
-      const number = split[1];
-      switch (label) {
-        case "question":
-          addQuestion(number, e.target);
-          break;
-        case "answer":
-          addAnswer(number, e.target);
-          break;
-        case "result":
-          addResult(number, e.target);
-          break;
-        default:
-          console.log("tools clickHandler failed");
-          break;
-      }
-    });
+  const wrapper = document.querySelector("#wrapper");
+  wrapper.addEventListener("click", (e) => {
+    let number;
+    const pos = { x: e.pageX, y: e.pageY };
+    const color = randomColor();
+    switch (label) {
+      case "question":
+        number = getElementNumber("question");;
+        addQuestion(number, pos, color);
+        break;
+      case "answer":
+        addAnswer(number, e.target, 1);
+        break;
+      case "result":
+        number = getElementNumber("result");
+        addResult(number, pos, color);
+        break;
+      default:
+        console.log("tools clickHandler failed");
+        break;
+    }
   });
 };
 
-
-export const getContainerNumber = () =>{
-    const containers = document.querySelectorAll('.container')
-}
+const getElementNumber = (type) => {
+  const elements = document.querySelectorAll(`.${type}`);
+  return elements.length;
+};

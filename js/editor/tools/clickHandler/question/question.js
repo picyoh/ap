@@ -1,16 +1,19 @@
 import {addAnswer} from "../answer/answer.js"
 
-export const addQuestion = (contNumber, target) => {
+export const addQuestion = (countNumber, pos, color) => {
+  console.log(color)
   const question = `
-            <div class='question'>
-                <div class='question__input' id='question_${contNumber} draggable='true'>
-                    <label for='question_input_${contNumber}'>Question :&nbsp;</label>
-                    <textarea id='question_input_${contNumber}' name='question_${contNumber}'></textarea>
-                    <input type='hidden' id='question_parent_${contNumber}' name='question_parent_${contNumber}'/>
-                </div>
+        <div class="containers" id="container_${countNumber}" draggable="true" style="top: ${pos.y}px; left: ${pos.x}px; background: rgb(${color.r},${color.g},${color.b});">
+          <div class="question">
+            <div class="question__input" id="question_${countNumber}">
+              <label for="question_input_${countNumber}">Question :&nbsp;</label>
+              <textarea id="question_input_${countNumber}" name="question_${countNumber}"></textarea>
+              <input type="hidden" id="question_parent_${countNumber}" name="question_parent_${countNumber}"/>
             </div>
-            `;
-  target.insertAdjacentHTML("afterbegin", question);
-  //TODO: add 2 answers
-  addAnswer(contNumber, target, 2)
+          </div>
+          <div id="answers_${countNumber}" class="answers"></div>
+        </div>`;
+  document.querySelector("#wrapper").insertAdjacentHTML("afterbegin", question);
+  const answers = document.querySelector(`#answers_${countNumber}`);
+  addAnswer(countNumber, answers, 2);
 };

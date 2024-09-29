@@ -1,4 +1,4 @@
-import { resetHandlers } from "../../gridHandler.js";
+import { resetHandlers } from "../gridHandler.js";
 
 const min = 0;
 const max = 2;
@@ -51,8 +51,7 @@ const zooming = (target) => {
       break;
   }
   //console.log(wrapper.style);
-  //TODO: fix origin or add translate or transform origin oin editor or ???
-  wrapper.style.transformOrigin = `50% 50%`;
+  wrapper.style.transformOrigin = `0% 0%`;
   wrapper.style.transform = `scale(${zoom})`;
   resetHandlers();
 };
