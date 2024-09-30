@@ -116,8 +116,8 @@ header {
   right: 4%;
   background-color: var(--darker-dark);
   border: 1px solid grey;
-  padding: 0.3rem;
   border-radius: 2rem;
+  padding: 0.3rem;
 }
 
 .zoom {
@@ -125,16 +125,32 @@ header {
   padding: 0.2rem;
 }
 
-.labels {
+.labels, .menu_labels {
+  border: 1px solid silver;
+  border-radius: 0.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.labels i {
+  height: 2rem;
+  width: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 3;
+}
+
+.z_border::after{
+  content:'';
+  position: absolute;
   height: 2rem;
   width: 2rem;
   border: 1px solid silver;
   border-radius: 0.3rem;
-  display: flex;
-  flex-flow: row nowrap;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
+  z-index: 3;
 }
 
 .labels p {
@@ -145,14 +161,27 @@ header {
   display: block;
 } */
 
+.menus{
+  position: absolute;
+  z-index: 2;
+  height: 2rem;
+  left: .2rem;
+  background-color: var(--darker-dark);
+  border: 1px solid silver;
+  border-radius: .3rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: .3rem;
+  padding-left: 3.4rem;
+}
+
 .containers{
   position: absolute;
   background-color: var(--lighter-dim);
   padding: .8rem;
   border-radius: .5rem;
   vertical-align: baseline;
-  display: flex;
-  flex-flow: column;
   gap: .5rem;
 }
 

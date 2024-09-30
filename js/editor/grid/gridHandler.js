@@ -4,7 +4,8 @@ import { navigateHandler } from "./navigate/navigateWrapper.js";
 const buttons = [
   "zoom_minus",
   "zoom_plus",
-  "zoom_reset"
+  "zoom_reset",
+  "wrapper"
 ];
 
 export const waitForElements = (selector) => {

@@ -25,7 +25,7 @@ export const navigateHandler = () => {
     grabbing = true;
     startX = e.pageX - wrapper.offsetLeft;
     startY = e.pageY - wrapper.offsetTop;
-    wrapper.style.cursor = "grabbing";
+    wrapper.style.cursor = "all-scroll";
     navigating();
   });
 };
