@@ -173,6 +173,10 @@ flex-flow: row;
 gap:.5rem;
 }
 
+.answer {
+  border-radius: .3rem;
+}
+
 svg {
   position: absolute;
   top: 0;

@@ -23,7 +23,7 @@ export const clickHandler = (label) => {
         console.log("tools clickHandler failed");
         break;
     }
-  });
+  }, {once: true});
 };
 
 const getElementNumber = (type) => {

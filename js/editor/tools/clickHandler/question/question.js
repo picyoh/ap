@@ -1,7 +1,7 @@
+import { randomPick } from "../../colorPicker/colorPicker.js";
 import {addAnswer} from "../answer/answer.js"
 
 export const addQuestion = (countNumber, pos, color) => {
-  console.log(color)
   const question = `
         <div class="containers" id="container_${countNumber}" draggable="true" style="top: ${pos.y}px; left: ${pos.x}px; background: rgb(${color.r},${color.g},${color.b});">
           <div class="question">
@@ -15,5 +15,6 @@ export const addQuestion = (countNumber, pos, color) => {
         </div>`;
   document.querySelector("#wrapper").insertAdjacentHTML("afterbegin", question);
   const answers = document.querySelector(`#answers_${countNumber}`);
-  addAnswer(countNumber, answers, 2);
+  const hue = randomPick(color);
+  addAnswer(countNumber, answers, 2, hue);
 };

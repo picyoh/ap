@@ -1,9 +1,9 @@
 import { randomColor } from "../../colorPicker/colorPicker.js";
 
-export const addAnswer = (contNumber, answers, iter) => {
+export const addAnswer = (contNumber, answers, iter, hue) => {
   for (let i = 0; i < iter; i++) {
     const number = `${contNumber}_${i}`;
-    const color = randomColor(); 
+    const color = randomColor(hue); 
     const answer = `
       <div class='answer' draggable='true' style='background: rgb(${color.r}, ${color.g}, ${color.b})'>
         <div class='answer__input' id='answer_${number} >
