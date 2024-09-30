@@ -20,3 +20,9 @@ export const randomPick = (obj) =>{
     //console.log(random, hue)
     return hue;
 };
+
+export const getColor = (target) =>{
+    const targetStyle =  target.style.background;
+    const array = targetStyle.replace('rgb(', '').replace(')', '').split(',');
+    return {r: array[0], g: array[1], b: array[2]}
+}

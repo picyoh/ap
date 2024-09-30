@@ -9,8 +9,8 @@ import { initHandlers } from "./grid/gridHandler.js";
 //TODO: add grip and link on .containers and .answer
 //TODO: add answer feature (only add on existant container else change cursor to 0)
 //TODO: tooltip css rather than p in labels
-//TODO: dropdown on click / answer => txt, img or list
 //TODO: add result feature 
+//TODO: add init question
 //TODO: add link feature
 //TODO: set drag and drop 
 //TODO: add group and select feature

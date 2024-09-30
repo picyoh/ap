@@ -4,13 +4,13 @@ import { addEmptyContainers } from "./emptyContainers.js";
 
 export const addContainer = (parent) => {
   // get container number
-  const countNumber =
+  const count =
     parseInt(parent.querySelectorAll(".container").length) + 1;
   // secondRow ?
   const secondRow = parseInt(parent.id.split("_")[1]) >= 2;
   // component
   const container = `
-  <div class='container' id='container_${countNumber}'>
+  <div class='container' id='container_${count}'>
     <div class='questions'>
       <button type='button' class='add_container' ${
         secondRow ? `>+</button>` : ` style='display: none;'>+</button>`
@@ -31,5 +31,5 @@ export const addContainer = (parent) => {
   const lastAnswers = answers[answers.length - 1];
   addAnswer(parent, lastAnswers);
   // add empty containers
-  addEmptyContainers(parent, countNumber);
+  addEmptyContainers(parent, count);
 };

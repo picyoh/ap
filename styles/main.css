@@ -156,6 +156,10 @@ header {
   pointer-events: none;
 }
 
+label {
+  pointer-events: none;
+}
+
 .labels p {
   display: none;
 }
@@ -179,7 +183,7 @@ header {
 }
 
 .labels:hover .menus,
-.active
+.visible
  {
   display: flex;
 }
