@@ -1,5 +1,7 @@
 import { addQuestion } from "./question/question.js";
 import { randomColor } from "../colorPicker/colorPicker.js";
+import { callHandlers } from "../labels/createLabels.js";
+import { resetHandlers } from "../../grid/gridHandler.js";
 
 export const clickHandler = (label) => {
   const wrapper = document.querySelector("#wrapper");
@@ -12,8 +14,8 @@ export const clickHandler = (label) => {
         number = getElementNumber("question");;
         addQuestion(number, pos, color);
         break;
-      case "answer":
-        addAnswer(number, e.target, 1);
+      case "answer_text":
+
         break;
       case "result":
         number = getElementNumber("result");

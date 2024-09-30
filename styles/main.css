@@ -125,7 +125,8 @@ header {
   padding: 0.2rem;
 }
 
-.labels, .menu_labels {
+.labels,
+.menu_labels {
   border: 1px solid silver;
   border-radius: 0.3rem;
   display: flex;
@@ -135,6 +136,7 @@ header {
 }
 
 .labels i {
+  font-size: 1.2rem;
   height: 2rem;
   width: 2rem;
   display: flex;
@@ -143,67 +145,77 @@ header {
   z-index: 3;
 }
 
-.z_border::after{
-  content:'';
+.z_border::after {
+  content: "";
   position: absolute;
   height: 2rem;
   width: 2rem;
   border: 1px solid silver;
   border-radius: 0.3rem;
   z-index: 3;
+  pointer-events: none;
 }
 
 .labels p {
   display: none;
 }
 
-/* .labels:hover p{
-  display: block;
-} */
-
-.menus{
+.menus {
   position: absolute;
   z-index: 2;
   height: 2rem;
   left: .2rem;
   background-color: var(--darker-dark);
   border: 1px solid silver;
-  border-radius: .3rem;
-  display: flex;
+  border-radius: 0.3rem;
   align-items: center;
   gap: 1rem;
-  padding: .3rem;
+  padding: 0.3rem;
   padding-left: 3.4rem;
 }
 
-.containers{
+.menus {
+  display: none;
+}
+
+.labels:hover .menus,
+.active
+ {
+  display: flex;
+}
+
+input[type='file']{
+padding: .3rem;
+}
+
+.containers {
   position: absolute;
   background-color: var(--lighter-dim);
-  padding: .8rem;
-  border-radius: .5rem;
+  padding: 0.8rem;
+  border-radius: 0.5rem;
   vertical-align: baseline;
-  gap: .5rem;
+  gap: 0.5rem;
 }
 
 .question,
 .answer {
-  padding: .3rem;
+  padding: 0.3rem;
 }
 
 .question__input,
-.answer__input{
+.answer__input {
   display: flex;
   flex-flow: column;
 }
 
-.answers{
-display: flex;
-flex-flow: row;
-gap:.5rem;
+.answers {
+  display: flex;
+  flex-flow: row;
+  gap: 0.5rem;
 }
 
 .answer {
-  border-radius: .3rem;
+  border-radius: 0.3rem;
 }
 
 svg {
@@ -215,5 +227,5 @@ svg {
 
 footer {
   max-height: 15vh;
-  z-index : 2;
+  z-index: 2;
 }

@@ -1,6 +1,7 @@
 import { resetHandlers } from "../../grid/gridHandler.js";
 import { clickHandler } from "../clickHandler/clickHandler.js";
 import { addCursor } from "../cursor/customCursor.js";
+import { toogleDropdown } from "../dropdown/dropdown.js";
 
 export const createLabels = (labels) => {
   let labelHtml = "";
@@ -10,9 +11,11 @@ export const createLabels = (labels) => {
       labelHtml += hr;
     } else {
       const labelTemplate = `
-                    <div id='${label.name}_label' class='labels ${label.menu ? 'z_border': ''}'>
-                      <p>${label.text}</p>
+                    <div id='${label.name}_label' class='labels${
+        label.menu ? " z_border" : ""
+      }'>
                       <i class="${label.icon}"></i>
+                      <p>${label.text}</p>
                       ${label.menu ? createMenu(label) : ""}
                     </div>
                     `;
@@ -30,7 +33,6 @@ const createMenu = (label) => {
   let content = "";
   label.menu.forEach((topic) => {
     if (topic.name === "file") {
-      console.log(topic.name);
       content = `
       <label for'${label.name}_${topic.name}'>Fichier:&nbsp</label>
       <input type='file' id='${label.name}_${topic.name}' name='${label.name}_${topic.name}' accept='application.json' />
@@ -40,15 +42,13 @@ const createMenu = (label) => {
     }
     container += `<div id='${label.name}_${topic.name}_label' class='menu_labels'>${content}</div>`;
   });
-  return `<div id='${label.name}_menu' class='menus'>${container}</div>`;
+  return `<div id='${label.name}_menu' class='menus drop-down'>${container}</div>`;
 };
 
 export const callHandlers = () => {
   const labelsDom = document.querySelectorAll(".labels");
   labelsDom.forEach((labelDom) => {
     labelDom.addEventListener("click", (e) => {
-      // change cursor
-      document.querySelector("#wrapper").style.cursor = "pointer";
       //get Label ID
       let labelId;
       if (e.target.id) {
@@ -60,24 +60,36 @@ export const callHandlers = () => {
       // call handler
       switch (label) {
         case "question":
-        case "answer":
         case "result":
+          // change cursor
+          document.querySelector("#wrapper").style.cursor = "pointer";
+          // add custom cursor
           addCursor(labelId);
           clickHandler(label);
           break;
+        case "answer":
+          toogleDropdown(label);
+          break;
         case "eraser":
-          // add cursor
+          // change cursor
+          document.querySelector("#wrapper").style.cursor = "pointer";
+          // add custom cursor
           addCursor(labelId);
           //eraseHandler();
           break;
-        case "row":
-        case "links":
+        case "group":
+          // change cursor
+          document.querySelector("#wrapper").style.cursor = "pointer";
+          // add custom cursor
+          addCursor(labelId);
           areaHandler(label);
-        case "import":
-          user_import();
+        case "upload":
+          toogleDropdown(label);
+          user_upload();
           break;
-        case "export":
-          user_export();
+        case "download":
+          toogleDropdown(label);
+          //user_download();
           break;
         default:
           console.log("callHandlers failed");

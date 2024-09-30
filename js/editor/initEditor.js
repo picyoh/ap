@@ -8,6 +8,7 @@ import { initHandlers } from "./grid/gridHandler.js";
 //TODO: ameliorer navigation (callstack et reinit a verif);
 //TODO: add grip and link on .containers and .answer
 //TODO: add answer feature (only add on existant container else change cursor to 0)
+//TODO: tooltip css rather than p in labels
 //TODO: dropdown on click / answer => txt, img or list
 //TODO: add result feature 
 //TODO: add link feature
@@ -48,16 +49,15 @@ const initTools = () => {
   const wrapper = document.querySelector("#editor");
   wrapper.insertAdjacentHTML("afterbegin", tools);
   const labels = [
-    {name:"question", text:"Question", icon:"fi fi-rr-comments-question-check"},
-    {name:"answer", text:"Réponse", icon:"fi fi-rr-comment-check", menu:[{name:'text', icon:'fi fi-rr-text'},{name:'img', icon:'fi fi-rr-picture'} , {name:'list', icon:'fi fi-rr-list-dropdown'}]},
-    {name:"result", text:"Résultat", icon:"fi fi-rr-leaderboard"},
+    {name:"question", text:"Question", icon:"fi fi-rr-comment-question"},
+    {name:"answer", text:"Réponse", icon:"fi fi-rr-comment-check", menu:[{name:'text', icon:'fi fi-rr-text'},{name:'img', icon:'fi fi-rr-picture'} , {name:'list', icon:'fi fi-rr-list'}]},
+    {name:"result", text:"Résultat", icon:"fi fi-rr-ranking-star"},
+    {name: "hr"},
+    {name:"group", text:"Creer un groupe", icon:"fi fi-rr-object-group"},
     {name:"eraser", text:"Gomme", icon:"fi fi-rr-eraser"},
     {name: "hr"},
-    {name:"select", text:"Selection", icon:"fi fi-rr-square-dashed"},
-    {name:"group", text:"Creer un groupe", icon:"fi fi-rr-object-group"},
-    {name: "hr"},
-    {name:"upload", text:"Importer", icon:"fi fi-rr-file-import", menu:[{name: 'file'}]},
-    {name:"submit", text:"Télécharger", icon:"fi fi-rr-file-export", menu:[{name: 'file'}]}
+    {name:"upload", text:"Importer", icon:"fi fi-rr-upload", menu:[{name: 'file'}]},
+    {name:"download", text:"Télécharger", icon:"fi fi-rr-download", menu:[{name: 'file'}]}
   ];
   addZoomIcons();
   createLabels(labels);
