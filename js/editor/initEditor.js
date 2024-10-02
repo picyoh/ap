@@ -7,7 +7,6 @@ import { initHandlers } from "./grid/gridHandler.js";
 
 //TODO: ameliorer navigation (callstack et reinit a verif);
 //TODO: add grip and link on .containers and .answer
-//TODO: add answer feature (only add on existant container else change cursor to 0)
 //TODO: tooltip css rather than p in labels
 //TODO: add result feature 
 //TODO: add init question
