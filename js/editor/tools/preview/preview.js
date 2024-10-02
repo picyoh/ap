@@ -1,7 +1,7 @@
 export const addPreview = (label, number) => {
   return `
     <div id='${label}_preview_${number}' class='preview'>
-        <img id='${label}_preview_${number}_img' class='preview_img' />
+        <img id='${label}_preview_${number}_img' class='preview_img' src='https://bougezvousavecnous.fr/wp-content/uploads/2020/10/no-image.jpg' />
     </div>
         `;
 };

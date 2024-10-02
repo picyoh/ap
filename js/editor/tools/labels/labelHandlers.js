@@ -1,6 +1,7 @@
 import { clickHandler } from "../clickHandler/clickHandler.js";
 import { addCursor } from "../cursor/customCursor.js";
 import { toogleDropdown } from "../dropdown/dropdown.js";
+import { eraseHandler } from "../eraser/eraser.js"
 
 export const labelHandlers = () => {
   const labelsDom = document.querySelectorAll(".labels");
@@ -42,7 +43,7 @@ export const labelHandlers = () => {
           document.querySelector("#wrapper").style.cursor = "pointer";
           // add custom cursor
           addCursor(labelId);
-          //eraseHandler();
+          eraseHandler();
           break;
         case "group":
           // change cursor

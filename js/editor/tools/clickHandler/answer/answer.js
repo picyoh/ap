@@ -3,7 +3,6 @@ import { addAnswerOnList } from "./addAnswerOnList.js";
 import { addPreview, updatePreview } from "../../preview/preview.js";
 
 export const addAnswer = (count, iter, hue, label) => {
-  console.log(label);
   const answers = document.querySelector(`#answers_${count}`);
   const answersNumber = answers.children
     ? parseInt(answers.children.length)

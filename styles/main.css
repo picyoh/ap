@@ -211,6 +211,10 @@ padding: .3rem;
   display: flex;
   flex-flow: column;
   gap: .5rem;
+  .preview_img {
+    width: 11rem;
+    height: 11rem;
+  }
 }
 
 .answers {
@@ -226,6 +230,10 @@ padding: .3rem;
 .result_container {
   display: flex;
   flex-flow: row;
+  .preview_img {
+    width: 15rem;
+    height: 15rem;
+  }
 }
 
 .result {
@@ -241,11 +249,6 @@ output{
   background-color: white;
   border: 1px solid var(--darker-dim);
   border-radius: .3rem;
-}
-
-.preview_img {
-  width: 15rem;
-  height: 15rem;
 }
 
 svg {

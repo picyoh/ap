@@ -4,9 +4,9 @@ export const addResult = (count, pos, color) => {
   const preview = addPreview('result', count);
     const result = `
         <div class='containers result_container' style="top: ${pos.y}px; left: ${pos.x}px; background: rgb(${color.r},${color.g},${color.b};)">
-          <div class='result'>
-            <label for='result_${count}'>Name :</label>
-            <input type='text' id='result_${count}' name='result_${count}' placeHolder='Result ${count}'>
+          <div id='result_${count}' class='result'>
+            <label for='result_text_${count}'>Name :</label>
+            <input type='text' id='result_text_${count}' name='result_${count}' placeHolder='Result ${count}'>
             <label for='img_link_${count}'>Image link :</label>
             <input type='text' id='img_link_${count}' name='img_link_${count}' class='img_link' placeholder='https://'>
             <label for='aff_link_${count}'>Affiliate link :</label>
