@@ -5,7 +5,6 @@ import { initHandlers } from "./grid/gridHandler.js";
 
 //TODO: templates => composants
 
-//TODO: tooltip css rather than p in labels
 //TODO: add grip and link on .containers and .answer
 //TODO: add link feature
 //TODO: set drag and drop 
@@ -31,7 +30,7 @@ export const initEditorForm = () => {
 const initWrapper = () => {
   const rows = `
   <div id="wrapper" style="cursor: grab;">
-    <div class="containers" id="container_0" draggable="true" style="top: 15px; left: 388px; background: limgreen;">
+    <div class="containers" id="container_0" draggable="true" style="top: 15px; left: 388px; background: limegreen;">
       <div class="question">
         <div class="question__input" id="question_0">
           <label for="question_input_0">Question :&nbsp;</label>
@@ -57,7 +56,7 @@ const initTools = () => {
     {name:"answer", text:"Réponse", icon:"fi fi-rr-comment-check", menu:[{name:'text', icon:'fi fi-rr-text'},{name:'img', icon:'fi fi-rr-picture'} , {name:'list', icon:'fi fi-rr-list'}]},
     {name:"result", text:"Résultat", icon:"fi fi-rr-ranking-star"},
     {name: "hr"},
-    {name:"group", text:"Creer un groupe", icon:"fi fi-rr-object-group"},
+    {name:"group", text:"Grouper", icon:"fi fi-rr-object-group"},
     {name:"eraser", text:"Gomme", icon:"fi fi-rr-eraser"},
     {name: "hr"},
     {name:"upload", text:"Importer", icon:"fi fi-rr-upload", menu:[{name: 'file'}]},

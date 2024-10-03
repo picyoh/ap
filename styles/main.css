@@ -160,22 +160,18 @@ label {
   pointer-events: none;
 }
 
-.labels p {
-  display: none;
-}
-
 .menus {
   position: absolute;
-  z-index: 2;
+  z-index: 1;
   height: 2rem;
-  left: .2rem;
+  left: -.3rem;
   background-color: var(--darker-dark);
   border: 1px solid silver;
   border-radius: 0.3rem;
   align-items: center;
   gap: 1rem;
   padding: 0.3rem;
-  padding-left: 3.4rem;
+  padding-left: 3.3rem;
 }
 
 .menus {
@@ -283,6 +279,26 @@ output{
   margin: .3rem;
 }
 
+.tooltip {
+  position: relative;
+  z-index: 4;
+}
+
+.tooltip_text {
+  visibility: hidden;
+  position: absolute;
+  top: 70%;
+  left: 80%;
+  z-index: 4;
+  padding: .3rem;
+  background-color: var(--lighter-dim);
+  border-radius: .3rem;
+  color: var(--lighter-mid);
+}
+
+.tooltip:hover .tooltip_text{
+visibility: visible;
+}
 
 svg {
   position: absolute;

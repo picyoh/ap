@@ -12,9 +12,9 @@ export const createLabels = (labels) => {
       const labelTemplate = `
                     <div id='${label.name}_label' class='labels${
         label.menu ? " z_border" : ""
-      }'>
+      } tooltip'>
                       <i class="${label.icon}"></i>
-                      <p>${label.text}</p>
+                      <p class='tooltip_text'>${label.text}</p>
                       ${label.menu ? createMenu(label) : ""}
                     </div>
                     `;
