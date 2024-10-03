@@ -1,6 +1,7 @@
 import { addQuestion } from "./question/question.js";
 import { addAnswer } from "./answer/answer.js";
 import { addResult } from "./result/result.js";
+import { tagsHandler } from "../tags/tags.js"
 import { randomColor, randomPick, getColor } from "../colorPicker/colorPicker.js";
 
 export const clickHandler = (label) => {
@@ -19,6 +20,7 @@ export const clickHandler = (label) => {
         case "result":
           number = getElementNumber("result");
           addResult(number, pos, color);
+          tagsHandler();
           break;
         case "answer_text":
         case "answer_img":

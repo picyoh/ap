@@ -4,6 +4,7 @@ import { addPreview, updatePreview } from "../../preview/preview.js";
 
 export const addAnswer = (count, iter, hue, label) => {
   const answers = document.querySelector(`#answers_${count}`);
+  console.log(answers)
   const answersNumber = answers.children
     ? parseInt(answers.children.length)
     : 0;

@@ -5,18 +5,15 @@ import { initHandlers } from "./grid/gridHandler.js";
 
 //TODO: templates => composants
 
-//TODO: ameliorer navigation (callstack et reinit a verif);
-//TODO: add grip and link on .containers and .answer
 //TODO: tooltip css rather than p in labels
-//TODO: add result feature 
-//TODO: add init question
+//TODO: add grip and link on .containers and .answer
 //TODO: add link feature
 //TODO: set drag and drop 
-//TODO: add group and select feature
+//TODO: add group feature
 //TODO: add import and export feature
-//TODO: complexifier grille css
-//TODO: faire apparaitre une box de tags au premier result ajoute
 //TODO: submit editor a mettre en place
+//TODO: complexifier grille css
+//TODO: ameliorer navigation (callstack et reinit a verif);
 //TODO: fusionner les fichiers question et result + ajouter nuage de tag au milieu du json
 
 export const initEditorForm = () => {
@@ -34,6 +31,14 @@ export const initEditorForm = () => {
 const initWrapper = () => {
   const rows = `
   <div id="wrapper" style="cursor: grab;">
+    <div class="containers" id="container_0" draggable="true" style="top: 15px; left: 388px; background: limgreen;">
+      <div class="question">
+        <div class="question__input" id="question_0">
+          <label for="question_input_0">Question :&nbsp;</label>
+          <input type='text' id="question_input_0" name="question_0" placeholder='Go!'></input>
+        </div>
+      </div>
+    </div>
   </div>
   `;
   const form = document.querySelector("#editor");
