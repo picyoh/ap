@@ -4,7 +4,7 @@ import { addPreview, updatePreview } from "../../preview/preview.js";
 
 export const addAnswer = (count, iter, hue, label) => {
   const answers = document.querySelector(`#answers_${count}`);
-  console.log(answers)
+  console.log(answers);
   const answersNumber = answers.children
     ? parseInt(answers.children.length)
     : 0;
@@ -15,6 +15,9 @@ export const addAnswer = (count, iter, hue, label) => {
     if (label === "answer_text" || label === undefined) {
       answer = `
         <div class='answer' draggable='true' style='background: rgb(${color.r}, ${color.g}, ${color.b})'>
+          <div class="grip">
+            <i class="fa-solid fa-grip-vertical"></i>
+          </div>
           <div class='answer__input' id='answer_${number}'>
             <label for='answer_input_${number}'>Réponse :&nbsp;</label>
             <textarea id='answer_input_${number}' name='answer_${number}'></textarea>
@@ -22,14 +25,19 @@ export const addAnswer = (count, iter, hue, label) => {
             <label for='answer_tag_${number}'>Tag :&nbsp;</label>
             <input type='text' id='answer_tag_${number}' name='tag_${number}' class='answer_tag' />
           </div>
+          <div class="links link_bottom">
+            <div class="link_circle"></div>
+          </div>  
         </div>
               `;
       answers.insertAdjacentHTML("beforeend", answer);
     } else if (label === "answer_img") {
-      //TODO: add upload image and store a copy in a folder ?
       const preview = addPreview(label, number);
       answer = `
         <div class='answer' draggable='true' style='background: rgb(${color.r}, ${color.g}, ${color.b})'>
+          <div class="grip">
+            <i class="fa-solid fa-grip-vertical"></i>
+          </div>  
           <div class='answer__input' id='answer_${number}'>
             <label for='img_link_${number}'>Image link :</label>
             <input type='text' id='img_link_${number}' name='img_link_${number}' class='img_link' placeholder='https://'>
@@ -38,6 +46,9 @@ export const addAnswer = (count, iter, hue, label) => {
             <label for='answer_tag_${number}'>Tag :&nbsp;</label>
             <input type='text' id='answer_tag_${number}' name='tag_${number}' class='answer_tag' />
           </div>
+          <div class="links link_bottom">
+            <div class="link_circle"></div>
+          </div>  
         </div>
               `;
       answers.insertAdjacentHTML("beforeend", answer);
@@ -45,6 +56,9 @@ export const addAnswer = (count, iter, hue, label) => {
     } else if (label === "answer_list") {
       answer = `
         <div class='answer' draggable='true' style='background: rgb(${color.r}, ${color.g}, ${color.b})'>
+          <div class="grip">
+            <i class="fa-solid fa-grip-vertical"></i>
+          </div> 
           <div class='answer__input' id='answer_${number}'>
             <label for='answer_input_${number}'>Réponses :&nbsp;</label>
             <input type='text' id='answer_input_${number}' name='answer_${number}'></input>
@@ -54,6 +68,9 @@ export const addAnswer = (count, iter, hue, label) => {
             <label for='answer_tag_${number}'>Tag :&nbsp;</label>
             <input type='text' id='answer_tag_${number}' name='tag_${number}' class='answer_tag' />
           </div>
+          <div class="links link_bottom">
+            <div class="link_circle"></div>
+          </div>  
         </div>
               `;
       answers.insertAdjacentHTML("beforeend", answer);

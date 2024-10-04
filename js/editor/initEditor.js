@@ -5,13 +5,13 @@ import { initHandlers } from "./grid/gridHandler.js";
 
 //TODO: templates => composants
 
-//TODO: add grip and link on .containers and .answer
 //TODO: add link feature
 //TODO: set drag and drop 
 //TODO: add group feature
 //TODO: add import and export feature
 //TODO: submit editor a mettre en place
 //TODO: complexifier grille css
+//TODO: fix hover on menu
 //TODO: ameliorer navigation (callstack et reinit a verif);
 //TODO: fusionner les fichiers question et result + ajouter nuage de tag au milieu du json
 
@@ -31,6 +31,12 @@ const initWrapper = () => {
   const rows = `
   <div id="wrapper" style="cursor: grab;">
     <div class="containers" id="container_0" draggable="true" style="top: 15px; left: 388px; background: limegreen;">
+      <div class="grip">
+        <i class="fa-solid fa-grip-vertical"></i>
+      </div>
+      <div class="link">
+        <div class="link_circle"></div>
+      </div>
       <div class="question">
         <div class="question__input" id="question_0">
           <label for="question_input_0">Question :&nbsp;</label>
@@ -53,7 +59,7 @@ const initTools = () => {
   wrapper.insertAdjacentHTML("afterbegin", tools);
   const labels = [
     {name:"question", text:"Question", icon:"fi fi-rr-comment-question"},
-    {name:"answer", text:"Réponse", icon:"fi fi-rr-comment-check", menu:[{name:'text', icon:'fi fi-rr-text'},{name:'img', icon:'fi fi-rr-picture'} , {name:'list', icon:'fi fi-rr-list'}]},
+    {name:"answer", text:"Réponse", icon:"fi fi-rr-comment-check", menu:[{name:'text', text: 'Texte', icon:'fi fi-rr-text'},{name:'img', text:'Image', icon:'fi fi-rr-picture'} , {name:'list', text:'Liste', icon:'fi fi-rr-list'}]},
     {name:"result", text:"Résultat", icon:"fi fi-rr-ranking-star"},
     {name: "hr"},
     {name:"group", text:"Grouper", icon:"fi fi-rr-object-group"},
