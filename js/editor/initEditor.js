@@ -1,7 +1,7 @@
-import { initSvg } from "./svg/paths/components/svg.js";
+import { initSvg } from "./svg/svg.js";
 import { createLabels } from "./tools/labels/createLabels.js"
 import { addZoomIcons } from "./grid/zoom/zoomIcons.js";
-import { initHandlers } from "./grid/gridHandler.js";
+import { initHandlers } from "./handlers.js";
 
 //TODO: templates => composants
 
@@ -14,6 +14,8 @@ import { initHandlers } from "./grid/gridHandler.js";
 //TODO: fix hover on menu
 //TODO: ameliorer navigation (callstack et reinit a verif);
 //TODO: fusionner les fichiers question et result + ajouter nuage de tag au milieu du json
+//TODO: fix cursor on hover (question answer result);
+//TODO: changer image preview
 
 export const initEditorForm = () => {
   const form = `
@@ -23,7 +25,6 @@ export const initEditorForm = () => {
   const main = document.querySelector("#main");
   main.insertAdjacentHTML("beforeend", form);
   initWrapper();
-  initSvg();
   //initSubmit();
 };
 
@@ -34,14 +35,14 @@ const initWrapper = () => {
       <div class="grip">
         <i class="fa-solid fa-grip-vertical"></i>
       </div>
-      <div class="link">
-        <div class="link_circle"></div>
-      </div>
       <div class="question">
         <div class="question__input" id="question_0">
           <label for="question_input_0">Question :&nbsp;</label>
           <input type='text' id="question_input_0" name="question_0" placeholder='Go!'></input>
         </div>
+      </div>
+      <div class="links">
+        <div id="link_0" class="link_circle link_bottom"></div>
       </div>
     </div>
   </div>
@@ -70,5 +71,10 @@ const initTools = () => {
   ];
   addZoomIcons();
   createLabels(labels);
-  initHandlers()
+  initHandlers();
+  initSvg();
 };
+
+export const resetHandlers = () =>{
+
+} 

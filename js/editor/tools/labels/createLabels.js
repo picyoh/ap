@@ -1,6 +1,6 @@
 import { createMenu } from "./createMenu.js";
-import { resetHandlers } from "../../grid/gridHandler.js";
-import { labelHandlers } from "./labelHandlers.js";
+import { resetHandlers } from "../../handlers.js";
+import { labelHandlers } from "../labelHandlers.js";
 
 export const createLabels = (labels) => {
   let labelHtml = "";

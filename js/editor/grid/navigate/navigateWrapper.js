@@ -10,6 +10,7 @@ export const navigateHandler = () => {
   const wrapper = document.querySelector("#wrapper");
   //console.log(wrapper, grabbing);
   wrapper.addEventListener("mouseup", (e) => {
+    e.stopPropagation();
     grabbing = false;
     wrapper.style.cursor = "grab";
     //resetwrapper()
@@ -22,11 +23,14 @@ export const navigateHandler = () => {
   });
 
   wrapper.addEventListener("mousedown", (e) => {
-    grabbing = true;
-    startX = e.pageX - wrapper.offsetLeft;
-    startY = e.pageY - wrapper.offsetTop;
-    wrapper.style.cursor = "all-scroll";
-    navigating();
+    e.stopPropagation();
+    if(e.target.id === 'wrapper'){
+      grabbing = true;
+      startX = e.pageX - wrapper.offsetLeft;
+      startY = e.pageY - wrapper.offsetTop;
+      wrapper.style.cursor = "all-scroll";
+      navigating();
+    }
   });
 };
 

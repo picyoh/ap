@@ -24,3 +24,18 @@ const erase = (targetId) => {
   }
   element.parentNode.remove();
 };
+
+export const pathClickHandler = () => {
+  //TODO: rework to erase paths
+  const paths = document.querySelectorAll(".paths");
+  paths.forEach((path) => {
+    path.addEventListener("click", (e) => {
+      const split = path.id.split("_");
+      const answerId = "answer_link_" + split[1];
+      document.getElementById(answerId).click();
+      path.remove();
+      removeCircle(split[1]);
+      removeCircle(split[2]);
+    });
+  });
+};

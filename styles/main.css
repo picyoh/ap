@@ -194,6 +194,7 @@ input[type="file"] {
   flex-flow: row wrap;
   align-items: stretch;
   justify-content: space-between;
+  z-index: 3;
 }
 
 .grip {
@@ -220,6 +221,12 @@ input[type="file"] {
   height: 16px;
   border-radius: 2rem;
   background-color: white;
+  z-index: 3;
+}
+
+circle {
+  fill: var(--darker-dim);
+  z-index: 4;
 }
 
 .question{
@@ -229,14 +236,28 @@ input[type="file"] {
 .answers {
   display: flex;
   flex-flow: row;
-  gap: 0.5rem;
+  gap: .3rem;
 }
 
 .answer {
-  display: flex;
-  flex-flow: row wrap;
+  flex-grow: 1;
   border-radius: 0.3rem;
   border: 1px solid var(--bright-color);
+  display: grid;
+  grid-template-areas: 
+  "grip content"
+  "grip bottom"
+  ;
+  .grip {
+    grid-area: grip;
+  }
+
+  .answer__input{
+    grid-area: content;
+  }
+  .links{
+    grid-area: bottom;
+  }
 }
 
 .question__input,
@@ -345,7 +366,8 @@ svg {
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 0;
+  z-index: 5;
+  pointer-events: none;
 }
 
 footer {

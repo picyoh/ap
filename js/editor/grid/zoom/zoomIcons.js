@@ -1,4 +1,4 @@
-import { resetHandlers } from "../gridHandler.js";
+import { resetHandlers } from "../../handlers.js";
 
 const min = 0;
 const max = 2;
