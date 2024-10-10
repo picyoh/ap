@@ -1,3 +1,4 @@
+import { refreshPaths } from "../../svg/links/linkHandlers.js";
 import { getRelativePosition } from "../../utils/position/getPosition.js";
 
 // Drag start
@@ -40,4 +41,5 @@ export const dropHandler = (e) => {
     //create new answer in targeted container
     //set node value
   }
+  refreshPaths();
 };

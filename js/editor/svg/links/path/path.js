@@ -47,19 +47,23 @@ export const resetTemp = () => {
   }
 };
 
-export const createPath = (first, second) => {
+export const createPath = (linkBottom, linkTop, startIsTop) => {
   // get end position
-  const pos = getElementPositions(second);
-  end.x = pos.x;
-  end.y = pos.y;
-  // get the answer to get right container number
-  const firstOpt = first.classList.contains('link_bottom');
-  const secondOpt = second.classList.contains('link_bottom');
+  if(startIsTop){
+    const pos = getElementPositions(linkBottom);
+    end.x = pos.x;
+    end.y = pos.y;
+  }else{
+    const pos = getElementPositions(linkTop);
+    end.x = pos.x;
+    end.y = pos.y;
+  }
+  // get link id number for circles
+  const linkBottomNumber = getNumber(linkBottom.id);
   // get numbers and concatenate
-  const firstContNumber = getNumber(first.id, firstOpt);
-  const firstNumber = getNumber(first.id);
-  const secondNumber = getNumber(second.id, secondOpt);
-  const pathId = "path_" + firstContNumber + "_" + secondNumber;
+  const linkBottomContNumber = getNumber(linkBottom.id, true);
+  const linkTopNumber = getNumber(linkTop.id);
+  const pathId = "path_" + linkBottomContNumber + "_" + linkTopNumber;
   // get center point
   getCenter(start, end);
 
@@ -75,8 +79,8 @@ export const createPath = (first, second) => {
       />`;
   const svg = document.querySelector("svg");
   svg.insertAdjacentHTML("beforeend", path);
-  //console.log(start, center, end);
+  console.log(start, center, end);
   resetTemp();
-  addCircle(firstContNumber, secondNumber, start.x, start.y);
-  addCircle(secondNumber, firstContNumber, end.x, end.y);
+  addCircle(linkBottomNumber, linkTopNumber, start.x, start.y);
+  addCircle(linkTopNumber, linkBottomNumber, end.x, end.y);
 };

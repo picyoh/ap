@@ -1,6 +1,6 @@
 import { resetHandlers } from "../../handlers.js";
 import { mouseMoveTrigger } from "../../utils/mouse/mouse.js";
-import { getElementPositions } from "../../utils/position/getPosition.js";
+import { getElementPositions, getRelativePosition } from "../../utils/position/getPosition.js";
 import { setStart, createPath } from "./path/path.js";
 import { cancelClickTrigger } from "./cancelClick/cancelclick.js";
 import { addParentValue } from "./addParentValue/addParentValue.js";
@@ -64,9 +64,13 @@ const endLinkTrigger = (endLink) => {
 
 const endLinkHandler = (e) => {
   e.stopPropagation();
+  const startIsTop = startDom.classList.contains('link_top');
+  const linkTop = startIsTop ? startDom : e.target;
+  const linkBottom = startIsTop ? e.target : startDom;
   // create canvas link
-  createPath(startDom, e.target);
+  createPath(linkBottom, linkTop, startIsTop);
   // add parent value
+  //TODO: adjust addParentValue wth top and bottom (bottom is always the parent)
   addParentValue(startDom, e.target);
   //reinit triggers
   linkablesHandler();
@@ -87,8 +91,14 @@ export const refreshPaths = () =>{
 const paths = document.querySelectorAll('.paths');
 paths.forEach((path)=>{
   const contNumber = path.id.split('_');
-  const firstCont = document.querySelector(`#container_${contNumber[1]}`)
-  const secondCont = document.querySelector(`#container_${contNumber[2]}`)
-  console.log(path.id, contNumber, firstCont, secondCont)
+  // remove 
+  path.remove();
+  document.querySelector(`#circle_${contNumber[1]}_${contNumber[2]}`).remove();
+  document.querySelector(`#circle_${contNumber[2]}_${contNumber[1]}`).remove();
+  // update
+  const linkBottom = document.querySelector(`#link_${contNumber[1]}`);
+  const linkTop = document.querySelector(`#link_${contNumber[2]}`);
+  console.log(linkBottom, linkTop);
+  createPath(linkBottom, linkTop, false);
 })
 };

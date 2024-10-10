@@ -33,6 +33,7 @@ export const pathClickHandler = () => {
       const split = path.id.split("_");
       const answerId = "answer_link_" + split[1];
       document.getElementById(answerId).click();
+      //TODO: remove linked from classList and parents
       path.remove();
       removeCircle(`${split[1]}_${split[2]}`);
       removeCircle(`${split[2]}_${split[1]}`);
