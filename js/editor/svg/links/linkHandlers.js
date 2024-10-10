@@ -1,6 +1,6 @@
 import { resetHandlers } from "../../handlers.js";
 import { mouseMoveTrigger } from "../../utils/mouse/mouse.js";
-import { getPositions } from "../../utils/position/getPosition.js";
+import { getElementPositions } from "../../utils/position/getPosition.js";
 import { setStart, createPath } from "./path/path.js";
 import { cancelClickTrigger } from "./cancelClick/cancelclick.js";
 import { addParentValue } from "./addParentValue/addParentValue.js";
@@ -8,7 +8,7 @@ import { hightlightHandler } from "./highlight/highlight.js";
 
 let onDrag = false;
 let startDom;
-
+//TODO: refresh links when a container move
 export const linksHandler = () => {
   const links = document.querySelectorAll(".link_circle");
   links.forEach(
@@ -80,18 +80,15 @@ export const linkablesHandler = () => {
   mouseMoveTrigger(onDrag);
   cancelClickTrigger(onDrag);
   hightlightHandler();
+  refreshPaths();
 };
 
-export const hideLinkHandler = () => {
-  const btn = document.querySelector("#hide_links");
-  btn.addEventListener("click", (e) => {
-    e.preventDefault();
-    //TODO: toogle class instead of :
-    const svgDom = document.querySelector("svg");
-    if (svgDom.classList.contains("none")) {
-      svgDom.classList.remove("none");
-    } else {
-      svgDom.classList.add("none");
-    }
-  });
+export const refreshPaths = () =>{
+const paths = document.querySelectorAll('.paths');
+paths.forEach((path)=>{
+  const contNumber = path.id.split('_');
+  const firstCont = document.querySelector(`#container_${contNumber[1]}`)
+  const secondCont = document.querySelector(`#container_${contNumber[2]}`)
+  console.log(path.id, contNumber, firstCont, secondCont)
+})
 };

@@ -3,6 +3,7 @@ import { addAnswer } from "./answer/answer.js";
 import { addResult } from "./result/result.js";
 import { tagsHandler } from "../../tags/tags.js"
 import { randomColor, randomPick, getColor } from "../colorPicker/colorPicker.js";
+import { getRelativePosition } from "../../utils/position/getPosition.js";
 
 export const clickHandler = (label) => {
   const wrapper = document.querySelector("#wrapper");
@@ -10,7 +11,7 @@ export const clickHandler = (label) => {
     "click",
     (e) => {
       let number;
-      const pos = { x: e.pageX, y: e.pageY };
+      const pos = getRelativePosition(e);
       const color = randomColor();
       switch (label) {
         case "question":

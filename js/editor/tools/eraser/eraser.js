@@ -34,8 +34,8 @@ export const pathClickHandler = () => {
       const answerId = "answer_link_" + split[1];
       document.getElementById(answerId).click();
       path.remove();
-      removeCircle(split[1]);
-      removeCircle(split[2]);
+      removeCircle(`${split[1]}_${split[2]}`);
+      removeCircle(`${split[2]}_${split[1]}`);
     });
   });
 };

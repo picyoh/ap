@@ -197,6 +197,24 @@ input[type="file"] {
   z-index: 3;
 }
 
+#container_0{
+  display: grid;
+  grid-template-areas: 
+        'grip question'
+        'grip link';
+
+  .grip {
+    grid-area: grip;
+  }
+
+  .question{
+    grid-area: question;
+  }
+  .links{
+    grid-area: link;
+  }
+}
+
 .grip {
   display: flex;
   justify-content: center;

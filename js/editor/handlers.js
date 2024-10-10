@@ -1,13 +1,16 @@
 import { zoomIconsHandler } from "./grid/zoom/zoomIcons.js";
 import { navigateHandler } from "./grid/navigate/navigateWrapper.js";
-import { linksHandler } from "./svg/links/links.js";
+import { linksHandler } from "./svg/links/linkHandlers.js";
+import { dragDropHandler } from "./grid/dragDrop/dragdropHandler.js";
 
 const elements = [
   "#zoom_minus",
   "#zoom_plus",
   "#zoom_reset",
   "#wrapper",
-  ".link_circle"
+  ".link_circle",
+  ".grip",
+  ".containers"
 ];
 
 export const waitForElements = (selector) => {
@@ -45,6 +48,7 @@ export const resetHandlers = () => {
     zoomIconsHandler();
     navigateHandler();
     linksHandler();
+    dragDropHandler();
 };
 
 export const removeListeners = (elements) => {

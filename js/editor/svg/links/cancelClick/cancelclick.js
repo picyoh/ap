@@ -1,6 +1,6 @@
 import { resetTemp } from "../path/path.js";
 import { mouseMoveTrigger } from "../../../utils/mouse/mouse.js";
-import { linkablesHandler } from "../links.js";
+import { linkablesHandler } from "../linkHandlers.js";
 
 export const cancelClickTrigger = (onDrag) => {
   const body = document.querySelector("body");

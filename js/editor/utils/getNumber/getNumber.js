@@ -1,7 +1,14 @@
-export const getNumber = (targetId) => {
+export const getNumber = (targetId, isAnswerLink) => {
     //console.log(targetId);
     const targetSplit = targetId.split("_");
-    const targetSplitLast = targetSplit.length - 1;
-    const targetNumber = targetSplit[targetSplitLast];
+    let targetNumber;
+    if(isAnswerLink){
+      // get answer container number
+      targetNumber = targetSplit[1];
+    }else{
+      // get other container number
+      const targetSplitLast = targetSplit.length - 1;
+      targetNumber = targetSplit[targetSplitLast];
+    }
     return targetNumber;
   };

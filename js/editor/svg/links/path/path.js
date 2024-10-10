@@ -1,5 +1,5 @@
 import { getNumber } from "../../../utils/getNumber/getNumber.js";
-import { getPositions } from "../../../utils/position/getPosition.js";
+import { getElementPositions } from "../../../utils/position/getPosition.js";
 import { addCircle, removeCircle } from "../circle/circle.js";
 import { cancelRequest } from "../../../utils/mouse/mouse.js";
 
@@ -8,15 +8,20 @@ let center = { x: 0, y: 0 };
 let end = { x: 0, y: 0 };
 
 export const setStart = (target) => {
-  let pos = getPositions(target);
+  let pos = getElementPositions(target);
   start.x = pos.x;
   start.y = pos.y;
 };
 
+const getCenter = (start, end) =>{
+  center.x = (end.x + start.x) / 2;
+  center.y = (end.y + start.y) / 2 + 100;
+}
+
 export const addTempPath = (mouse) => {
   // get center point
-  center.x = (mouse.x + start.x) / 2;
-  center.y = (mouse.y + start.y) / 2 + 100;
+  getCenter(start, mouse);
+
   const path = `
     <path 
       id='temp_path' 
@@ -27,7 +32,7 @@ export const addTempPath = (mouse) => {
     />`;
   const svg = document.querySelector("svg");
   svg.insertAdjacentHTML("beforeend", path);
-  addCircle("temp", start.x, start.y);
+  addCircle("temp", "temp", start.x, start.y);
 };
 
 export const resetTemp = () => {
@@ -38,22 +43,25 @@ export const resetTemp = () => {
     // remove temp path
     tempPath.remove();
     // remove circle
-    removeCircle("temp");
+    removeCircle("temp_temp");
   }
 };
 
 export const createPath = (first, second) => {
   // get end position
-  const pos = getPositions(second);
+  const pos = getElementPositions(second);
   end.x = pos.x;
   end.y = pos.y;
+  // get the answer to get right container number
+  const firstOpt = first.classList.contains('link_bottom');
+  const secondOpt = second.classList.contains('link_bottom');
   // get numbers and concatenate
+  const firstContNumber = getNumber(first.id, firstOpt);
   const firstNumber = getNumber(first.id);
-  const secondNumber = getNumber(second.id);
-  const pathId = "path_" + firstNumber + "_" + secondNumber;
+  const secondNumber = getNumber(second.id, secondOpt);
+  const pathId = "path_" + firstContNumber + "_" + secondNumber;
   // get center point
-  center.x = (end.x + start.x) / 2;
-  center.y = (end.y + start.y) / 2 + 100;
+  getCenter(start, end);
 
   // draw path
   const path = `
@@ -67,9 +75,8 @@ export const createPath = (first, second) => {
       />`;
   const svg = document.querySelector("svg");
   svg.insertAdjacentHTML("beforeend", path);
-  console.log(start, center, end);
-  //console.log(first)
-  resetTemp(firstNumber);
-  addCircle(firstNumber, start.x, start.y);
-  addCircle(secondNumber, end.x, end.y);
+  //console.log(start, center, end);
+  resetTemp();
+  addCircle(firstContNumber, secondNumber, start.x, start.y);
+  addCircle(secondNumber, firstContNumber, end.x, end.y);
 };

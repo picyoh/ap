@@ -1,5 +1,6 @@
 import { removeCircle } from "../../svg/links/circle/circle.js";
 import { addTempPath } from "../../svg/links/path/path.js";
+import { getRelativePosition } from "../position/getPosition.js";
 
 let mouse = { x: 0, y: 0 };
 let request;
@@ -13,9 +14,9 @@ export const mouseMoveTrigger = (onDrag) => {
 };
 
 const updateMousePosition = (e) => {
-  const wrapper = document.querySelector('#wrapper').getBoundingClientRect();
-  mouse.x = e.pageX - wrapper.left;
-  mouse.y = e.pageY - wrapper.top;
+  const relativePos = getRelativePosition(e);
+  mouse.x = relativePos.x;
+  mouse.y = relativePos.y;
   //console.log(mouse);
   updateMouse();
 };
@@ -26,7 +27,7 @@ const updateMouse = () => {
   if (tempPath) {
     tempPath.remove();
     // remove circle
-    removeCircle("temp");
+    removeCircle("temp_temp");
   }
   //add new path
   addTempPath(mouse);
