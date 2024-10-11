@@ -64,14 +64,14 @@ const endLinkTrigger = (endLink) => {
 
 const endLinkHandler = (e) => {
   e.stopPropagation();
-  const startIsTop = startDom.classList.contains('link_top');
-  const linkTop = startIsTop ? startDom : e.target;
-  const linkBottom = startIsTop ? e.target : startDom;
+  const startFromTop = startDom.classList.contains('link_top');
+  const linkTop = startFromTop ? startDom : e.target;
+  const linkBottom = startFromTop ? e.target : startDom;
   // create canvas link
-  createPath(linkBottom, linkTop, startIsTop);
+  createPath(linkBottom, linkTop, startFromTop);
   // add parent value
   //TODO: adjust addParentValue wth top and bottom (bottom is always the parent)
-  addParentValue(startDom, e.target);
+  addParentValue(linkBottom, e.target);
   //reinit triggers
   linkablesHandler();
   //console.log(startDom.id, e.target.id);
@@ -90,15 +90,16 @@ export const linkablesHandler = () => {
 export const refreshPaths = () =>{
 const paths = document.querySelectorAll('.paths');
 paths.forEach((path)=>{
-  const contNumber = path.id.split('_');
+  const splitId = path.id.split('_');
+  const answerNumber = `${splitId[1]}_${splitId[2]}`;
+  const contNumber = `${splitId[3]}`;
   // remove 
   path.remove();
-  document.querySelector(`#circle_${contNumber[1]}_${contNumber[2]}`).remove();
-  document.querySelector(`#circle_${contNumber[2]}_${contNumber[1]}`).remove();
+  document.querySelector(`#circle_${answerNumber}_${contNumber}`).remove();
+  document.querySelector(`#circle_${contNumber}_${answerNumber}`).remove();
   // update
-  const linkBottom = document.querySelector(`#link_${contNumber[1]}`);
-  const linkTop = document.querySelector(`#link_${contNumber[2]}`);
-  console.log(linkBottom, linkTop);
+  const linkBottom = document.querySelector(`#link_${answerNumber}`);
+  const linkTop = document.querySelector(`#link_${contNumber}`);
   createPath(linkBottom, linkTop, false);
 })
 };

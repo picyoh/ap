@@ -37,10 +37,12 @@ const initWrapper = () => {
         <div class="question__input" id="question_0">
           <label for="question_input_0">Question :&nbsp;</label>
           <input type='text' id="question_input_0" name="question_0" placeholder='Go!'></input>
+          <label for='answer_tag_0_0' style='display: none;'>Tag :&nbsp;</label>
+          <input type='text' id='answer_tag_0_0' name='tag_0_0' class='answer_tag' style='display: none;' value='start'/>
         </div>
       </div>
       <div class="links">
-        <div id="link_0" class="link_circle link_bottom"></div>
+        <div id="link_0_0" class="link_circle link_bottom"></div>
       </div>
     </div>
   </div>

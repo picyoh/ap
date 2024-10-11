@@ -18,7 +18,7 @@ export const addQuestion = (count, pos, color) => {
       <div id="question_${count}" class="question__input">
         <label for="question_input_${count}">Question:&nbsp;</label>
         <textarea id="question_input_${count}" name="question_${count}"></textarea>
-        <input type="hidden" id="question_parent_${count}" name="question_parent_${count}" />
+        <input type="hidden" id="question_parent_${count}" name="question_parent_${count}" class="question_parents" />
       </div>
       <div id="answers_${count}" class="answers"></div>
     </div>

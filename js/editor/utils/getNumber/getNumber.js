@@ -4,7 +4,7 @@ export const getNumber = (targetId, isAnswerLink) => {
     let targetNumber;
     if(isAnswerLink){
       // get answer container number
-      targetNumber = targetSplit[1];
+      targetNumber = `${targetSplit[1]}_${targetSplit[2]}`;
     }else{
       // get other container number
       const targetSplitLast = targetSplit.length - 1;

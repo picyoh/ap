@@ -47,23 +47,25 @@ export const resetTemp = () => {
   }
 };
 
-export const createPath = (linkBottom, linkTop, startIsTop) => {
+export const createPath = (linkBottom, linkTop, startFromTop) => {
   // get end position
-  if(startIsTop){
+  if(startFromTop){
+    // drag case
     const pos = getElementPositions(linkBottom);
     end.x = pos.x;
     end.y = pos.y;
   }else{
+    // refresh
+    setStart(linkBottom);
     const pos = getElementPositions(linkTop);
     end.x = pos.x;
     end.y = pos.y;
   }
   // get link id number for circles
-  const linkBottomNumber = getNumber(linkBottom.id);
+  const linkBottomNumber = getNumber(linkBottom.id, true);
   // get numbers and concatenate
-  const linkBottomContNumber = getNumber(linkBottom.id, true);
   const linkTopNumber = getNumber(linkTop.id);
-  const pathId = "path_" + linkBottomContNumber + "_" + linkTopNumber;
+  const pathId = "path_" + linkBottomNumber + "_" + linkTopNumber;
   // get center point
   getCenter(start, end);
 
@@ -79,8 +81,9 @@ export const createPath = (linkBottom, linkTop, startIsTop) => {
       />`;
   const svg = document.querySelector("svg");
   svg.insertAdjacentHTML("beforeend", path);
-  console.log(start, center, end);
+  //console.log(start, center, end);
   resetTemp();
+  //console.log(linkBottomNumber, linkTopNumber)
   addCircle(linkBottomNumber, linkTopNumber, start.x, start.y);
   addCircle(linkTopNumber, linkBottomNumber, end.x, end.y);
 };

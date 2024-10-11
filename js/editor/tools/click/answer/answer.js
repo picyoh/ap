@@ -19,6 +19,9 @@ export const addAnswer = (count, iter, hue, label) => {
       </div>
       <div class='answer__input' id='answer_${number}'>
         ${content}
+        <input type='hidden' id='answer_parent_${number}' name='answer_parent_${number}' class='answer_parents'/>
+        <label for='answer_tag_${number}'>Tag :&nbsp;</label>
+        <input type='text' id='answer_tag_${number}' name='tag_${number}' class='answer_tag' />
       </div>
       <div class="links">
         <div id="link_${number}" class="link_circle link_bottom"></div>
@@ -36,9 +39,7 @@ const createContent = (label,number) => {
     answer = `
           <label for='answer_input_${number}'>Réponse :&nbsp;</label>
           <textarea id='answer_input_${number}' name='answer_${number}'></textarea>
-          <input type='hidden' id='answer_parent_${number}' name='answer_parent_${number}'/>
-          <label for='answer_tag_${number}'>Tag :&nbsp;</label>
-          <input type='text' id='answer_tag_${number}' name='tag_${number}' class='answer_tag' />
+
             `;
   } else if (label === "answer_img") {
     const preview = addPreview(label, number);
