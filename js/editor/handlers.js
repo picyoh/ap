@@ -10,7 +10,7 @@ const elements = [
   "#wrapper",
   ".link_circle",
   ".grip",
-  ".containers"
+  ".containers",
 ];
 
 export const waitForElements = (selector) => {

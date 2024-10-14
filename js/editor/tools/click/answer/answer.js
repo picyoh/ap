@@ -39,7 +39,6 @@ const createContent = (label,number) => {
     answer = `
           <label for='answer_input_${number}'>Réponse :&nbsp;</label>
           <textarea id='answer_input_${number}' name='answer_${number}'></textarea>
-
             `;
   } else if (label === "answer_img") {
     const preview = addPreview(label, number);
@@ -58,9 +57,6 @@ const createContent = (label,number) => {
           <input type='text' id='answer_input_${number}' name='answer_${number}'></input>
           <button type='button' id='answer_input_button_${number}' class='list_button'>Add</button>
           <output id='answer_input_output_${number}' class='list_output'></output>
-          <input type='hidden' id='answer_parent_${number}' name='answer_parent_${number}'/>
-          <label for='answer_tag_${number}'>Tag :&nbsp;</label>
-          <input type='text' id='answer_tag_${number}' name='tag_${number}' class='answer_tag' />
             `;
 
     addAnswerOnList(number);

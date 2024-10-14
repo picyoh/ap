@@ -8,7 +8,6 @@ import { hightlightHandler } from "./highlight/highlight.js";
 
 let onDrag = false;
 let startDom;
-//TODO: refresh links when a container move
 export const linksHandler = () => {
   const links = document.querySelectorAll(".link_circle");
   links.forEach(
@@ -70,8 +69,7 @@ const endLinkHandler = (e) => {
   // create canvas link
   createPath(linkBottom, linkTop, startFromTop);
   // add parent value
-  //TODO: adjust addParentValue wth top and bottom (bottom is always the parent)
-  addParentValue(linkBottom, e.target);
+  addParentValue(linkBottom, linkTop);
   //reinit triggers
   linkablesHandler();
   //console.log(startDom.id, e.target.id);

@@ -49,9 +49,3 @@ export const navigating = () => {
     editor.style.transformOrigin = `${startX} ${startY}`;
   });
 };
-
-// TODO: clean listeners
-const resetwrapper = () => {
-  const wrapper = document.querySelector("#wrapper");
-  wrapper.replaceWith(wrapper.cloneNode(true));
-}

@@ -22,6 +22,9 @@
   --grid-gap: 11px;
   --grid-color: var(--darker-mid);
   --paper-color: var(--lighter-dark);
+
+  --resizer-size: 8px;
+  --resizer-offset: -4px;
 }
 
 html {
@@ -311,6 +314,28 @@ output {
   background-color: white;
   border: 1px solid var(--darker-dim);
   border-radius: 0.3rem;
+}
+
+.groups {
+  position: absolute;
+  min-width: fit-content;
+  min-height: fit-content;
+  resize: both;
+  overflow: auto;
+  input{
+    position: absolute;
+    left: var(--resizer-size);
+  }
+  .grip{
+    position: absolute;
+    height: 100%;
+    display: flex;
+  }
+}
+
+#temp_group{
+  background-color: var(--link-color);
+  pointer-events: none;
 }
 
 #tags {

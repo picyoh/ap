@@ -2,6 +2,7 @@ import { clickHandler } from "./click/clickHandler.js";
 import { addCursor } from "../utils/mouse/cursor/customCursor.js";
 import { toogleDropdown } from "../utils/dropdown/dropdown.js";
 import { eraseHandler } from "./eraser/eraser.js"
+import { groupHandler } from "./group/groupHandler.js";
 
 export const labelHandlers = () => {
   const labelsDom = document.querySelectorAll(".labels");
@@ -46,11 +47,9 @@ export const labelHandlers = () => {
           eraseHandler();
           break;
         case "group":
-          // change cursor
           document.querySelector("#wrapper").style.cursor = "crosshair";
-          // add custom cursor
-          addCursor(labelId);
-          areaHandler(label);
+          groupHandler();
+          break;
         case "upload":
           toogleDropdown(label);
           //user_upload();
