@@ -21,7 +21,7 @@ export const addAnswer = (count, iter, hue, label) => {
         ${content}
         <input type='hidden' id='answer_parent_${number}' name='answer_parent_${number}' class='answer_parents'/>
         <label for='answer_tag_${number}'>Tag :&nbsp;</label>
-        <input type='text' id='answer_tag_${number}' name='tag_${number}' class='answer_tag' />
+        <input type='text' id='answer_tag_${number}' name='tag_${number}' class='answer_tag' placeholder='Tag'/>
       </div>
       <div class="links">
         <div id="link_${number}" class="link_circle link_bottom"></div>
@@ -38,7 +38,7 @@ const createContent = (label,number) => {
   if (label === "answer_text" || label === undefined) {
     answer = `
           <label for='answer_input_${number}'>Réponse :&nbsp;</label>
-          <textarea id='answer_input_${number}' name='answer_${number}'></textarea>
+          <textarea id='answer_input_${number}' name='answer_${number}' placeholder='Réponse'></textarea>
             `;
   } else if (label === "answer_img") {
     const preview = addPreview(label, number);
@@ -46,19 +46,15 @@ const createContent = (label,number) => {
           <label for='img_link_${number}'>Image link :</label>
           <input type='text' id='img_link_${number}' name='img_link_${number}' class='img_link' placeholder='https://'>
           ${preview}
-          <input type='hidden' id='answer_parent_${number}' name='answer_parent_${number}'/>
-          <label for='answer_tag_${number}'>Tag :&nbsp;</label>
-          <input type='text' id='answer_tag_${number}' name='tag_${number}' class='answer_tag' />
             `;
     updatePreview(label, number);
   } else if (label === "answer_list") {
     answer = `
           <label for='answer_input_${number}'>Réponses :&nbsp;</label>
-          <input type='text' id='answer_input_${number}' name='answer_${number}'></input>
+          <input type='text' id='answer_input_${number}' name='answer_${number}' placeholder='Réponses' />
           <button type='button' id='answer_input_button_${number}' class='list_button'>Add</button>
-          <output id='answer_input_output_${number}' class='list_output'></output>
+          <output id='answer_input_output_${number}' class='list_output' placeholder='Liste'></output>
             `;
-
     addAnswerOnList(number);
   }
   return answer;

@@ -1,5 +1,5 @@
 import { resetHandlers } from "../../handlers.js";
-import { getRelativePosition } from "../../utils/position/getPosition.js";
+import { getElementPositions, getRelativePosition } from "../../utils/position/getPosition.js";
 import { randomColor } from "../colorPicker/colorPicker.js";
 
 let start = { x: 0, y: 0 };
@@ -16,7 +16,6 @@ export const sizing = (e) => {
   const pos = getRelativePosition(e);
   width = pos.x - start.x;
   height = pos.y - start.y;
-  return {width, height};
 };
 
 const setStartPos = (e) => {
@@ -28,10 +27,12 @@ const setStartPos = (e) => {
 const groupStretch = (e) => {
   const tempGroup = e.target.querySelector('#temp_group');
   sizing(e);
-  tempGroup.style.width = `${width}px`;
-  tempGroup.style.height = `${height}px`;
-  e.target.addEventListener("mousemove", groupStretch);
-  e.target.addEventListener("click", addGroup);
+  if(tempGroup !== null){
+    tempGroup.style.width = `${width}px`;
+    tempGroup.style.height = `${height}px`;
+    e.target.addEventListener("mousemove", groupStretch);
+    e.target.addEventListener("click", addGroup);
+  }
 };
 
 const addTempGroup = (e) =>{
@@ -40,6 +41,7 @@ const addTempGroup = (e) =>{
 };
 
 const addGroup = (e) => {
+  e.target.removeEventListener("mousemove", groupStretch);
   sizing(e);
   const number = document.querySelectorAll(".groups").length;
   const color = randomColor();
@@ -48,9 +50,7 @@ const addGroup = (e) => {
     class='groups' 
     style='
       top:${start.y}px; 
-      left:${start.x}px; 
-      width:${width}px; 
-      height:${height}px; 
+      left:${start.x}px;
       background: rgb(${color.r}, ${color.g}, ${color.b});'>
         <label for='group_tag_${number}'></label>
         <input type='text' id='group_tag_${number}' name='group_tag_${number}' class='group_tag' placeholder='Theme'/>
@@ -62,5 +62,28 @@ const addGroup = (e) => {
   e.target.insertAdjacentHTML("beforeend", group);
   document.querySelector("#temp_group").remove();
   e.target.style.cursor = 'pointer';
+  addToGroup(e, number, start, width, height);
   resetHandlers();
 };
+
+const addToGroup = (e, number, start, width, height) => {
+  const group = e.target.querySelector(`#group_${number}`);
+  
+  const containers = document.querySelectorAll('.containers');
+  const end = {x:0, y:0};
+  end.x = start.x + width;
+  end.y = start.x + height;
+  containers.forEach((container)=>{
+    const contPos = getElementPositions(container);
+    if(start.x <= contPos.x && start.y <= contPos.y && end.x >= contPos.x && end.y >= contPos.y){
+      const groupContent = group.querySelector('.group_content');
+      const clone = container.cloneNode(true);
+      clone.style.position = 'relative';
+      clone.style.top = '0';
+      clone.style.left = '0';
+      container.remove();
+      groupContent.appendChild(clone);
+    }
+  });
+  
+}

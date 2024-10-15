@@ -5,7 +5,7 @@ import { initHandlers } from "./handlers.js";
 
 //TODO: templates => composants
 
-//TODO: set drag and drop 
+//TODO: set drag and drop and adjust image on drag
 //TODO: add group feature
 //TODO: add import and export feature
 //TODO: position screen above zoom

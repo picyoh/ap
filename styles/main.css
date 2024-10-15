@@ -161,6 +161,8 @@ header {
 
 label {
   pointer-events: none;
+  position: absolute;
+  display:none;
 }
 
 .menus {
@@ -193,7 +195,9 @@ input[type="file"] {
 .containers {
   position: absolute;
   border-radius: 0.5rem;
+  padding: .3rem;
   display: flex;
+  gap: .5rem;
   flex-flow: row wrap;
   align-items: stretch;
   justify-content: space-between;
@@ -202,6 +206,7 @@ input[type="file"] {
 
 #container_0{
   display: grid;
+  gap: .5rem;
   grid-template-areas: 
         'grip question'
         'grip link';
@@ -211,6 +216,7 @@ input[type="file"] {
   }
 
   .question{
+    padding-top: .3rem;
     grid-area: question;
   }
   .links{
@@ -252,6 +258,9 @@ circle {
 
 .question{
   flex-grow: 1;
+  display: flex;
+  gap: .3rem;
+  flex-flow: column;
 }
 
 .answers {
@@ -265,6 +274,7 @@ circle {
   border-radius: 0.3rem;
   border: 1px solid var(--bright-color);
   display: grid;
+  gap: .3rem;
   grid-template-areas: 
   "grip content"
   "grip bottom"
@@ -318,19 +328,26 @@ output {
 
 .groups {
   position: absolute;
-  min-width: fit-content;
-  min-height: fit-content;
   resize: both;
   overflow: auto;
-  input{
-    position: absolute;
-    left: var(--resizer-size);
+  display: grid;
+  grid-template-areas:
+  'grip label .'
+  'grip content content';
+  gap: .3rem;
+  .grip {
+    grid-area: grip;
   }
-  .grip{
-    position: absolute;
-    height: 100%;
-    display: flex;
-  }
+}
+
+.group_tag {
+  grid-area: label;
+}
+
+.group_content{
+  position: relative;
+  grid-area: content;
+  display: flex;
 }
 
 #temp_group{
