@@ -8,19 +8,25 @@ export const dragDropHandler = () => {
     // trigger event
     grip.addEventListener("dragstart", (e) => {
       dragStartHandler(e);
-      dropTrigger(e.target)
+      dropTrigger(e.target);
     });
   });
 };
 
 export const dropTrigger = (dragged) => {
-  
   const parentNodeClassList = dragged.parentNode.classList;
-  let dropZone = '';
-  if(dragged.classList.contains("containers") || parentNodeClassList.contains('containers')){
-    dropZone = '#wrapper';
-  }else if(parentNodeClassList.contains("answer")){
-    dropZone = '.containers';
+  let dropZone = "";
+  switch (true) {
+    case parentNodeClassList.contains("groups"):
+    case parentNodeClassList.contains("containers"):
+      dropZone = "#wrapper";
+      break;
+    case parentNodeClassList.contains("answer"):
+      dropZone = ".containers";
+      break;
+    default:
+      console.log("drop Trigger failed");
+      break;
   }
   // get targets
   const targets = document.querySelectorAll(`${dropZone}`);

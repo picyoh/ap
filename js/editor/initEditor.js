@@ -30,7 +30,7 @@ const initWrapper = () => {
   const rows = `
   <div id="wrapper" style="cursor: grab;">
     <div id="container_0" class="containers question_container" draggable="true" style="top: 15px; left: 388px; background: limegreen;">
-      <div class="grip">
+      <div class="grip" draggable='true'>
         <i class="fa-solid fa-grip-vertical"></i>
       </div>
       <div class="question">

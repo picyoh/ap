@@ -5,11 +5,20 @@ import { getRelativePosition } from "../../utils/position/getPosition.js";
 export const dragStartHandler = (e) => {
   e.stopPropagation();
   let target;
-  //console.log(e.target.parentNode.classList.contains('answer'))
-  if(e.target.parentNode.classList.contains('answer')){
-    target = e.target.parentNode.id;
-  }else{
-    target = e.target.closest('.containers').id;
+  const parentNodeClassList = e.target.parentNode.classList;
+  switch (true) {
+    case parentNodeClassList.contains("answer"):
+      target = e.target.parentNode.id;
+      break;
+    case parentNodeClassList.contains("containers"):
+      target = e.target.closest(".containers").id;
+      break;
+    case parentNodeClassList.contains("groups"):
+      target = e.target.closest(".groups").id;
+      break;
+    default:
+      console.log("dragStart handler fail");
+      break;
   }
   e.dataTransfer.setData("text/plain", target);
   e.dataTransfer.effectAllowed = "move";
@@ -28,18 +37,23 @@ export const dropHandler = (e) => {
   e.stopPropagation();
   const data = e.dataTransfer.getData("text/plain");
   const dataDom = document.getElementById(data);
-  //console.log(dataDom)
-  if (dataDom === null) return;
-  if(dataDom.classList.contains('containers')){
-    const pos = getRelativePosition(e);
-    dataDom.style.left = `${pos.x}px`;
-    dataDom.style.top = `${pos.y}px`;
-  }
-  if(dataDom.classList.contains('answer')){
-    //TODO: drop answer
-    //get node value
-    //create new answer in targeted container
-    //set node value
+  console.log(dataDom, e.target)
+  switch (true) {
+    case dataDom.classList.contains("answer"):
+      const target = e.target;
+      const clone = dataDom.cloneNode(true);
+      target.appendChild(clone);
+      dataDom.remove();
+      break;
+    case dataDom.classList.contains("containers"):
+    case dataDom.classList.contains("groups"):
+      const pos = getRelativePosition(e);
+      dataDom.style.left = `${pos.x}px`;
+      dataDom.style.top = `${pos.y}px`;
+      break;
+    default:
+      console.log("drop handler failed");
+      break;
   }
   refreshPaths();
 };
