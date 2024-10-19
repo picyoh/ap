@@ -31,7 +31,7 @@ const groupStretch = (e) => {
     tempGroup.style.width = `${width}px`;
     tempGroup.style.height = `${height}px`;
     e.target.addEventListener("mousemove", groupStretch);
-    e.target.addEventListener("click", addGroup);
+    e.target.addEventListener("click", addGroupHandler);
   }
 };
 
@@ -40,17 +40,26 @@ const addTempGroup = (e) =>{
   e.target.insertAdjacentHTML("beforeend", div);
 };
 
-const addGroup = (e) => {
+const addGroupHandler = (e) =>{
   e.target.removeEventListener("mousemove", groupStretch);
   sizing(e);
+  const pos = start;
+  addGroup(pos);
+  document.querySelector("#temp_group").remove();
+  e.target.style.cursor = 'pointer';
+  addToGroup();
+  resetHandlers();
+}
+
+export const addGroup = (pos) => {
   const number = document.querySelectorAll(".groups").length;
   const color = randomColor();
   const group = `<div 
     id='group_${number}' 
     class='groups' 
     style='
-      top:${start.y}px; 
-      left:${start.x}px;
+      top:${pos.y}px; 
+      left:${pos.x}px;
       background: rgb(${color.r}, ${color.g}, ${color.b});'>
         <label for='group_tag_${number}'></label>
         <input type='text' id='group_tag_${number}' name='group_tag_${number}' class='group_tag' placeholder='Theme'/>
@@ -59,16 +68,12 @@ const addGroup = (e) => {
         </div>
         <div id='group_content_${number}'class='group_content'></div>
   </div>`;
-  e.target.insertAdjacentHTML("beforeend", group);
-  document.querySelector("#temp_group").remove();
-  e.target.style.cursor = 'pointer';
-  addToGroup(e, number, start, width, height);
-  resetHandlers();
+  document.querySelector('#wrapper').insertAdjacentHTML("beforeend", group);
 };
 
-const addToGroup = (e, number, start, width, height) => {
-  const group = e.target.querySelector(`#group_${number}`);
-  
+const addToGroup = () => {
+  const groups = document.querySelectorAll(".groups");
+  const group = groups[groups.length - 1];
   const containers = document.querySelectorAll('.containers');
   const end = {x:0, y:0};
   end.x = start.x + width;

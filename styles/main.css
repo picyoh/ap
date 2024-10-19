@@ -330,7 +330,9 @@ output {
   position: absolute;
   resize: both;
   overflow: auto;
-  display: grid;
+  display: inline-grid;
+  grid-template-columns: 2rem auto;
+  grid-template-rows: fit-content(2rem) fit-content(100px);
   grid-template-areas:
   'grip label .'
   'grip content content';
@@ -345,9 +347,9 @@ output {
 }
 
 .group_content{
+  min-height: 2rem;
   position: relative;
   grid-area: content;
-  display: flex;
 }
 
 #temp_group{

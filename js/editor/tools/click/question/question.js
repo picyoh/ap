@@ -1,7 +1,4 @@
-import { randomPick } from "../../colorPicker/colorPicker.js";
-import {addAnswer} from "../answer/answer.js"
-
-export const addQuestion = (count, pos, color) => {
+export const addQuestion = (count, pos, color, parent) => {
   const question = `
   <div
   id="container_${count}"
@@ -24,7 +21,5 @@ export const addQuestion = (count, pos, color) => {
     </div>
   </div>
   `;
-  document.querySelector("#wrapper").insertAdjacentHTML("beforeend", question);
-  const hue = randomPick(color);
-  addAnswer(count, 2, hue);
+  parent.insertAdjacentHTML("beforeend", question);
 };

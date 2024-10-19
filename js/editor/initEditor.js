@@ -5,13 +5,11 @@ import { initHandlers } from "./handlers.js";
 
 //TODO: templates => composants
 
-//TODO: set drag and drop and adjust image on drag
-//TODO: add group feature
+//TODO: adjust image on drag
 //TODO: add import and export feature
 //TODO: position screen above zoom
 //TODO: ameliorer navigation (callstack et reinit a verif);
 //TODO: complex css grid
-//TODO: fix hover on menu
 //TODO: fusionner les fichiers question et result + ajouter nuage de tag au milieu du json
 //TODO: changer image preview
 

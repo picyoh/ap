@@ -37,7 +37,7 @@ export const dropHandler = (e) => {
   e.stopPropagation();
   const data = e.dataTransfer.getData("text/plain");
   const dataDom = document.getElementById(data);
-  console.log(dataDom, e.target)
+  //console.log(dataDom, e.target)
   switch (true) {
     case dataDom.classList.contains("answer"):
       const target = e.target;
@@ -46,6 +46,19 @@ export const dropHandler = (e) => {
       dataDom.remove();
       break;
     case dataDom.classList.contains("containers"):
+      if(e.target.classList.contains('group_content')){
+        const target = e.target;
+        const clone = dataDom.cloneNode(true);
+        clone.style.top = 0;
+        clone.style.left = 0;
+        target.appendChild(clone);
+        dataDom.remove();
+      }else {
+        const pos = getRelativePosition(e);
+        dataDom.style.left = `${pos.x}px`;
+        dataDom.style.top = `${pos.y}px`;
+      }
+      break;
     case dataDom.classList.contains("groups"):
       const pos = getRelativePosition(e);
       dataDom.style.left = `${pos.x}px`;

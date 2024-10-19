@@ -1,8 +1,9 @@
 import { clickHandler } from "./click/clickHandler.js";
 import { addCursor } from "../utils/mouse/cursor/customCursor.js";
 import { toogleDropdown } from "../utils/dropdown/dropdown.js";
-import { eraseHandler } from "./eraser/eraser.js"
+import { eraseHandler } from "./eraser/eraser.js";
 import { groupHandler } from "./group/groupHandler.js";
+import { uploadTrigger } from "./import/customImport.js";
 
 export const labelHandlers = () => {
   const labelsDom = document.querySelectorAll(".labels");
@@ -32,7 +33,7 @@ export const labelHandlers = () => {
         case "answer_text":
         case "answer_img":
         case "answer_list":
-          toogleDropdown('answer');
+          toogleDropdown("answer");
           // change cursor
           document.querySelector("#wrapper").style.cursor = "pointer";
           // add custom cursor
@@ -51,14 +52,16 @@ export const labelHandlers = () => {
           groupHandler();
           break;
         case "upload":
+        case "upload_file":
           toogleDropdown(label);
-          //user_upload();
+          uploadTrigger();
           break;
         case "download":
           toogleDropdown(label);
-          //user_download();
+          //downloadTrigger();
           break;
         default:
+          console.log(labelId, label)
           console.log("labelHandlers failed");
           break;
       }

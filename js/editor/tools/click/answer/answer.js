@@ -28,13 +28,18 @@ export const addAnswer = (count, iter, hue, label) => {
       </div>  
     </div>
     `;
-    answers.insertAdjacentHTML("beforeend", answer);  
+    answers.insertAdjacentHTML("beforeend", answer);
   }
-  resetHandlers()
+  if (label === "answer_img") {
+    updatePreview(label, number);
+  } else if (label === "answer_img") {
+    addAnswerOnList(number);
+  }
+  resetHandlers();
 };
 
-const createContent = (label,number) => {
-  let answer = '';
+const createContent = (label, number) => {
+  let answer = "";
   if (label === "answer_text" || label === undefined) {
     answer = `
           <label for='answer_input_${number}'>Réponse :&nbsp;</label>
@@ -47,7 +52,6 @@ const createContent = (label,number) => {
           <input type='text' id='img_link_${number}' name='img_link_${number}' class='img_link' placeholder='https://'>
           ${preview}
             `;
-    updatePreview(label, number);
   } else if (label === "answer_list") {
     answer = `
           <label for='answer_input_${number}'>Réponses :&nbsp;</label>
@@ -55,7 +59,6 @@ const createContent = (label,number) => {
           <button type='button' id='answer_input_button_${number}' class='list_button'>Add</button>
           <output id='answer_input_output_${number}' class='list_output' placeholder='Liste'></output>
             `;
-    addAnswerOnList(number);
   }
   return answer;
-}
+};

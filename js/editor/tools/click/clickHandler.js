@@ -4,6 +4,7 @@ import { addResult } from "./result/result.js";
 import { tagsHandler } from "../../tags/tags.js"
 import { randomColor, randomPick, getColor } from "../colorPicker/colorPicker.js";
 import { getRelativePosition } from "../../utils/position/getPosition.js";
+import { getElementNumber } from "../../utils/getNumber/getNumber.js";
 
 export const clickHandler = (label) => {
   const wrapper = document.querySelector("#wrapper");
@@ -11,12 +12,15 @@ export const clickHandler = (label) => {
     "click",
     (e) => {
       let number;
+      const parent = document.querySelector("#wrapper");
       const pos = getRelativePosition(e);
       const color = randomColor();
       switch (label) {
         case "question":
           number = getElementNumber("question");
-          addQuestion(number, pos, color);
+          addQuestion(number, pos, color, parent);
+          const hue = randomPick(color);
+          addAnswer(number, 2, hue);
           break;
         case "result":
           number = getElementNumber("result");
@@ -40,9 +44,4 @@ export const clickHandler = (label) => {
     },
     { once: true }
   );
-};
-
-const getElementNumber = (type) => {
-  const elements = document.querySelectorAll(`.${type}`);
-  return elements.length;
 };
