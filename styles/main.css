@@ -113,6 +113,8 @@ header {
 }
 
 #zoomIcons {
+  display: flex;
+  gap:.3rem;
   position: fixed;
   z-index: 5;
   top: 84%;
@@ -124,6 +126,8 @@ header {
 }
 
 .zoom {
+  width: 32px;
+  height: 32px;
   font-size: 2rem;
   padding: 0.2rem;
 }

@@ -2,6 +2,7 @@ import { initSvg } from "./svg/svg.js";
 import { createLabels } from "./tools/labels/createLabels.js"
 import { addZoomIcons } from "./grid/zoom/zoomIcons.js";
 import { initHandlers } from "./handlers.js";
+import { importExemple } from "./tools/import/customImport.js";
 
 //TODO: templates => composants
 
@@ -27,7 +28,9 @@ export const initEditorForm = () => {
 const initWrapper = () => {
   const rows = `
   <div id="wrapper" style="cursor: grab;">
-    <div id="container_0" class="containers question_container" draggable="true" style="top: 15px; left: 388px; background: limegreen;">
+  </div>
+  `;
+  const content = `<div id="container_0" class="containers question_container" draggable="true" style="top: 15px; left: 388px; background: limegreen;">
       <div class="grip" draggable='true'>
         <i class="fa-solid fa-grip-vertical"></i>
       </div>
@@ -42,9 +45,7 @@ const initWrapper = () => {
       <div class="links">
         <div id="link_0_0" class="link_circle link_bottom"></div>
       </div>
-    </div>
-  </div>
-  `;
+    </div>`
   const form = document.querySelector("#editor");
   form.insertAdjacentHTML("beforeend", rows);
   initTools();
@@ -60,8 +61,8 @@ const initTools = () => {
     {name:"question", text:"Question", icon:"fi fi-rr-comment-question"},
     {name:"answer", text:"Réponse", icon:"fi fi-rr-comment-check", menu:[{name:'text', text: 'Texte', icon:'fi fi-rr-text'},{name:'img', text:'Image', icon:'fi fi-rr-picture'} , {name:'list', text:'Liste', icon:'fi fi-rr-list'}]},
     {name:"result", text:"Résultat", icon:"fi fi-rr-ranking-star"},
-    {name: "hr"},
     {name:"group", text:"Grouper", icon:"fi fi-rr-object-group"},
+    {name: "hr"},
     {name:"eraser", text:"Gomme", icon:"fi fi-rr-eraser"},
     {name: "hr"},
     {name:"upload", text:"Importer", icon:"fi fi-rr-upload", menu:[{name: 'file'}]},
@@ -71,6 +72,7 @@ const initTools = () => {
   createLabels(labels);
   initHandlers();
   initSvg();
+  importExemple();
 };
 
 export const resetHandlers = () =>{

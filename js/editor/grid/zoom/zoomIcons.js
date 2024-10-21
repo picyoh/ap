@@ -7,9 +7,9 @@ let zoom = 1;
 export const addZoomIcons = () => {
   const zoomIcons = `
     <div id='zoomIcons'>
-        <i id="zoom_minus" class="fa-solid fa-circle-minus zoom"></i>
-        <i id="zoom_reset" class="fa-solid fa-rotate-left zoom"></i>
-        <i id="zoom_plus" class="fa-solid fa-circle-plus zoom"></i>
+        <i id="zoom_minus" class="fi fi-rr-minus-circle zoom"></i>
+        <i id="zoom_reset" class="fi fi-rr-rotate-left zoom"></i>
+        <i id="zoom_plus" class="fi fi-rr-add zoom"></i>
     </div>
     `;
   const editor = document.querySelector("#editor");

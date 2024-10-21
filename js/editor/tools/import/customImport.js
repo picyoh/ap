@@ -19,8 +19,6 @@ const alertUser = (e) => {
       container.remove();
     });
     handleUploadFile(e);
-  } else {
-    return;
   }
 };
 
@@ -57,20 +55,24 @@ const buildImport = (obj) => {
       }
       row.choices.forEach((answer) => {
         const number = answer.number;
-        const count = `${number.split('_')[0]}_${number.split('_')[1]}`;
+        const count = `${number.split("_")[0]}_${number.split("_")[1]}`;
         //console.log(answer, number);
         if (answer.name === "select") {
           addAnswer(count, 1, hue, "answer_list");
-          const element = document.querySelector(`#answer_input_output_${number}`);
+          const element = document.querySelector(
+            `#answer_input_output_${number}`
+          );
           element.value = answer.title;
         } else if (answer.src) {
           addAnswer(count, 1, hue, "answer_img");
           const element = document.querySelector(`#img_link_${number}`);
           element.value = answer.title;
         } else {
-          console.log( count)
+          //console.log(count);
           addAnswer(count, 1, hue, "answer_text");
-          const elementInput = document.querySelector(`#answer_input_${number}`);
+          const elementInput = document.querySelector(
+            `#answer_input_${number}`
+          );
           elementInput.value = answer.title;
         }
         const elementTag = document.querySelector(`#answer_tag_${number}`);
@@ -81,7 +83,7 @@ const buildImport = (obj) => {
 };
 
 const buildQuestion = (wrapper, row, init) => {
-  console.log(row);
+  //console.log(row);
   let pos = { x: 0, y: 0 };
   const count = row.number;
   const color = randomColor();
@@ -92,4 +94,10 @@ const buildQuestion = (wrapper, row, init) => {
   const element = document.querySelector(`#question_input_${count}`);
   element.value = row.question;
   return randomPick(color);
+};
+
+export const importExemple = () => {
+  fetch("/js/editor/tools/import/exemple.json")
+    .then((response) => response.json())
+    .then((json) => buildImport(json));
 };
