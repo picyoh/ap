@@ -1,10 +1,13 @@
 export const initSvg = () => {
+  const wrapper = document.querySelector('#wrapper');
+  const width = wrapper.offsetWidth;
+  const height = wrapper.offsetHeight;
   const svg = `
     <svg 
     xmlns="http://www.w3.org/2000/svg" 
     version="1.1"
-    width= "100%"
-    height= "100%"
+    width= "${width}px"
+    height= "${height}px"
     >
     </svg>`;
   const page = document.querySelector("#editor");

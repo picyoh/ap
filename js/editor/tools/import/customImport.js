@@ -3,6 +3,9 @@ import { addQuestion } from "../click/question/question.js";
 import { addAnswer } from "../click/answer/answer.js";
 import { addResult } from "../click/result/result.js";
 import { randomColor, randomPick } from "../colorPicker/colorPicker.js";
+import { createPath } from "../../svg/links/path/path.js";
+import { refreshPaths } from "../../svg/links/linkHandlers.js";
+import { waitForElements } from "../../handlers.js";
 
 export const uploadTrigger = () => {
   const uploadInput = document.querySelector("#upload_file");
@@ -41,8 +44,11 @@ const buildImport = (obj) => {
       buildQuestion(wrapper, row, true);
     } else {
       let hue;
-      const pos = { x: "270", y: `${15 + 300 * index}` };
+      const pos = { x: "200", y: `${200 * index}` };
       addGroup(pos);
+      // add Theme on groups
+      document.querySelector(`#group_tag_${index - 1}`).value = row.theme;
+      // get current group_content
       const currentGroup =
         document.querySelectorAll(".group_content")[index - 1];
       // Check question or qMulti
@@ -77,23 +83,52 @@ const buildImport = (obj) => {
         }
         const elementTag = document.querySelector(`#answer_tag_${number}`);
         elementTag.value = answer.tag;
+        const elementParent = document.querySelector(
+          `#answer_parent_${number}`
+        );
+        elementParent.value = answer.parent;
       });
     }
   });
+  const elements = ['.paths', 'circles'];
+  elements.forEach(element => waitForElements(element).then(refreshPaths()));
 };
 
 const buildQuestion = (wrapper, row, init) => {
-  //console.log(row);
-  let pos = { x: 0, y: 0 };
   const count = row.number;
   const color = randomColor();
-  if (init) {
-    pos = { x: "270", y: "15" };
-  }
+  let pos;
+  init ? (pos = { x: "200", y: "120" }) : (pos = { x: 0, y: 0 });
   addQuestion(count, pos, color, wrapper);
   const element = document.querySelector(`#question_input_${count}`);
   element.value = row.question;
+  if (init) {
+    // change link className
+    const linkDom = document.querySelector(".link_circle");
+    linkDom.classList.replace("link_top", "link_bottom");
+    linkDom.id = `link_0_0_0`;
+    // add a tag on question
+    const tag = `<input type='hidden' id='answer_tag_${count}_0' name='tag_${count}' class='answer_tag' value='start' />`;
+    document
+      .querySelector(`#question_${count}`)
+      .insertAdjacentHTML("beforeend", tag);
+  }
+  if (row.parent) {
+    buildLinks(row.number, row.parent);
+  }
   return randomPick(color);
+};
+
+const buildLinks = (number, parent) => {
+  const tags = document.querySelectorAll(`.answer_tag`);
+  let parentTag = "";
+  tags.forEach((tag) => {
+    tag.value === parent ? parentTag = tag.id : "";
+  });
+  const parentId = parentTag.replace('answer_tag', 'link');
+  const parentDom = document.querySelector(`#${parentId}`);
+  const childDom = document.querySelector(`#link_${number}`);
+  createPath(parentDom, childDom)
 };
 
 export const importExemple = () => {

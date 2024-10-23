@@ -1,4 +1,5 @@
 import { resetHandlers } from "../../handlers.js";
+import { refreshPaths } from "../../svg/links/linkHandlers.js";
 
 const min = 0;
 const max = 2;
@@ -54,4 +55,5 @@ const zooming = (target) => {
   wrapper.style.transformOrigin = `0% 0%`;
   wrapper.style.transform = `scale(${zoom})`;
   resetHandlers();
+  refreshPaths();
 };

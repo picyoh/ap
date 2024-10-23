@@ -208,7 +208,11 @@ input[type="file"] {
   z-index: 3;
 }
 
-#container_0{
+.group_content .containers {
+  position: relative;
+}
+
+#container_0_0{
   display: grid;
   gap: .5rem;
   grid-template-areas: 
@@ -220,8 +224,8 @@ input[type="file"] {
   }
 
   .question{
-    padding-top: .3rem;
     grid-area: question;
+    gap: 0;
   }
   .links{
     grid-area: link;
@@ -258,6 +262,10 @@ input[type="file"] {
 circle {
   fill: var(--darker-dim);
   z-index: 4;
+}
+
+textarea {
+  height: 1rem;
 }
 
 .question{
@@ -332,10 +340,9 @@ output {
 
 .groups {
   position: absolute;
-  resize: both;
-  overflow: auto;
-  display: inline-grid;
-  grid-template-columns: 2rem auto;
+
+  display: grid;
+  grid-template-columns: fit-content(2rem auto);
   grid-template-rows: fit-content(2rem) fit-content(100px);
   grid-template-areas:
   'grip label .'
@@ -351,9 +358,10 @@ output {
 }
 
 .group_content{
-  min-height: 2rem;
-  position: relative;
+  height: fit-content;
   grid-area: content;
+  display: flex;
+  gap:.5rem;
 }
 
 #temp_group{

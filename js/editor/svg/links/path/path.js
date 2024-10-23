@@ -48,6 +48,7 @@ export const resetTemp = () => {
 };
 
 export const createPath = (linkBottom, linkTop, startFromTop) => {
+  //console.log(linkBottom, linkTop)
   // get end position
   if(startFromTop){
     // drag case
@@ -62,9 +63,9 @@ export const createPath = (linkBottom, linkTop, startFromTop) => {
     end.y = pos.y;
   }
   // get link id number for circles
-  const linkBottomNumber = getNumber(linkBottom.id, true);
+  const linkBottomNumber = getNumber(linkBottom.id, true).replaceAll('_', '-');
   // get numbers and concatenate
-  const linkTopNumber = getNumber(linkTop.id);
+  const linkTopNumber = getNumber(linkTop.id).replace('_', '-');
   const pathId = "path_" + linkBottomNumber + "_" + linkTopNumber;
   // get center point
   getCenter(start, end);

@@ -7,6 +7,7 @@ import { importExemple } from "./tools/import/customImport.js";
 //TODO: templates => composants
 
 //TODO: adjust image on drag
+//TODO: adjust path on zoom 
 //TODO: add import and export feature
 //TODO: position screen above zoom
 //TODO: ameliorer navigation (callstack et reinit a verif);

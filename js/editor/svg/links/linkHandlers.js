@@ -5,6 +5,7 @@ import { setStart, createPath } from "./path/path.js";
 import { cancelClickTrigger } from "./cancelClick/cancelclick.js";
 import { addParentValue } from "./addParentValue/addParentValue.js";
 import { hightlightHandler } from "./highlight/highlight.js";
+import { removeCircle } from "./circle/circle.js";
 
 let onDrag = false;
 let startDom;
@@ -49,6 +50,7 @@ const beginLinkHandler = (e) => {
 };
 
 const endLinkTrigger = (endLink) => {
+  console.log(endLink)
   const linkables = document.querySelectorAll(`.${endLink}`);
   linkables.forEach((linkable) => {
     linkable.addEventListener(
@@ -72,7 +74,7 @@ const endLinkHandler = (e) => {
   addParentValue(linkBottom, linkTop);
   //reinit triggers
   linkablesHandler();
-  //console.log(startDom.id, e.target.id);
+  console.log(startDom.id, e.target.id);
 };
 
 export const linkablesHandler = () => {
@@ -89,12 +91,14 @@ export const refreshPaths = () =>{
 const paths = document.querySelectorAll('.paths');
 paths.forEach((path)=>{
   const splitId = path.id.split('_');
-  const answerNumber = `${splitId[1]}_${splitId[2]}`;
-  const contNumber = `${splitId[3]}`;
+  console.log(path.id, splitId)
+  const answerNumber = `${splitId[1].replaceAll('-', '_')}`;
+  const contNumber = `${splitId[2].replace('-', '_')}`;
   // remove 
   path.remove();
-  document.querySelector(`#circle_${answerNumber}_${contNumber}`).remove();
-  document.querySelector(`#circle_${contNumber}_${answerNumber}`).remove();
+  console.log(answerNumber, contNumber)
+  removeCircle(`${splitId[1]}_${splitId[2]}`);
+  removeCircle(`${splitId[2]}_${splitId[1]}`);
   // update
   const linkBottom = document.querySelector(`#link_${answerNumber}`);
   const linkTop = document.querySelector(`#link_${contNumber}`);
