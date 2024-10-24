@@ -63,13 +63,13 @@ const buildImport = (obj) => {
         const number = answer.number;
         const count = `${number.split("_")[0]}_${number.split("_")[1]}`;
         //console.log(answer, number);
-        if (answer.name === "select") {
+        if (answer.type === "select") {
           addAnswer(count, 1, hue, "answer_list");
           const element = document.querySelector(
             `#answer_input_output_${number}`
           );
           element.value = answer.title;
-        } else if (answer.src) {
+        } else if (answer.type === "img") {
           addAnswer(count, 1, hue, "answer_img");
           const element = document.querySelector(`#img_link_${number}`);
           element.value = answer.title;

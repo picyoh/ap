@@ -15,7 +15,7 @@ export const addAnswer = (count, iter, hue, label) => {
     let answer = `
     <div id='answer_container_${number}' class='answer' style='background: rgb(${color.r}, ${color.g}, ${color.b})'>
       <div class="grip" draggable='true'>
-        <i class="fa-solid fa-grip-vertical"></i>
+        <i class="fi fi-rr-grip-dots-vertical"></i>
       </div>
       <div class='answer__input' id='answer_${number}'>
         ${content}

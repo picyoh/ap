@@ -55,37 +55,43 @@
           "number": "2_0_0",
           "title": "Savoyarde",
           "tag": "savoy",
-          "parent": "cream"
+          "parent": "cream",
+          "type": "select"
         },
         {
           "number": "2_0_1",
           "title": "4 fromages",
           "tag": "4 cheese",
-          "parent": "cream"
+          "parent": "cream",
+          "type": "select"
         },
         {
           "number": "2_1_0",
           "title": "Napoli",
           "tag": "nap",
-          "parent": "tomato"
+          "parent": "tomato",
+          "type": "select"
         },
         {
           "number": "2_1_1",
           "title": "Reina",
           "tag": "reina",
-          "parent": "tomato"
+          "parent": "tomato",
+          "type": "select"
         },
         {
           "number": "2_2_0",
           "title": "Banane chocolat",
           "tag": "banana",
-          "parent": "sugar"
+          "parent": "sugar",
+          "type": "select"
         },
         {
           "number": "2_2_1",
           "title": "Fraise",
           "tag": "strawberry",
-          "parent": "sugar"
+          "parent": "sugar",
+          "type": "select"
         }
       ]
     },
@@ -108,25 +114,29 @@
           "number": "3_0_0",
           "title": "Fromage",
           "tag": "cheese",
-          "parent": "reina"
+          "parent": "reina",
+          "type": "img"
         },
         {
           "number": "3_0_1",
           "title": "Lardons",
           "tag": "bacon",
-          "parent": "reina"
+          "parent": "reina",
+          "type": "img"
         },
         {
           "number": "3_1_0",
           "title": "Chocolat",
           "tag": "chocolate",
-          "parent": "strawberry"
+          "parent": "strawberry",
+          "type": "img"
         },
         {
           "number": "3_1_1",
           "title": "Chantilly",
           "tag": "sweet cream",
-          "parent": "strawberry"
+          "parent": "strawberry",
+          "type": "img"
         }
       ]
     }

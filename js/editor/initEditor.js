@@ -6,13 +6,14 @@ import { importExemple } from "./tools/import/customImport.js";
 
 //TODO: templates => composants
 
-//TODO: adjust image on drag
-//TODO: adjust path on zoom 
-//TODO: add import and export feature
-//TODO: position screen above zoom
-//TODO: ameliorer navigation (callstack et reinit a verif);
+//TODO: improve example img->supp list->choix + result pizzeria
+//TODO: merge question and result datas
+//TODO: add export feature
+//TODO: add colorpicker
+//TODO: add position screen above zoom
 //TODO: complex css grid
-//TODO: fusionner les fichiers question et result + ajouter nuage de tag au milieu du json
+//TODO: adjust image on drag
+//TODO: ameliorer navigation (callstack et reinit a verif);
 //TODO: changer image preview
 
 export const initEditorForm = () => {
@@ -33,7 +34,7 @@ const initWrapper = () => {
   `;
   const content = `<div id="container_0" class="containers question_container" draggable="true" style="top: 15px; left: 388px; background: limegreen;">
       <div class="grip" draggable='true'>
-        <i class="fa-solid fa-grip-vertical"></i>
+        <i class="fi fi-rr-grip-dots-vertical"></i>
       </div>
       <div class="question">
         <div class="question__input" id="question_0">

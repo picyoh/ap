@@ -64,7 +64,7 @@ export const addGroup = (pos) => {
         <label for='group_tag_${number}'></label>
         <input type='text' id='group_tag_${number}' name='group_tag_${number}' class='group_tag' placeholder='Theme'/>
         <div class="grip" draggable='true'>
-          <i class="fa-solid fa-grip-vertical"></i>
+          <i class="fi fi-rr-grip-dots-vertical"></i>
         </div>
         <div id='group_content_${number}'class='group_content'></div>
   </div>`;

@@ -9,7 +9,7 @@ export const addQuestion = (count, pos, color, parent) => {
       <div id="link_${count}" class="link_circle link_top"></div>
     </div>
     <div class="grip" draggable='true'>
-      <i class="fa-solid fa-grip-vertical"></i>
+      <i class="fi fi-rr-grip-dots-vertical"></i>
     </div>
     <div class="question">
       <div id="question_${count}" class="question__input">
